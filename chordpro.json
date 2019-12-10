@@ -111,13 +111,13 @@
     // },
 
     // // Table of contents.
-    // "toc" : {
+    "toc" : {
 	//   // Title for ToC.
 	//   "title" : "Table of Contents",
 	//   // Sorting order.
 	//   // Currently only sorting by page number and alpha is implemented.
-	//   "order" : "page",
-    // },
+	  "order" : "alpha",
+    },
 
     // // Layout definitions for PDF output.
 
