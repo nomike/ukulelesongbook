@@ -239,7 +239,7 @@
 	// "even-odd-pages" : 1,
 
 	// // Formats.
-	// "formats" : {
+	 "formats" : {
 	//     // Titles/Footers.
 
 	//     // Titles/footers have 3 parts, which are printed left,
@@ -255,20 +255,20 @@
 	//     	"footer"    : [ "%{title}", "", "%{page}" ],
 	//     },
 	//     // The first page of a song has:
-	//     "title" : {
+	    "title" : {
 	//         // Title and subtitle.
 	//     	"title"     : [ "", "%{title}", "" ],
-	//     	"subtitle"  : [ "", "%{subtitle}", "" ],
+	        "subtitle"  : [ "%{artist|%{artist}}%{subtitle|%{subtitle}}%{key| / Key %{key}}%{capo| / Capo %{capo}}", "", "" ],
 	// 	// Footer with page number.
 	//     	"footer"    : [ "", "", "%{page}" ],
-	//     },
+	    },
 	//     // The very first output page is slightly different:
 	//     "first" : {
 	//     	// It has title and subtitle, like normal 'first' pages.
 	// 	// But no footer.
 	//     	"footer"    : null,
 	//     },
-	// },
+	},
 
 	// // Fonts.
 	// // Fonts can be specified by name (for the corefonts)
