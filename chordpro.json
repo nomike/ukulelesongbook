@@ -90,6 +90,7 @@
     // // Use 0 for an empty string, and -1 for a muted string.
     // // "fingers" is optional.
 	"chords" : ["append",
+		{ "name" : "D7",       "base" : 1, "frets" : [ 2,0,2,0 ], "fingers" : [ 2,0,1,0 ] },
 		{ "name" : "E",        "base" : 1, "frets" : [ 1,4,0,2 ], "fingers" : [ 1,4,0,2 ] },
 		{ "name" : "Em",       "base" : 1, "frets" : [ 0,4,3,2 ], "fingers" : [ 0,3,2,1 ] },
 		{ "name" : "A7sus4",   "base" : 1, "frets" : [ 0,1,0,0 ], "fingers" : [ 0,2,0,0 ] },
