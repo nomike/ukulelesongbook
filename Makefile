@@ -17,3 +17,6 @@ cover-ukulele.pdf: cover-ukulele.tex
 
 cover-guitar.pdf: cover-guitar.tex
 	pdflatex cover-guitar.tex ; rm -f cover-guitar.aux cover-guitar.log
+
+clean-vscode: clean
+	rm -f cover-guitar.aux cover-guitar.fdb_latexmk cover-guitar.fls cover-guitar.log cover-guitar.synctex.gz cover-ukulele.aux cover-ukulele.fdb_latexmk cover-ukulele.fls cover-ukulele.log cover-ukulele.synctex.gz
