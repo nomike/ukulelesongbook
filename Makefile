@@ -20,3 +20,6 @@ cover-guitar.pdf: cover-guitar.tex
 
 clean-vscode: clean
 	rm -f cover-guitar.aux cover-guitar.fdb_latexmk cover-guitar.fls cover-guitar.log cover-guitar.synctex.gz cover-ukulele.aux cover-ukulele.fdb_latexmk cover-ukulele.fls cover-ukulele.log cover-ukulele.synctex.gz
+
+convert-tabs:
+	for i in *.tab ; do chordpro --a2crd "$${i}" > "$${i%.tab}.chopro" ; rm -f "$${i}" ; done
