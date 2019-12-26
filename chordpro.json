@@ -90,16 +90,18 @@
     // // Use 0 for an empty string, and -1 for a muted string.
     // // "fingers" is optional.
 	"chords" : ["append",
-		{ "name" : "D7",       "base" : 1, "frets" : [ 2,0,2,0 ], "fingers" : [ 2,0,1,0 ] },
+		{ "name" : "A7sus4",   "base" : 1, "frets" : [ 0,2,0,0 ], "fingers" : [ 0,1,0,0 ] },
+		{ "name" : "C7sus4",   "base" : 1, "frets" : [ 0,0,1,1 ], "fingers" : [ 0,0,1,1 ] },
 		{ "name" : "Dbm",      "base" : 1, "frets" : [ 1,1,0,4 ], "fingers" : [ 1,2,0,4 ] },
+		{ "name" : "Dm7",      "base" : 1, "frets" : [ 2,0,1,3 ], "fingers" : [ 2,0,1,4 ] },
+		{ "name" : "D7",       "base" : 1, "frets" : [ 2,0,2,0 ], "fingers" : [ 2,0,1,0 ] },
+		{ "name" : "D7sus4",   "base" : 1, "frets" : [ 0,2,3,5 ], "fingers" : [ 0,1,4,2 ] },
 		{ "name" : "E",        "base" : 1, "frets" : [ 1,4,0,2 ], "fingers" : [ 1,4,0,2 ] },
 		{ "name" : "Em",       "base" : 1, "frets" : [ 0,4,3,2 ], "fingers" : [ 0,3,2,1 ] },
-		{ "name" : "A7sus4",   "base" : 1, "frets" : [ 0,2,0,0 ], "fingers" : [ 0,1,0,0 ] },
-                { "name" : "NC",       "base" :  1, "frets" : [ -1, -1, -1, -1] },
-                { "name" : "N.C.",     "copy" : "NC" },
-                { "name" : "Dm7",      "base" : 1, "frets" : [ 2,0,1,3 ], "fingers" : [ 2,0,1,4 ] },
-                { "name" : "C7sus4",   "base" : 1, "frets" : [ 0,0,1,1 ], "fingers" : [ 0,0,1,1 ] },
-                { "name" : "G7sus4",   "base" : 1, "frets" : [ 0,2,1,3 ], "fingers" : [ 0,2,1,4 ] },
+		{ "name" : "F7sus4",   "base" : 1, "frets" : [ 3,3,1,3 ], "fingers" : [ 2,3,1,4 ] },
+		{ "name" : "G7sus4",   "base" : 1, "frets" : [ 0,2,1,3 ], "fingers" : [ 0,2,1,4 ] },
+		{ "name" : "NC",       "base" :  1, "frets" : [ -1, -1, -1, -1] },
+		{ "name" : "N.C.",     "copy" : "NC" },
     ],
 
 
