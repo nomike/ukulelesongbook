@@ -12,6 +12,12 @@ songbook-guitar.pdf : *.chopro chordpro-guitar.json cover-guitar.pdf
 clean:
 	rm -f songbook.pdf songbook-guitar.pdf cover-guitar.pdf cover-guitar.aux cover-guitar.log cover-ukulele.pdf cover-ukulele.aux cover-ukulele.log
 
+cover-ukulele.tex: cover-ukulele.tex.tpl configuration
+	. ./configuration ; export nusb_version ; envsubst <cover-ukulele.tex.tpl >cover-ukulele.tex
+
+cover-guitar.tex: cover-guitar.tex.tpl configuration
+	. ./configuration ; export nusb_version ; envsubst <cover-guitar.tex.tpl >cover-guitar.tex
+
 cover-ukulele.pdf: cover-ukulele.tex
 	pdflatex cover-ukulele.tex ; rm -f cover-ukulele.aux cover-ukulele.log
 
