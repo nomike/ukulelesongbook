@@ -260,20 +260,18 @@
 	//     	"footer"    : [ "%{title}", "", "%{page}" ],
 	//     },
 	//     // The first page of a song has:
-	    "title" : {
-	//         // Title and subtitle.
-	//     	"title"     : [ "", "%{title}", "" ],
-	        "subtitle"  : [ "%{artist|%{artist}}%{subtitle|%{subtitle}}%{key| / Key %{key}}%{capo| / Capo %{capo}}", "", "" ],
-	// 	// Footer with page number.
-	//     	"footer"    : [ "", "", "%{page}" ],
-	    },
-	//     // The very first output page is slightly different:
-	//     "first" : {
-	//     	// It has title and subtitle, like normal 'first' pages.
-	// 	// But no footer.
-	//     	"footer"    : null,
-	//     },
-	},
+			"title" : {
+		//         // Title and subtitle.
+		//     	"title"     : [ "", "%{title}", "" ],
+				"subtitle"  : [ "%{artist|%{artist}}%{subtitle|%{subtitle}}%{key| / Key %{key}}%{capo| / Capo %{capo}}", "", "" ],
+		// 	// Footer with page number.
+				"footer"    : [ "%{title}", "", "%{page}" ],
+			},
+		//     // The very first output page is slightly different:
+			 "first" : {
+				 "footer"    : [ "%{title}", "", "%{page}" ],
+			},
+		},
 
 	// // Fonts.
 	// // Fonts can be specified by name (for the corefonts)
