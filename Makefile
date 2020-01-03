@@ -4,10 +4,10 @@ guitar: songbook-guitar.pdf
 cover-ukulele: cover-ukulele.pdf
 cover-guitar: cover-guitar.pdf
 
-songbook-ukulele.pdf : *.chopro chordpro-ukulele.json cover-ukulele.pdf
+songbook-ukulele.pdf : *.chopro chordpro-ukulele.json cover-ukulele.pdf ukulele-songlist
 	./create_songbook.py --instrument ukulele
 
-songbook-guitar.pdf : *.chopro chordpro-guitar.json cover-guitar.pdf
+songbook-guitar.pdf : *.chopro chordpro-guitar.json cover-guitar.pdf guitar-songlist
 	./create_songbook.py --instrument guitar
 
 clean:
