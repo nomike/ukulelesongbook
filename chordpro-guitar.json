@@ -192,7 +192,7 @@
 	// },
 
 	"chorus" : {
-	    "indent"     :  20,
+	    // "indent"     :  20,
 	    // Chorus side bar.
 	    "bar" : {
 		"width"  :  0.5,
