@@ -130,7 +130,8 @@
 	//   // Sorting order.
 	//   // Currently only sorting by page number and alpha is implemented.
 	  "order" : "alpha",
-    },
+	  "line" : "%{title}  -  %{artist}",
+  },
 
     // // Layout definitions for PDF output.
 
