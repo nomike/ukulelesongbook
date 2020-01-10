@@ -11,7 +11,7 @@ songbook-guitar.pdf : songs/*.chopro chordpro-guitar.json cover-guitar.pdf guita
 	CHORDPRO_PDF="PDF::API2" ./create_songbook.py --instrument guitar
 
 clean:
-	rm -f songbook-ukulele.pdf songbook-guitar.pdf cover-guitar.pdf cover-guitar.aux cover-guitar.log cover-ukulele.pdf cover-ukulele.aux cover-ukulele.log
+	rm -f songbook-ukulele.pdf songbook-guitar.pdf cover-guitar.pdf cover-guitar.aux cover-guitar.log cover-guitar.tex cover-ukulele.pdf cover-ukulele.aux cover-ukulele.log cover-ukulele.tex
 
 clean-songbooks:
 	rm -f songbook-ukulele.pdf songbook-guitar.pdf
