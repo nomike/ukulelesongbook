@@ -132,6 +132,7 @@
 
 	// // Papersize, 'a4' or [ 595, 842 ] etc.
 	"papersize" : "a4",
+	"pagealign-songs" : 1,
 
 	// // Space between columns, in pt.
 	// "columnspace"  :  20,
