@@ -5,13 +5,16 @@ cover-ukulele: cover-ukulele.pdf
 cover-guitar: cover-guitar.pdf
 
 songbook-ukulele.pdf : *.chopro chordpro-ukulele.json cover-ukulele.pdf ukulele-songlist
-	./create_songbook.py --instrument ukulele
+	CHORDPRO_PDF="PDF::API2" ./create_songbook.py --instrument ukulele
 
 songbook-guitar.pdf : *.chopro chordpro-guitar.json cover-guitar.pdf guitar-songlist
-	./create_songbook.py --instrument guitar
+	CHORDPRO_PDF="PDF::API2" ./create_songbook.py --instrument guitar
 
 clean:
 	rm -f songbook-ukulele.pdf songbook-guitar.pdf cover-guitar.pdf cover-guitar.aux cover-guitar.log cover-ukulele.pdf cover-ukulele.aux cover-ukulele.log
+
+clean-songbooks:
+	rm -f songbook-ukulele.pdf songbook-guitar.pdf
 
 cover-ukulele.tex: cover-ukulele.tex.tpl configuration
 	. ./configuration ; export nusb_version ; envsubst <cover-ukulele.tex.tpl >cover-ukulele.tex
