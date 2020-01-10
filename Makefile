@@ -7,10 +7,10 @@ cover-guitar: cover/cover-guitar.pdf
 out:
 	mkdir -p out
 
-out/songbook-ukulele.pdf : out songs/*.chopro chordpro-ukulele.json cover/cover-ukulele.pdf ukulele-songlist
+out/songbook-ukulele.pdf : out songs/*.chopro chordpro-ukulele.json cover/cover-ukulele.pdf songlist-ukulele
 	CHORDPRO_PDF="PDF::API2" ./create_songbook.py --instrument ukulele
 
-out/songbook-guitar.pdf : out songs/*.chopro chordpro-guitar.json cover/cover-guitar.pdf guitar-songlist
+out/songbook-guitar.pdf : out songs/*.chopro chordpro-guitar.json cover/cover-guitar.pdf songlist-guitar
 	CHORDPRO_PDF="PDF::API2" ./create_songbook.py --instrument guitar
 
 clean-vscode: clean

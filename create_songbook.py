@@ -17,7 +17,7 @@ if __name__ == "__main__":
         raise Exception("Unsupported instrument")
     target_instrument = arguments["--instrument"]
     excludeded_instruments = [re.compile('^.*-%s.chopro$' % (i)) for i in instruments if i != target_instrument]
-    with open('%s-songlist' % (target_instrument), 'r') as file:
+    with open('songlist-%s' % (target_instrument), 'r') as file:
         lines = [os.path.join("songs", i.rstrip('\n')) for i in file.readlines()]
 
     filelist = glob.glob('songs/*.chopro')
