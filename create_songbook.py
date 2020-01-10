@@ -27,6 +27,6 @@ if __name__ == "__main__":
             if not p.match(os.path.basename(file)):
                 if not file in lines:
                     lines.append(file)
-    command = ['/usr/local/bin/chordpro', '--config', 'chordpro-%s.json' % (target_instrument), '--output', 'songbook-%s.pdf' % (target_instrument), '--cover', 'cover/cover-%s.pdf' % (target_instrument)]
+    command = ['/usr/local/bin/chordpro', '--config', 'chordpro-%s.json' % (target_instrument), '--output', 'out/songbook-%s.pdf' % (target_instrument), '--cover', 'cover/cover-%s.pdf' % (target_instrument)]
     command.extend(lines)
     subprocess.run(command)
