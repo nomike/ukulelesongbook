@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+
+import sys
+import re
+
+if __name__ == "__main__":
+    last_section = None
+    re_section_header = re.compile('^\[([^\]]*)\]$')
+    with open(sys.argv[1], 'r') as file:
+        lines = file.readlines()
+    for i in range(0, len(lines) - 1):
+        line = lines[i].rstrip('\n')
+        match = re_section_header.match(line)
+        if match:
+            if last_section:
+                print('{end_of_%s}\n' % (last_section))
+            last_section = match.group(1).lower()
+            print('{start_of_%s: %s}' % (last_section, last_section.capitalize()))
+        else:
+            if not (len(line) == 0 and i < (len(lines) - 1) and lines[i+1].startswith("[")):
+                print(line)
+    if last_section:
+        print('{end_of_%s}' % (last_section))
+

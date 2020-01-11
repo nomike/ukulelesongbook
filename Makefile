@@ -1,3 +1,5 @@
+SHELL := /bin/bash -O nullglob
+
 all: ukulele guitar
 ukulele: out/songbook-ukulele.pdf
 guitar: out/songbook-guitar.pdf
@@ -34,5 +36,10 @@ cover/cover-ukulele.pdf: cover/cover-ukulele.tex
 cover/cover-guitar.pdf: cover/cover-guitar.tex
 	(cd cover; pdflatex cover-guitar.tex)
 
+convert: convert-ultimate convert-tabs
+
 convert-tabs:
-	for i in songs/*.tab ; do chordpro --a2crd "$${i}" > "$${i%.tab}.chopro" ; rm -f "$${i}" ; done
+	( shopt -s nullglob; cd songs ; for i in *.tab ; do chordpro --a2crd "$${i}" > "$${i%.tab}.chopro" ; rm -f "$${i}" ; done )
+
+convert-ultimate:
+	( shopt -s nullglob; cd songs ; for i in *.ult ; do ../convert_ultimate "$${i}" > "$${i%.ult}.tab" ; rm -f "$${i}" ; done )
