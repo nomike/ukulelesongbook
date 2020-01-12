@@ -16,7 +16,7 @@ if __name__ == "__main__":
             if last_section:
                 print('{end_of_%s}\n' % (last_section.replace('-', '')))
             last_section = match.group(1).lower()
-            print('{start_of_%s: %s}' % (last_section.replace('-', ''), "%s %d" % (last_section.capitalize(), verse_count) if last_section == 'verse' else last_section))
+            print('{start_of_%s: %s}' % (last_section.replace('-', ''), "%s %d" % (last_section.capitalize(), verse_count) if last_section == 'verse' else last_section.capitalize()))
             if last_section == "verse":
                 verse_count = verse_count + 1
         else:
