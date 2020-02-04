@@ -1,5 +1,5 @@
-out/songbook-guitar.pdf
-out/songbook-ukulele.pdf
+out/
+build/
 cover/cover-guitar.pdf
 cover/cover-ukulele.pdf
 cover/cover-guitar.aux

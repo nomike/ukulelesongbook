@@ -90,6 +90,12 @@ Versese which are just labled `Verse`, will automatically be numbered.
 ## Ultimate Guitar format with square brackets
 TODO: This format needs to be documented.
 
+Single songbooks
+----------------
+Single songbooks are printable versions of the songbook where songs can be added easily.
+An individual PDF is generated for each song and the reulting files are joined together with the cover and a freshly generated TOC.
+If new songs are added, just print the new songs and sort put them into the existing book.
+
 empty.pdf
 ---------
 Contains an empty A4 page to be spliced into a PDF.

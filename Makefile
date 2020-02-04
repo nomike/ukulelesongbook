@@ -1,6 +1,7 @@
 SHELL := /bin/bash -O nullglob
-
-all: ukulele guitar
+all: regular single
+regular: ukulele guitar
+single: out/songbook-guitar-single.pdf out/songbook-ukulele-single.pdf
 ukulele: out/songbook-ukulele.pdf
 guitar: out/songbook-guitar.pdf
 cover-ukulele: cover/cover-ukulele.pdf
@@ -43,3 +44,30 @@ convert-tabs:
 
 convert-ultimate:
 	( shopt -s nullglob; cd songs ; for i in *.ult ; do ../convert_ultimate "$${i}" > "$${i%.ult}.tab" ; rm -f "$${i}" ; done )
+
+build/empty.pdf:
+	convert xc:none -page A4 build/empty.pdf
+
+build/guitar/toc.txt:
+	mkdir -p build/guitar/ ; (cd songs ; find . -type f -a -name "*.chopro" -a ! -name "*-ukulele.chopro") | cut -c 3- | sed 's/\(-guitar\)\{0,1\}\.chopro$$//' | sort > build/guitar/toc.txt
+
+build/guitar/toc.ps: build/guitar/toc.txt
+	enscript -Bp build/guitar/toc.ps build/guitar/toc.txt
+
+build/guitar/toc.pdf: build/guitar/toc.ps
+	ps2pdf build/guitar/toc.ps build/guitar/toc.pdf
+
+out/songbook-guitar-single.pdf: out build/guitar/toc.pdf build/empty.pdf songs/*.chopro chordpro-guitar.json cover/cover-guitar.pdf
+	./create_single_songbook.sh guitar ukulele
+
+build/ukulele/toc.txt:
+	mkdir -p build/ukulele/ ; (cd songs ; find . -type f -a -name "*.chopro" -a ! -name "*-guitar.chopro") | cut -c 3- | sed 's/\(-ukulele\)\{0,1\}\.chopro$$//' | sort > build/ukulele/toc.txt
+
+build/ukulele/toc.ps: build/ukulele/toc.txt
+	enscript -Bp build/ukulele/toc.ps build/ukulele/toc.txt
+
+build/ukulele/toc.pdf: build/ukulele/toc.ps
+	ps2pdf build/ukulele/toc.ps build/ukulele/toc.pdf
+
+out/songbook-ukulele-single.pdf: out build/ukulele/toc.pdf build/empty.pdf songs/*.chopro chordpro-ukulele.json cover/cover-ukulele.pdf
+	./create_single_songbook.sh ukulele guitar
