@@ -88,7 +88,22 @@ Versese which are just labled `Verse`, will automatically be numbered.
 ***Note**: This conversion is not very robust. Expect some weird results and adapt the source files or fix the resulting output accordingly.*
 
 ## Ultimate Guitar format with square brackets
-TODO: This format needs to be documented.
+If the file looks like this:
+```
+[Intro]
+[ch]Am[/ch] - [ch]F[/ch] - [ch]C[/ch] - [ch]G[/ch]
+
+[Chorus]
+[tab][ch]Am[/ch]        [ch]F[/ch]              [ch]C[/ch]
+ How long, how long will I slide?[/tab]
+```
+
+You can clean up the mess with search and replace, using the following regular expression to replace the matches with nothing:
+```
+\[/?(tab|ch)\]
+```
+
+It can then be treated like any other ultimate guitar file.
 
 Single songbooks
 ----------------
