@@ -84,4 +84,4 @@ upload-ukulele-single: out/songbook-ukulele-single.pdf
 upload-guitar-single: out/songbook-guitar-single.pdf
 	scp out/songbook-guitar-single.pdf nomike@david-brearley.dreamhost.com:nomike.com/public/.ukulelesongbook/
 
-upload: upload-ukulele upload-guitar upload-ukulele-single uplod-guitar-single
+upload: upload-ukulele upload-guitar upload-ukulele-single upload-guitar-single
