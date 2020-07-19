@@ -71,3 +71,17 @@ build/ukulele/toc.pdf: build/ukulele/toc.ps
 
 out/songbook-ukulele-single.pdf: out build/ukulele/toc.pdf build/empty.pdf songs/*.chopro chordpro-ukulele.json cover/cover-ukulele.pdf
 	./create_single_songbook.sh ukulele guitar
+
+upload-ukulele: out/songbook-ukulele.pdf
+	scp out/songbook-ukulele.pdf nomike@david-brearley.dreamhost.com:nomike.com/public/.ukulelesongbook/
+
+upload-guitar: out/songbook-guitar.pdf
+	scp out/songbook-guitar.pdf nomike@david-brearley.dreamhost.com:nomike.com/public/.ukulelesongbook/
+
+upload-ukulele-single: out/songbook-ukulele-single.pdf
+	scp out/songbook-ukulele-single.pdf nomike@david-brearley.dreamhost.com:nomike.com/public/.ukulelesongbook/
+
+upload-guitar-single: out/songbook-guitar-single.pdf
+	scp out/songbook-guitar-single.pdf nomike@david-brearley.dreamhost.com:nomike.com/public/.ukulelesongbook/
+
+upload: upload-ukulele upload-guitar upload-ukulele-single uplod-guitar-single
