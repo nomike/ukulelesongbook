@@ -19,8 +19,11 @@ out/songbook-guitar.pdf : out songs/*.chopro chordpro-guitar.json cover/cover-gu
 clean-vscode: clean
 	rm -f cover/cover-guitar.aux cover/cover-guitar.fdb_latexmk cover/cover-guitar.fls cover/cover-guitar.log cover/cover-guitar.synctex.gz cover/cover-ukulele.aux cover/cover-ukulele.fdb_latexmk cover/cover-ukulele.fls cover/cover-ukulele.log cover/cover-ukulele.synctex.gz
 
-clean: clean-out
+clean: clean-build clean-out
 	rm -f cover/cover-guitar.pdf cover/cover-guitar.aux cover/cover-guitar.log cover/cover-guitar.tex cover/cover-ukulele.pdf cover/cover-ukulele.aux cover/cover-ukulele.log cover/cover-ukulele.tex
+
+clean-build:
+	rm -rf build/
 
 clean-out:
 	rm -rf out/
@@ -52,7 +55,7 @@ build/guitar/toc.txt:
 	mkdir -p build/guitar/ ; (cd songs ; find . -type f -a -name "*.chopro" -a ! -name "*-ukulele.chopro") | cut -c 3- | sed 's/\(-guitar\)\{0,1\}\.chopro$$//' | sort > build/guitar/toc.txt
 
 build/guitar/toc.ps: build/guitar/toc.txt
-	enscript -Bp build/guitar/toc.ps build/guitar/toc.txt
+	cat build/guitar/toc.txt | iconv -c --from-code utf-8 --to-code ISO-8859-1 | enscript --margins=30::40: --encoding=88591 --font=Helvetica@12 --no-header --output=build/guitar/toc.ps 
 
 build/guitar/toc.pdf: build/guitar/toc.ps
 	ps2pdf build/guitar/toc.ps build/guitar/toc.pdf
@@ -64,7 +67,7 @@ build/ukulele/toc.txt:
 	mkdir -p build/ukulele/ ; (cd songs ; find . -type f -a -name "*.chopro" -a ! -name "*-guitar.chopro") | cut -c 3- | sed 's/\(-ukulele\)\{0,1\}\.chopro$$//' | sort > build/ukulele/toc.txt
 
 build/ukulele/toc.ps: build/ukulele/toc.txt
-	enscript -Bp build/ukulele/toc.ps build/ukulele/toc.txt
+	cat build/ukulele/toc.txt | iconv -c --from-code utf-8 --to-code ISO-8859-1 | enscript --margins=30::40: --encoding=88591 --font=Helvetica@12 --no-header --output=build/ukulele/toc.ps 
 
 build/ukulele/toc.pdf: build/ukulele/toc.ps
 	ps2pdf build/ukulele/toc.ps build/ukulele/toc.pdf
