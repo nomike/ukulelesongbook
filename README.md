@@ -5,25 +5,29 @@ The song book comes in a ukulele and a guitar flavour. The main difference is th
 
 Dependencies
 ------------
-The songbook depends on [chordpro][1] and [latex][2].
+You need to install a couple of dependencies:
 
-Chordpro can be installed with cpan on all platforms:
-`$ cpan install chordpro`
+### Additional packages
+#### Ubuntu/Debian
+```
+sudo apt install texlive-full python3-docopt enscript libpdf-api2-perl imagemagick libstring-interpolate-perl
+sudo cpan install App::Packager
+sudo cpan install chordpro
+```
+<!-- TODO: Add instructions for other operating systems** -->
 
-For LATEX either texlive (linux) or mikex (windows) are recommended.
+### Imagemagick
+You need to enable PDF support for ImageMagick.<br/>
+Edit the file `/etc/ImageMagick-6/policy.xml`
+and change line
+```
+<policy domain="coder" rights="none" pattern="PDF" />
+```
+to
+```
+<policy domain="coder" rights="read | write" pattern="PDF" />
+```
 
-On most linux distributions you can install it with:
-```
-$ sudo apt install texlife-full
-```
-or
-```
-$ sudo yum install texlive-full
-```
-Windows: Download and install miktex, or use the chcolatey package manager:
-```
-> choco install miktex
-```
 
 building the songbook
 ---------------------
