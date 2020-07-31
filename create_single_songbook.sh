@@ -11,12 +11,14 @@ mkdir -p "build/${instrument}/songs"
     cd songs
     # create an individual PDF for each song
     for song in *.chopro ; do
-        echo "${song}" | grep -q -- "-${noinstrument}.chopro" && continue
-        chordpro --config ../chordpro-${instrument}.json --output "../build/${instrument}/songs/${song%.chopro}.pdf" "${song}"
-        # if the song has an odd number of pages, add an empty page
-        if [[ $(( $( pdfinfo "../build/${instrument}/songs/${song%.chopro}.pdf" | grep "Pages:" | awk '{print $2}' ) % 2 )) -eq 1 ]]; then
-            pdfunite "../build/${instrument}/songs/${song%.chopro}.pdf" ../build/empty.pdf "../build/${instrument}/temp.out"
-            mv "../build/${instrument}/temp.out" "../build/${instrument}/songs/${song%.chopro}.pdf"
+        if [ "%{song}" -nt "../build/${instrument}/songs/${song%.chopro}.pdf" ] ; then
+            echo "${song}" | grep -q -- "-${noinstrument}.chopro" && continue
+            chordpro --config ../chordpro-${instrument}.json --output "../build/${instrument}/songs/${song%.chopro}.pdf" "${song}"
+            # if the song has an odd number of pages, add an empty page
+            if [[ $(( $( pdfinfo "../build/${instrument}/songs/${song%.chopro}.pdf" | grep "Pages:" | awk '{print $2}' ) % 2 )) -eq 1 ]]; then
+                pdfunite "../build/${instrument}/songs/${song%.chopro}.pdf" ../build/empty.pdf "../build/${instrument}/temp.out"
+                mv "../build/${instrument}/temp.out" "../build/${instrument}/songs/${song%.chopro}.pdf"
+            fi
         fi
     done
 )
