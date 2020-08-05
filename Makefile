@@ -88,3 +88,11 @@ upload-guitar-single: out/songbook-guitar-single.pdf
 	scp out/songbook-guitar-single.pdf nomike@david-brearley.dreamhost.com:nomike.com/public/.ukulelesongbook/
 
 upload: all upload-ukulele upload-guitar upload-ukulele-single upload-guitar-single
+
+create-songlist-ukulele: songs/*.chopro
+	./create_songlist.py --instrument=ukulele > songlist-ukulele
+
+create-songlist-guitar: songs/*.chopro
+	./create_songlist.py --instrument=guitar > songlist-guitar
+
+create-songlists: create-songlist-ukulele create-songlist-guitar

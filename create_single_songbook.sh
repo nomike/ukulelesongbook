@@ -6,7 +6,7 @@ noinstrument="${2}"
 echo "Generating single songbook for ${instrument}..."
 
 # ensure that our build directory is present
-mkdir -p "build/${instrument}/songs"
+mkdir -p "build/${instrument}/songs/paged/"
 (
     cd songs
     # create an individual PDF for each song
@@ -16,8 +16,9 @@ mkdir -p "build/${instrument}/songs"
             chordpro --config ../chordpro-${instrument}.json --output "../build/${instrument}/songs/${song%.chopro}.pdf" "${song}"
             # if the song has an odd number of pages, add an empty page
             if [[ $(( $( pdfinfo "../build/${instrument}/songs/${song%.chopro}.pdf" | grep "Pages:" | awk '{print $2}' ) % 2 )) -eq 1 ]]; then
-                pdfunite "../build/${instrument}/songs/${song%.chopro}.pdf" ../build/empty.pdf "../build/${instrument}/temp.out"
-                mv "../build/${instrument}/temp.out" "../build/${instrument}/songs/${song%.chopro}.pdf"
+                pdfunite "../build/${instrument}/songs/${song%.chopro}.pdf" ../build/empty.pdf "../build/${instrument}/songs/paged/${song%.chopro}.pdf"
+            else
+                cp "../build/${instrument}/songs/${song%.chopro}.pdf" "../build/${instrument}/songs/paged/${song%.chopro}.pdf"
             fi
         fi
     done
@@ -37,4 +38,4 @@ if [[ $(( $( pdfinfo "build/${instrument}/toc.pdf" | grep "Pages:" | awk '{print
     mv "build/${instrument}/temp.out" "build/${instrument}/toc.pdf"
 fi
 
-pdfunite "build/${instrument}/cover.pdf" "build/${instrument}/toc.pdf" "build/${instrument}/songs/"*.pdf out/songbook-${instrument}-single.pdf
+pdfunite "build/${instrument}/cover.pdf" "build/${instrument}/toc.pdf" "build/${instrument}/songs/paged/"*.pdf out/songbook-${instrument}-single.pdf
