@@ -1,5 +1,5 @@
 SHELL := /bin/bash -O nullglob
-all: regular single
+all: regular single hardcover
 regular: ukulele guitar
 single: out/songbook-guitar-single.pdf out/songbook-ukulele-single.pdf
 ukulele: out/songbook-ukulele.pdf
@@ -96,3 +96,21 @@ create-songlist-guitar: songs/*.chopro
 	./create_songlist.py --instrument=guitar > songlist-guitar
 
 create-songlists: create-songlist-ukulele create-songlist-guitar
+
+cover/hardcover-ukulele.tex: cover/cover-ukulele.tex.tpl configuration
+	export nusb_version="" ; envsubst <cover/cover-ukulele.tex.tpl >cover/hardcover-ukulele.tex
+
+cover/hardcover-guitar.tex: cover/cover-guitar.tex.tpl configuration
+	export nusb_version="" ; envsubst <cover/cover-guitar.tex.tpl >cover/hardcover-guitar.tex
+
+cover/hardcover-ukulele.pdf: cover/hardcover-ukulele.tex
+	(cd cover; pdflatex hardcover-ukulele.tex)
+
+cover/hardcover-guitar.pdf: cover/hardcover-guitar.tex
+	(cd cover; pdflatex hardcover-guitar.tex)
+
+hardcover-ukulele: cover/hardcover-ukulele.pdf
+
+hardcover-guitar: cover/hardcover-guitar.pdf
+
+hardcover: hardcover-ukulele hardcover-guitar

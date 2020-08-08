@@ -19,9 +19,10 @@
 \Huge
 \title{nomike's Ukulele Songbook}
 \author{Guitar Edition}
-\date{v. ${nusb_version}}
+\date{${nusb_version}}
 \titlepicture[width=6in]{guitar}
 
 \maketitle
+\thispagestyle{empty}
 
 \end{document}
