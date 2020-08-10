@@ -73,7 +73,7 @@ Comin' for to carry me home.
 Converting Ultimate Guitar files
 --------------------------------
 Files originating from https://ultimate-guitar.com can be converted with the `convert-ultimate` Makefile target. All files with an `.ult` file extension in the songs directoy will be converted to the chord-above-text format mentioned above and can be converted to chordpro by executing the `convert-tabs` Makefile target as outlined above.
-The sorce files will be deleted after being converted.
+The source files will be deleted after being converted.
 
 ### Format
 This Format is an extension of the chord-above-text format described above. The extension is, that sections like the chorus, bridges, etc. can be marked with putting them in bracketes:
