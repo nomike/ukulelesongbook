@@ -28,9 +28,12 @@ fi
 print_range=$((
     test -r .last_printed_${instrument}_commit && export last_printed_commit="$(cat .last_printed_${instrument}_commit)" || export last_printed_commit="4b825dc642cb6eb9a060e54bf8d69288fbee4904"
     export IFS=$'\n'
-    for string in $(git --no-pager diff --name-only "${last_printed_commit}" HEAD  | grep "chopro" | tr -d '"') ; do
-        basename "$(printf "${string}")"
-    done
+    (
+        cd songs
+        for string in $(git --no-pager diff --name-only "${last_printed_commit}" HEAD  | grep "chopro" | tr -d '"') ; do
+            basename "$(printf "${string}")"
+        done
+    )
 ) | xargs --no-run-if-empty -d '\n' ./generate_print_string.py --instrument=${instrument})
 if [ "${print_range}" == "" ] ; then
     echo "${0}: Info: Nothing to print" >&2
@@ -43,5 +46,8 @@ else
     eval "${print_command}"
 fi
 if ! ${no_record} ; then
-    git rev-parse HEAD > .last_printed_${instrument}_commit
+    (
+        cd songs
+        git rev-parse HEAD > ../.last_printed_${instrument}_commit
+    )
 fi
