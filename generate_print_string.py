@@ -1,4 +1,4 @@
-#!/usr/bin/env
+#!/usr/bin/env python3
 """
 Usage:
     generate_pront_string.py --instrument=<instrument> <song>...
@@ -21,7 +21,7 @@ def count_pdf_pages(filename):
 
 if __name__=="__main__":
     logging.basicConfig(level=logging.INFO)
-    arguments = docopt(__doc__, version='creae_songlist.py v. 0.1')
+    arguments = docopt(__doc__, version='generate_print_string.py v. 0.1')
     if not arguments["--instrument"] in instruments:
         raise Exception("Unsupported instrument")
     instrument = arguments["--instrument"]
@@ -38,7 +38,15 @@ if __name__=="__main__":
     for file in files:
         all_songs.append({"title": file, "pages": count_pdf_pages(("build/%s/paged/songs/" % (instrument)) + file)})
     current_page = cover_pages + toc_pages
+    start = 1
+    end = current_page - 1
     for song in all_songs:
         if song["title"].replace(".pdf", "") in songs:
-            print ("%d-%d," % (current_page, current_page + song["pages"] + 1), end="")
+            new_start = current_page
+            new_end = current_page + song["pages"] + 1
+            if new_start > end:
+                print("%d-%d," % (start, end), end="")
+                start = new_start
+            end = new_end
         current_page = current_page + song["pages"]
+    print("%d-%d," % (start, end), end="")
