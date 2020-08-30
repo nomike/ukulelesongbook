@@ -1,1 +1,6 @@
-nusb_version="v. 0.8.0.1"
+nusb_tag="$(git tag)"
+nusb_timestamp="$(date +%Y%m%d%H%M%S --date="@$(git show -s --format=%ct)")"
+songs_tag="$(cd songs ; git tag)"
+songs_timestamp="$(cd songs ; date +%Y%m%d%H%M%S --date="@$(git show -s --format=%ct)")"
+export nusb_version="v. ${nusb_tag:-${nusb_timestamp}}"
+export songs_version="v. ${songs_tag:-${songs_timestamp}}"

@@ -28,11 +28,11 @@ clean-build:
 clean-out:
 	rm -rf out/
 
-cover/cover-ukulele.tex: cover/cover-ukulele.tex.tpl configuration
-	. ./configuration ; export nusb_version ; envsubst <cover/cover-ukulele.tex.tpl >cover/cover-ukulele.tex
+cover/cover-ukulele.tex: cover/cover-ukulele.tex.tpl COMMIT-HASH COMMIT-HASH-songs configuration
+	. ./configuration ; envsubst <cover/cover-ukulele.tex.tpl >cover/cover-ukulele.tex
 
-cover/cover-guitar.tex: cover/cover-guitar.tex.tpl configuration
-	. ./configuration ; export nusb_version ; envsubst <cover/cover-guitar.tex.tpl >cover/cover-guitar.tex
+cover/cover-guitar.tex: cover/cover-guitar.tex.tpl COMMIT-HASH COMMIT-HASH-songs configuration
+	. ./configuration ; envsubst <cover/cover-guitar.tex.tpl >cover/cover-guitar.tex
 
 cover/cover-ukulele.pdf: cover/cover-ukulele.tex
 	(cd cover; pdflatex cover-ukulele.tex)
@@ -97,10 +97,10 @@ create-songlist-guitar: songs/*.chopro
 
 create-songlists: create-songlist-ukulele create-songlist-guitar
 
-cover/hardcover-ukulele.tex: cover/cover-ukulele.tex.tpl configuration
+cover/hardcover-ukulele.tex: cover/cover-ukulele.tex.tpl COMMIT-HASH COMMIT-HASH-songs configuration
 	export nusb_version="" ; envsubst <cover/cover-ukulele.tex.tpl >cover/hardcover-ukulele.tex
 
-cover/hardcover-guitar.tex: cover/cover-guitar.tex.tpl configuration
+cover/hardcover-guitar.tex: cover/cover-guitar.tex.tpl COMMIT-HASH COMMIT-HASH-songs configuration
 	export nusb_version="" ; envsubst <cover/cover-guitar.tex.tpl >cover/hardcover-guitar.tex
 
 cover/hardcover-ukulele.pdf: cover/hardcover-ukulele.tex
@@ -114,3 +114,11 @@ hardcover-ukulele: cover/hardcover-ukulele.pdf
 hardcover-guitar: cover/hardcover-guitar.pdf
 
 hardcover: hardcover-ukulele hardcover-guitar
+
+COMMIT-HASH: FORCE
+	./update_commit_hashes.sh
+
+COMMIT-HASH-songs: FORCE
+	./update_commit_hashes.sh songs
+
+FORCE:
