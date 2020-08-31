@@ -46,7 +46,7 @@ convert-tabs:
 	( shopt -s nullglob; for i in songs/*.tab ; do chordpro --a2crd "$${i}" | grep -v "LYRICS" | grep -v "is not a valid chord." > "$${i%.tab}.chopro" ; rm -f "$${i}" ; done )
 
 convert-ultimate:
-	( shopt -s nullglob; for i in songs/*.ult ; do ./convert_ultimate "$${i}" > "$${i%.ult}.tab" ; rm -f "$${i}" ; done )
+	( shopt -s nullglob; for i in songs/*.ult ; do ./convert_ultimate.py "$${i}" > "$${i%.ult}.tab" ; rm -f "$${i}" ; done )
 
 build/empty.pdf:
 	convert xc:none -page A4 build/empty.pdf
