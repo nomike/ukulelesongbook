@@ -6,13 +6,10 @@ regular: out/songbook-guitar.pdf out/songbook-ukulele.pdf
 cover-ukulele: cover/cover-ukulele.pdf
 cover-guitar: cover/cover-guitar.pdf
 
-out:
-	mkdir -p out
-
-out/songbook-ukulele-printshop.pdf: out songs/*.chopro chordpro-ukulele.json cover/cover-ukulele.pdf build/ukulele.songlist
+out/songbook-ukulele-printshop.pdf: songs/*.chopro chordpro-ukulele.json cover/cover-ukulele.pdf build/ukulele.songlist
 	CHORDPRO_PDF="PDF::API2" ./create_printshop_songbook.py --instrument ukulele
 
-out/songbook-guitar-printshop.pdf: out songs/*.chopro chordpro-guitar.json cover/cover-guitar.pdf build/guitar.songlist
+out/songbook-guitar-printshop.pdf: songs/*.chopro chordpro-guitar.json cover/cover-guitar.pdf build/guitar.songlist
 	CHORDPRO_PDF="PDF::API2" ./create_printshop_songbook.py --instrument guitar
 
 clean-vscode: clean
@@ -59,7 +56,7 @@ build/guitar/toc.ps: build/guitar/toc.txt
 build/guitar/toc.pdf: build/guitar/toc.ps
 	ps2pdf build/guitar/toc.ps build/guitar/toc.pdf
 
-out/songbook-guitar.pdf: out build/guitar/toc.pdf build/empty.pdf songs/*.chopro chordpro-guitar.json cover/cover-guitar.pdf
+out/songbook-guitar.pdf: build/guitar/toc.pdf build/empty.pdf songs/*.chopro chordpro-guitar.json cover/cover-guitar.pdf
 	./create_songbook.sh guitar ukulele
 
 build/ukulele/toc.txt:
@@ -71,7 +68,7 @@ build/ukulele/toc.ps: build/ukulele/toc.txt
 build/ukulele/toc.pdf: build/ukulele/toc.ps
 	ps2pdf build/ukulele/toc.ps build/ukulele/toc.pdf
 
-out/songbook-ukulele.pdf: out build/ukulele/toc.pdf build/empty.pdf songs/*.chopro chordpro-ukulele.json cover/cover-ukulele.pdf
+out/songbook-ukulele.pdf: build/ukulele/toc.pdf build/empty.pdf songs/*.chopro chordpro-ukulele.json cover/cover-ukulele.pdf
 	./create_songbook.sh ukulele guitar
 
 upload-ukulele-printshop: out/songbook-ukulele-printshop.pdf

@@ -9,6 +9,7 @@ echo "Generating songbook for ${instrument}..."
 mkdir -p "build/${instrument}/songs/"
 mkdir -p "build/${instrument}/paged/songs/"
 mkdir -p "build/${instrument}/paged/"
+mkdir -p "out/"
 (
     # create an individual PDF for each song
     for song in songs/*.chopro ; do
