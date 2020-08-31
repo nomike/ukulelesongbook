@@ -1,7 +1,10 @@
 nomike's Ukulele Songbook
 =========================
-This repository contains chordpro files and scripts to re-create nomike's ukulele Songbook. It is not to be published publicly due to copyright reasons but might be handed around on a fair use basis for private use.
-The song book comes in a ukulele and a guitar flavour. The main difference is that the guitar flavour uses guitar-chord-diagrams for standard tuning (EADGBE) whereas the ukulele flavour uses chord diagrams specific to the ukulele standard tuning (GCEA). But it is also possible to specify songs or versions of them to appear only in one of the editions. See below for details.
+
+This repository contains scripts to create nomike's ukulele Songbook.
+
+The song book comes in a ukulele and a guitar flavour. The main difference is that the guitar flavour uses guitar-chord-diagrams for standard tuning (EADGBE) whereas the ukulele flavour uses chord diagrams specific to the ukulele standard tuning (GCEA).
+It is also possible to specify songs or versions of them to appear only in one of the editions. See below for details.
 
 Dependencies
 ------------
@@ -28,10 +31,9 @@ to
 <policy domain="coder" rights="read | write" pattern="PDF" />
 ```
 
-
-building the songbook
+Building the songbook
 ---------------------
-If you want to build the songbook just execute the included Makefile:
+If you want to build the songbook just execute the default target of the included `Makefile`:
 ```
 $ make
 ```
@@ -42,21 +44,27 @@ $ make ukulele
 $ make guitar
 ```
 
+The `songs` folder
+------------------
+All songs are to be placed in the `songs` folder in .chordpro format. `songs` is a symlink pointing to `../songs/`. as the songs have been split up to a separate repository due to copyright reasons.
+
+***Note:** For some features to work, the `songs` folder needs to be a git repository.*
+
 Adding songs to the songbook
 ----------------------------
-If you want to add a song, just place the corresponding chordpro file with a ".chopro" extension in the songs folder and build the songbook.
+If you want to add a song, just place the corresponding chordpro file with a `.chopro` extension in the `songs` folder and build the songbook.
 
 Songs specific to one edition
 -----------------------------
-If a song's filename matches the shell glob `*-ukulele.chopro` it is only included in the ukulele edition. Similar logic exist for `*-guitar.chopro`. This is especially usefull for songs with tabs, which look different for guitat and ukulele.
+If a song's filename matches the shell glob `*-ukulele.chopro` it is only included in the ukulele edition. Similar logic exist for `*-guitar.chopro`. This is especially usefull for songs with tabs, which look different for guitar and ukulele.
 
 Converting chord-above-text files
 ---------------------------------
-If you want to convert a song from the common chord above text format (see example below) to chordpro, you can use the "convert-tabs" Makefile target:
+If you want to convert a song from the common chord above text format (see example below) to chordpro, you can use the `convert-tabs` Makefile target:
 ```
 $ make convert-tabs
 ```
-This will convert all *.tab files in the current folder to the chordpro format and save them with a .chopro extension. The source files will be deleted after conversion.
+This will convert all `*.tab` files in the `songs` folder to the chordpro format and save them with a `.chopro` extension. The source files will be deleted after conversion.
 
 A chord over text file looks something like this:
 ```
@@ -72,7 +80,7 @@ Comin' for to carry me home.
 
 Converting Ultimate Guitar files
 --------------------------------
-Files originating from https://ultimate-guitar.com can be converted with the `convert-ultimate` Makefile target. All files with an `.ult` file extension in the songs directoy will be converted to the chord-above-text format mentioned above and can be converted to chordpro by executing the `convert-tabs` Makefile target as outlined above.
+Files originating from https://ultimate-guitar.com can be converted with the `convert-ultimate` Makefile target. All files with an `.ult` file extension in the `songs` directoy will be converted to the chord-above-text format mentioned above and can be converted to chordpro by executing the `convert-tabs` Makefile target as outlined above.
 The source files will be deleted after being converted.
 
 ### Format
@@ -114,14 +122,6 @@ Single songbooks
 Single songbooks are printable versions of the songbook where songs can be added easily.
 An individual PDF is generated for each song and the reulting files are joined together with the cover and a freshly generated TOC.
 If new songs are added, just print the new songs and sort put them into the existing book.
-
-empty.pdf
----------
-Contains an empty A4 page to be spliced into a PDF.
-Can be created with imagemagic:
-```
-$ convert xc:none -page A4 empty.pdf
-```
 
 clean-vscode
 ------------
