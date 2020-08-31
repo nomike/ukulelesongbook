@@ -1,7 +1,7 @@
 SHELL := /bin/bash -O nullglob
 all: regular single hardcover
 regular: ukulele guitar
-single: out/songbook-guitar-single.pdf out/songbook-ukulele-single.pdf
+single: out/songbook-guitar.pdf out/songbook-ukulele.pdf
 ukulele: out/songbook-ukulele-printshop.pdf
 guitar: out/songbook-guitar-printshop.pdf
 cover-ukulele: cover/cover-ukulele.pdf
@@ -60,8 +60,8 @@ build/guitar/toc.ps: build/guitar/toc.txt
 build/guitar/toc.pdf: build/guitar/toc.ps
 	ps2pdf build/guitar/toc.ps build/guitar/toc.pdf
 
-out/songbook-guitar-single.pdf: out build/guitar/toc.pdf build/empty.pdf songs/*.chopro chordpro-guitar.json cover/cover-guitar.pdf
-	./create_single_songbook.sh guitar ukulele
+out/songbook-guitar.pdf: out build/guitar/toc.pdf build/empty.pdf songs/*.chopro chordpro-guitar.json cover/cover-guitar.pdf
+	./create_songbook.sh guitar ukulele
 
 build/ukulele/toc.txt:
 	mkdir -p build/ukulele/ ; (cd songs ; find . -type f -a -name "*.chopro" -a ! -name "*-guitar.chopro") | cut -c 3- | sed 's/\(-ukulele\)\{0,1\}\.chopro$$//' | sort > build/ukulele/toc.txt
@@ -72,22 +72,22 @@ build/ukulele/toc.ps: build/ukulele/toc.txt
 build/ukulele/toc.pdf: build/ukulele/toc.ps
 	ps2pdf build/ukulele/toc.ps build/ukulele/toc.pdf
 
-out/songbook-ukulele-single.pdf: out build/ukulele/toc.pdf build/empty.pdf songs/*.chopro chordpro-ukulele.json cover/cover-ukulele.pdf
-	./create_single_songbook.sh ukulele guitar
+out/songbook-ukulele.pdf: out build/ukulele/toc.pdf build/empty.pdf songs/*.chopro chordpro-ukulele.json cover/cover-ukulele.pdf
+	./create_songbook.sh ukulele guitar
 
-upload-ukulele: out/songbook-ukulele-printshop.pdf
+upload-ukulele-printshop: out/songbook-ukulele-printshop.pdf
 	scp out/songbook-ukulele-printshop.pdf nomike@david-brearley.dreamhost.com:nomike.com/public/.ukulelesongbook/
 
-upload-guitar: out/songbook-guitar-printshop.pdf
+upload-guitar-printshop: out/songbook-guitar-printshop.pdf
 	scp out/songbook-guitar-printshop.pdf nomike@david-brearley.dreamhost.com:nomike.com/public/.ukulelesongbook/
 
-upload-ukulele-single: out/songbook-ukulele-single.pdf
-	scp out/songbook-ukulele-single.pdf nomike@david-brearley.dreamhost.com:nomike.com/public/.ukulelesongbook/
+upload-ukulele: out/songbook-ukulele.pdf
+	scp out/songbook-ukulele.pdf nomike@david-brearley.dreamhost.com:nomike.com/public/.ukulelesongbook/
 
-upload-guitar-single: out/songbook-guitar-single.pdf
-	scp out/songbook-guitar-single.pdf nomike@david-brearley.dreamhost.com:nomike.com/public/.ukulelesongbook/
+upload-guitar: out/songbook-guitar.pdf
+	scp out/songbook-guitar.pdf nomike@david-brearley.dreamhost.com:nomike.com/public/.ukulelesongbook/
 
-upload: all upload-ukulele upload-guitar upload-ukulele-single upload-guitar-single
+upload: all upload-ukulele upload-guitar upload-ukulele-printshop upload-guitar-printshop
 
 build/ukulele.songlist: songs/*.chopro
 	./create_songlist.py --instrument=ukulele > build/ukulele.songlist

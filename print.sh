@@ -39,7 +39,7 @@ if [ "${print_range}" == "" ] ; then
     echo "${0}: Info: Nothing to print" >&2
     exit 0
 fi
-print_command="lp -P \"${print_range}\" \"out/songbook-${instrument}-single.pdf\""
+print_command="lp -P \"${print_range}\" \"out/songbook-${instrument}.pdf\""
 if ${no_print} ; then
     echo "${print_command}"
 else

@@ -43,4 +43,4 @@ else
     cp "build/${instrument}/toc.pdf" "build/${instrument}/paged/toc.pdf"
 fi
 
-pdfunite "build/${instrument}/paged/cover.pdf" "build/${instrument}/paged/toc.pdf" "build/${instrument}/paged/songs/"*.pdf out/songbook-${instrument}-single.pdf
+pdfunite "build/${instrument}/paged/cover.pdf" "build/${instrument}/paged/toc.pdf" "build/${instrument}/paged/songs/"*.pdf out/songbook-${instrument}.pdf
