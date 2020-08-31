@@ -273,24 +273,23 @@
 	//     // For even/odd printing, the order is reversed.
 
 	//     // By default, a page has:
-	//     "default" : {
+	    "default" : {
 	//         // No title/subtitle.
 	//     	"title"     : null,
 	//     	"subtitle"  : null,
 	// 	// Footer is title -- page number.
-	//     	"footer"    : [ "%{title}", "", "%{page}" ],
-	//     },
+	    	"footer"    : [ "%{title} - %{artist}", "", "%{page}" ],
+	    },
 	//     // The first page of a song has:
 	    "title" : {
 	//         // Title and subtitle.
 	//     	"title"     : [ "", "%{title}", "" ],
 	        "subtitle"  : [ "%{artist|%{artist}}%{subtitle|%{subtitle}}%{key| / Key %{key}}%{capo| / Capo %{capo}}", "", "" ],
 	// 	// Footer with page number.
-			"footer"    : [ "%{title}", "", "%{page}" ],
 		},
 	//     // The very first output page is slightly different:
 	     "first" : {
-	     	"footer"    : [ "%{title}", "", "%{page}" ],
+	     	"footer"    : [ "%{title} - %{artist}", "", "%{page}" ],
 	    },
 	},
 

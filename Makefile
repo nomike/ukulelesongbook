@@ -1,9 +1,7 @@
 SHELL := /bin/bash -O nullglob
-all: regular single hardcover
-regular: ukulele guitar
-single: out/songbook-guitar.pdf out/songbook-ukulele.pdf
-ukulele: out/songbook-ukulele-printshop.pdf
-guitar: out/songbook-guitar-printshop.pdf
+all: regular printshop hardcover
+printshop: out/songbook-ukulele-printshop.pdf out/songbook-guitar-printshop.pdf
+regular: out/songbook-guitar.pdf out/songbook-ukulele.pdf
 cover-ukulele: cover/cover-ukulele.pdf
 cover-guitar: cover/cover-guitar.pdf
 

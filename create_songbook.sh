@@ -3,7 +3,7 @@
 instrument="${1}"
 noinstrument="${2}"
 
-echo "Generating single songbook for ${instrument}..."
+echo "Generating songbook for ${instrument}..."
 
 # ensure that our build directory is present
 mkdir -p "build/${instrument}/songs/"
@@ -15,7 +15,7 @@ mkdir -p "build/${instrument}/paged/"
         song="$(basename "${song}")"
         if [ ! -e "build/${instrument}/songs/${song%.chopro}.pdf" -o "%{song}" -nt "build/${instrument}/songs/${song%.chopro}.pdf" ] ; then
             echo "${song}" | grep -q -- "-${noinstrument}.chopro" && continue
-            chordpro --config chordpro-${instrument}.json --output "build/${instrument}/songs/${song%.chopro}.pdf" "songs/${song}"
+            chordpro --config chordpro-${instrument}.json --config no-pagenumbers.json --output "build/${instrument}/songs/${song%.chopro}.pdf" "songs/${song}"
             # if the song has an odd number of pages, add an empty page
             if [[ $(( $( pdfinfo "build/${instrument}/songs/${song%.chopro}.pdf" | grep "Pages:" | awk '{print $2}' ) % 2 )) -eq 1 ]]; then
                 pdfunite "build/${instrument}/songs/${song%.chopro}.pdf" build/empty.pdf "build/${instrument}/paged/songs/${song%.chopro}.pdf"

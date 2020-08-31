@@ -1,6 +1,3 @@
 * Title on "{chord: title}" directive makes title column larger
   Reported as a bug https://github.com/ChordPro/chordpro/issues/83
 * Fix chord display in "Here comes the sun - The Beatles"
-* Remove page number from cover
-* Remove page numbers from single songbooks
-* fix papersize of cover
