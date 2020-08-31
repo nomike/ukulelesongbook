@@ -14,7 +14,7 @@ mkdir -p "out/"
     # create an individual PDF for each song
     for song in songs/*.chopro ; do
         song="$(basename "${song}")"
-        if [ ! -e "build/${instrument}/songs/${song%.chopro}.pdf" -o "%{song}" -nt "build/${instrument}/songs/${song%.chopro}.pdf" ] ; then
+        if [ ! -e "build/${instrument}/songs/${song%.chopro}.pdf" -o "songs/${song}" -nt "build/${instrument}/songs/${song%.chopro}.pdf" ] ; then
             echo "${song}" | grep -q -- "-${noinstrument}.chopro" && continue
             chordpro --config chordpro-${instrument}.json --config no-pagenumbers.json --output "build/${instrument}/songs/${song%.chopro}.pdf" "songs/${song}"
             # if the song has an odd number of pages, add an empty page
