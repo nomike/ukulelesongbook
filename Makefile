@@ -10,10 +10,10 @@ cover-guitar: cover/cover-guitar.pdf
 out:
 	mkdir -p out
 
-out/songbook-ukulele-printshop.pdf : out songs/*.chopro chordpro-ukulele.json cover/cover-ukulele.pdf build/ukulele.songlist
+out/songbook-ukulele-printshop.pdf: out songs/*.chopro chordpro-ukulele.json cover/cover-ukulele.pdf build/ukulele.songlist
 	CHORDPRO_PDF="PDF::API2" ./create_printshop_songbook.py --instrument ukulele
 
-out/songbook-guitar-printshop.pdf : out songs/*.chopro chordpro-guitar.json cover/cover-guitar.pdf build/guitar.songlist
+out/songbook-guitar-printshop.pdf: out songs/*.chopro chordpro-guitar.json cover/cover-guitar.pdf build/guitar.songlist
 	CHORDPRO_PDF="PDF::API2" ./create_printshop_songbook.py --instrument guitar
 
 clean-vscode: clean
