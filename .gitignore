@@ -26,3 +26,6 @@ cover/hardcover-ukulele.tex
 .last_printed_guitar_commit
 .last_printed_ukulele_commit
 *~
+cover/hardcover-guitar.fdb_latexmk
+cover/hardcover-guitar.fls
+cover/hardcover-guitar.synctex.gz
