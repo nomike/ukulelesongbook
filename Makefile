@@ -1,5 +1,6 @@
 SHELL := /bin/bash -O nullglob
 all: regular printshop hardcover
+.PHONY: all printshop regular cover-ukulele cover-guitar clean clean-vscode clean-build clean-out convert convert-tabs convert-ultimate upload ukulele upload-guitar upload hardcover-ukulele hardcover-guitar hardcover
 printshop: out/songbook-ukulele-printshop.pdf out/songbook-guitar-printshop.pdf
 regular: out/songbook-guitar.pdf out/songbook-ukulele.pdf
 cover-ukulele: cover/cover-ukulele.pdf
