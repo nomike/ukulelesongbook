@@ -10,10 +10,10 @@ cover-guitar: cover/cover-guitar.pdf
 out:
 	mkdir -p out
 
-out/songbook-ukulele.pdf : out songs/*.chopro chordpro-ukulele.json cover/cover-ukulele.pdf songlist-ukulele
+out/songbook-ukulele.pdf : out songs/*.chopro chordpro-ukulele.json cover/cover-ukulele.pdf build/ukulele.songlist
 	CHORDPRO_PDF="PDF::API2" ./create_songbook.py --instrument ukulele
 
-out/songbook-guitar.pdf : out songs/*.chopro chordpro-guitar.json cover/cover-guitar.pdf songlist-guitar
+out/songbook-guitar.pdf : out songs/*.chopro chordpro-guitar.json cover/cover-guitar.pdf build/guitar.songlist
 	CHORDPRO_PDF="PDF::API2" ./create_songbook.py --instrument guitar
 
 clean-vscode: clean
@@ -89,13 +89,12 @@ upload-guitar-single: out/songbook-guitar-single.pdf
 
 upload: all upload-ukulele upload-guitar upload-ukulele-single upload-guitar-single
 
-create-songlist-ukulele: songs/*.chopro
-	./create_songlist.py --instrument=ukulele > songlist-ukulele
+build/ukulele.songlist: songs/*.chopro
+	./create_songlist.py --instrument=ukulele > build/ukulele.songlist
 
-create-songlist-guitar: songs/*.chopro
-	./create_songlist.py --instrument=guitar > songlist-guitar
+build/guitar.songlist: songs/*.chopro
+	./create_songlist.py --instrument=guitar > build/guitar.songlist
 
-create-songlists: create-songlist-ukulele create-songlist-guitar
 
 cover/hardcover-ukulele.tex: cover/cover-ukulele.tex.tpl COMMIT-HASH COMMIT-HASH-songs configuration
 	export nusb_version="" ; envsubst <cover/cover-ukulele.tex.tpl >cover/hardcover-ukulele.tex
