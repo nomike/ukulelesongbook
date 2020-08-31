@@ -26,7 +26,7 @@ if [ "${instrument}" != "guitar" ] && [ "${instrument}" != "ukulele" ] ; then
 fi
 
 print_range=$((
-    test -r .last_printed_${instrument}_commit && export last_printed_commit="$(cat .last_printed_${instrument}_commit)" || export last_printed_commit="4b825dc642cb6eb9a060e54bf8d69288fbee4904"
+    test -r build/last_printed_${instrument}_commit && export last_printed_commit="$(cat build/last_printed_${instrument}_commit)" || export last_printed_commit="4b825dc642cb6eb9a060e54bf8d69288fbee4904"
     export IFS=$'\n'
     (
         cd songs
@@ -48,6 +48,6 @@ fi
 if ! ${no_record} ; then
     (
         cd songs
-        git rev-parse HEAD > ../.last_printed_${instrument}_commit
+        git rev-parse HEAD > ../build/last_printed_${instrument}_commit
     )
 fi
