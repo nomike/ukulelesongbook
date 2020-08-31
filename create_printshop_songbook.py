@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Usage:
-    create_songbook.py --instrument=<instrument>
+    create_printshop_songbook.py --instrument=<instrument>
 """
 import glob
 import re
@@ -30,6 +30,6 @@ if __name__ == "__main__":
                 if not file in lines:
                     logging.info("%s is not in songlist." % (file))
                     lines.append(file)
-    command = ['/usr/local/bin/chordpro', '--config', 'chordpro-%s.json' % (target_instrument), '--output', 'out/songbook-%s.pdf' % (target_instrument), '--cover', 'cover/cover-%s.pdf' % (target_instrument)]
+    command = ['/usr/local/bin/chordpro', '--config', 'chordpro-%s.json' % (target_instrument), '--output', 'out/songbook-%s-printshop.pdf' % (target_instrument), '--cover', 'cover/cover-%s.pdf' % (target_instrument)]
     command.extend(lines)
     subprocess.run(command)

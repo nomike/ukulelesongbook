@@ -2,19 +2,19 @@ SHELL := /bin/bash -O nullglob
 all: regular single hardcover
 regular: ukulele guitar
 single: out/songbook-guitar-single.pdf out/songbook-ukulele-single.pdf
-ukulele: out/songbook-ukulele.pdf
-guitar: out/songbook-guitar.pdf
+ukulele: out/songbook-ukulele-printshop.pdf
+guitar: out/songbook-guitar-printshop.pdf
 cover-ukulele: cover/cover-ukulele.pdf
 cover-guitar: cover/cover-guitar.pdf
 
 out:
 	mkdir -p out
 
-out/songbook-ukulele.pdf : out songs/*.chopro chordpro-ukulele.json cover/cover-ukulele.pdf build/ukulele.songlist
-	CHORDPRO_PDF="PDF::API2" ./create_songbook.py --instrument ukulele
+out/songbook-ukulele-printshop.pdf : out songs/*.chopro chordpro-ukulele.json cover/cover-ukulele.pdf build/ukulele.songlist
+	CHORDPRO_PDF="PDF::API2" ./create_printshop_songbook.py --instrument ukulele
 
-out/songbook-guitar.pdf : out songs/*.chopro chordpro-guitar.json cover/cover-guitar.pdf build/guitar.songlist
-	CHORDPRO_PDF="PDF::API2" ./create_songbook.py --instrument guitar
+out/songbook-guitar-printshop.pdf : out songs/*.chopro chordpro-guitar.json cover/cover-guitar.pdf build/guitar.songlist
+	CHORDPRO_PDF="PDF::API2" ./create_printshop_songbook.py --instrument guitar
 
 clean-vscode: clean
 	rm -f cover/cover-guitar.aux cover/cover-guitar.fdb_latexmk cover/cover-guitar.fls cover/cover-guitar.log cover/cover-guitar.synctex.gz cover/cover-ukulele.aux cover/cover-ukulele.fdb_latexmk cover/cover-ukulele.fls cover/cover-ukulele.log cover/cover-ukulele.synctex.gz
@@ -75,11 +75,11 @@ build/ukulele/toc.pdf: build/ukulele/toc.ps
 out/songbook-ukulele-single.pdf: out build/ukulele/toc.pdf build/empty.pdf songs/*.chopro chordpro-ukulele.json cover/cover-ukulele.pdf
 	./create_single_songbook.sh ukulele guitar
 
-upload-ukulele: out/songbook-ukulele.pdf
-	scp out/songbook-ukulele.pdf nomike@david-brearley.dreamhost.com:nomike.com/public/.ukulelesongbook/
+upload-ukulele: out/songbook-ukulele-printshop.pdf
+	scp out/songbook-ukulele-printshop.pdf nomike@david-brearley.dreamhost.com:nomike.com/public/.ukulelesongbook/
 
-upload-guitar: out/songbook-guitar.pdf
-	scp out/songbook-guitar.pdf nomike@david-brearley.dreamhost.com:nomike.com/public/.ukulelesongbook/
+upload-guitar: out/songbook-guitar-printshop.pdf
+	scp out/songbook-guitar-printshop.pdf nomike@david-brearley.dreamhost.com:nomike.com/public/.ukulelesongbook/
 
 upload-ukulele-single: out/songbook-ukulele-single.pdf
 	scp out/songbook-ukulele-single.pdf nomike@david-brearley.dreamhost.com:nomike.com/public/.ukulelesongbook/
