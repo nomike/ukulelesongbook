@@ -1,7 +1,8 @@
 #!/bin/bash -e
 
+basedir="$(pwd)"
 eval "$(./docopts -V - -h - : "$@" <<EOF
-Usage: ${0} --instrument=<instrument> [--no-record] [--copiess=<copies>] [--no-print]
+Usage: ${0} --instrument=<instrument> [--no-record] [--copies=<copies>] [--no-print]
        ${0} --version
        ${0} --help
 Options:
@@ -12,7 +13,7 @@ Options:
       --help                    Show help options.
       --version                 Print program version.
 ----
-$(basename "${0}") - v. 0.0.1
+$(basename "${0}") - v. 0.0.2
 Copyright (C) 2020 nomike Postmann
 License GPLv3
 This is free software: you are free to change and redistribute it.
@@ -39,7 +40,7 @@ if [ "${print_range}" == "" ] ; then
     echo "${0}: Info: Nothing to print" >&2
     exit 0
 fi
-print_command="lp -P \"${print_range}\" \"out/songbook-${instrument}.pdf\""
+print_command="lp -P \"${print_range}\" \"${basedir}/out/songbook-${instrument}.pdf\""
 if ${no_print} ; then
     echo "${print_command}"
 else
@@ -48,6 +49,6 @@ fi
 if ! ${no_record} ; then
     (
         cd songs
-        git rev-parse HEAD > ../build/last_printed_${instrument}_commit
+        git rev-parse HEAD > "${basedir}/build/last_printed_${instrument}_commit"
     )
 fi
