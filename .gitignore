@@ -29,3 +29,10 @@ cover/hardcover-ukulele.tex
 cover/hardcover-guitar.fdb_latexmk
 cover/hardcover-guitar.fls
 cover/hardcover-guitar.synctex.gz
+__pycache__/
+config/upload_target
+config/releases
+config/releases.json
+config/COMMIT-HASH*
+config/last_printed_*_commit
+config/TAG*
