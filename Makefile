@@ -24,10 +24,10 @@ clean-build:
 clean-out:
 	rm -rf out/
 
-cover/cover-ukulele.tex: cover/cover-ukulele.tex.tpl build/COMMIT-HASH build/COMMIT-HASH-songs build/TAG build/TAG-songs configuration
+cover/cover-ukulele.tex: cover/cover-ukulele.tex.tpl config/COMMIT-HASH config/COMMIT-HASH-songs config/TAG config/TAG-songs configuration
 	. ./configuration ; envsubst <cover/cover-ukulele.tex.tpl >cover/cover-ukulele.tex
 
-cover/cover-guitar.tex: cover/cover-guitar.tex.tpl build/COMMIT-HASH build/COMMIT-HASH-songs build/TAG build/TAG-songs configuration
+cover/cover-guitar.tex: cover/cover-guitar.tex.tpl config/COMMIT-HASH config/COMMIT-HASH-songs config/TAG config/TAG-songs configuration
 	. ./configuration ; envsubst <cover/cover-guitar.tex.tpl >cover/cover-guitar.tex
 
 cover/cover-ukulele.pdf: cover/cover-ukulele.tex
@@ -92,10 +92,10 @@ build/guitar.songlist: songs/*.chopro
 	./create_songlist.py --instrument=guitar > build/guitar.songlist
 
 
-cover/hardcover-ukulele.tex: cover/cover-ukulele.tex.tpl build/COMMIT-HASH build/COMMIT-HASH-songs build/TAG build/TAG-songs configuration
+cover/hardcover-ukulele.tex: cover/cover-ukulele.tex.tpl config/COMMIT-HASH config/COMMIT-HASH-songs config/TAG config/TAG-songs configuration
 	export nusb_version="" ; envsubst <cover/cover-ukulele.tex.tpl >cover/hardcover-ukulele.tex
 
-cover/hardcover-guitar.tex: cover/cover-guitar.tex.tpl build/COMMIT-HASH build/COMMIT-HASH-songs build/TAG build/TAG-songs configuration
+cover/hardcover-guitar.tex: cover/cover-guitar.tex.tpl config/COMMIT-HASH config/COMMIT-HASH-songs config/TAG config/TAG-songs configuration
 	export nusb_version="" ; envsubst <cover/cover-guitar.tex.tpl >cover/hardcover-guitar.tex
 
 cover/hardcover-ukulele.pdf: cover/hardcover-ukulele.tex
@@ -110,10 +110,10 @@ hardcover-guitar: cover/hardcover-guitar.pdf
 
 hardcover: hardcover-ukulele hardcover-guitar
 
-build/COMMIT-HASH: FORCE
+config/COMMIT-HASH: FORCE
 	./update_commit_hashes.sh
 
-build/COMMIT-HASH-songs: FORCE
+config/COMMIT-HASH-songs: FORCE
 	./update_commit_hashes.sh songs
 
 FORCE:

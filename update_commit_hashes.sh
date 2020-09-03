@@ -1,12 +1,14 @@
 #!/bin/bash
 
+mkdir -p config
+
 if [ ${#} -eq 1 ] ; then
-    GCVF="build/COMMIT-HASH-${1}"
-    GTVF="build/TAG-${1}"
+    GCVF="config/COMMIT-HASH-${1}"
+    GTVF="config/TAG-${1}"
     pushd "${1}" >/dev/null
 else
-    GCVF="build/COMMIT-HASH"
-    GTVF="build/TAG"
+    GCVF="config/COMMIT-HASH"
+    GTVF="config/TAG"
     pushd . >/dev/null
 fi
 

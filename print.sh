@@ -20,14 +20,14 @@ This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
 EOF
 )"
-
+mkdir -p config
 if [ "${instrument}" != "guitar" ] && [ "${instrument}" != "ukulele" ] ; then
     echo "${0}: Error: Unsupported instrument" >&2
     exit 1
 fi
 
 print_range=$((
-    test -r build/last_printed_${instrument}_commit && export last_printed_commit="$(cat build/last_printed_${instrument}_commit)" || export last_printed_commit="4b825dc642cb6eb9a060e54bf8d69288fbee4904"
+    test -r config/last_printed_${instrument}_commit && export last_printed_commit="$(cat config/last_printed_${instrument}_commit)" || export last_printed_commit="4b825dc642cb6eb9a060e54bf8d69288fbee4904"
     export IFS=$'\n'
     (
         cd songs
@@ -49,6 +49,6 @@ fi
 if ! ${no_record} ; then
     (
         cd songs
-        git rev-parse HEAD > "${basedir}/build/last_printed_${instrument}_commit"
+        git rev-parse HEAD > "${basedir}/config/last_printed_${instrument}_commit"
     )
 fi
