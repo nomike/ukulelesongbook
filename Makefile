@@ -1,6 +1,6 @@
 SHELL := /bin/bash -O nullglob
 all: regular printshop hardcover
-.PHONY: all printshop regular cover-ukulele cover-guitar clean clean-vscode clean-build clean-out convert convert-tabs convert-ultimate upload ukulele upload-guitar upload hardcover-ukulele hardcover-guitar hardcover
+.PHONY: all printshop regular cover-ukulele cover-guitar clean clean-vscode clean-build clean-out convert convert-tabs convert-ultimate ukulele hardcover-ukulele hardcover-guitar hardcover
 printshop: out/songbook-ukulele-printshop.pdf out/songbook-guitar-printshop.pdf
 regular: out/songbook-guitar.pdf out/songbook-ukulele.pdf
 cover-ukulele: cover/cover-ukulele.pdf
@@ -71,19 +71,8 @@ build/ukulele/toc.pdf: build/ukulele/toc.ps
 out/songbook-ukulele.pdf: build/ukulele/toc.pdf build/empty.pdf songs/*.chopro chordpro-ukulele.json cover/cover-ukulele.pdf
 	./create_songbook.sh ukulele guitar
 
-upload-ukulele-printshop: out/songbook-ukulele-printshop.pdf
-	scp out/songbook-ukulele-printshop.pdf nomike@david-brearley.dreamhost.com:nomike.com/public/.ukulelesongbook/
-
-upload-guitar-printshop: out/songbook-guitar-printshop.pdf
-	scp out/songbook-guitar-printshop.pdf nomike@david-brearley.dreamhost.com:nomike.com/public/.ukulelesongbook/
-
-upload-ukulele: out/songbook-ukulele.pdf
-	scp out/songbook-ukulele.pdf nomike@david-brearley.dreamhost.com:nomike.com/public/.ukulelesongbook/
-
-upload-guitar: out/songbook-guitar.pdf
-	scp out/songbook-guitar.pdf nomike@david-brearley.dreamhost.com:nomike.com/public/.ukulelesongbook/
-
-upload: all upload-ukulele upload-guitar upload-ukulele-printshop upload-guitar-printshop
+release: out/songbook-guitar.pdf out/songbook-ukulele.pdf out/songbook-guitar-printshop.pdf out/songbook-ukulele-printshop.pdf
+	./release.py
 
 build/ukulele.songlist: songs/*.chopro
 	./create_songlist.py --instrument=ukulele > build/ukulele.songlist
