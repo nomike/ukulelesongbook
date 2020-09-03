@@ -49,4 +49,4 @@ if __name__=="__main__":
                 start = new_start
             end = new_end
         current_page = current_page + song["pages"]
-    print("%d-%d," % (start, end), end="")
+    print("%d-%d" % (start, end), end="")
