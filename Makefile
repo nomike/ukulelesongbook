@@ -71,7 +71,7 @@ build/ukulele/toc.pdf: build/ukulele/toc.ps
 out/songbook-ukulele.pdf: build/ukulele/toc.pdf build/empty.pdf songs/*.chopro chordpro-ukulele.json cover/cover-ukulele.pdf
 	./create_songbook.sh ukulele guitar
 
-release: out/songbook-guitar.pdf out/songbook-ukulele.pdf out/songbook-guitar-printshop.pdf out/songbook-ukulele-printshop.pdf
+release: clean out/songbook-guitar.pdf out/songbook-ukulele.pdf out/songbook-guitar-printshop.pdf out/songbook-ukulele-printshop.pdf
 	./release.py
 
 build/ukulele.songlist: songs/*.chopro
