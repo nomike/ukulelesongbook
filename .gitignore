@@ -36,3 +36,6 @@ config/releases.json
 config/COMMIT-HASH*
 config/last_printed_*_commit
 config/TAG*
+cover/hardcover-ukulele.fdb_latexmk
+cover/hardcover-ukulele.fls
+cover/hardcover-ukulele.synctex.gz
