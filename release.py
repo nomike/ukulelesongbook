@@ -7,7 +7,7 @@ from generate_print_string import generate_print_string
 
 def calculate_print_string(instrument, start, end = 'HEAD'):
     songs = str(subprocess.run(["git", "--no-pager", "diff", "--name-only", start, end], cwd = os.path.join(os.getcwd(), 'songs'), capture_output=True).stdout, 'utf-8').strip().split("\n")
-    songs = [x.replace(".chopro", "") for x in songs if x]
+    songs = [bytes(bytes(x.replace(".chopro", ""), 'ascii').decode('unicode-escape'), 'latin_1').decode('utf-8').strip('"') for x in songs if x]
     print_string = generate_print_string(songs, instrument)
     return print_string
 
@@ -53,9 +53,9 @@ if __name__ == "__main__":
         json.dump(releases, file, indent=4, sort_keys=True)
 
     # upload songbooks and releases file
-    upload_file('out/songbook-guitar.pdf', upload_target)
-    upload_file('out/songbook-guitar-printshop.pdf', upload_target)
-    upload_file('out/songbook-ukulele.pdf', upload_target)
-    upload_file('out/songbook-ukulele-printshop.pdf', upload_target)
-    upload_file('config/releases.json', upload_target)
+    # upload_file('out/songbook-guitar.pdf', upload_target)
+    # upload_file('out/songbook-guitar-printshop.pdf', upload_target)
+    # upload_file('out/songbook-ukulele.pdf', upload_target)
+    # upload_file('out/songbook-ukulele-printshop.pdf', upload_target)
+    # upload_file('config/releases.json', upload_target)
     
