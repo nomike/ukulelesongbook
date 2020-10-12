@@ -29,8 +29,11 @@ if __name__=="__main__":
     if not arguments["--instrument"] in instruments:
         raise Exception("Unsupported instrument")
     target_instrument = arguments["--instrument"]
+    exclude_instrument = instruments
+    exclude_instrument.remove(arguments["--instrument"])
     songs = []
-    files = [os.path.basename(x) for x in glob("build/%s/songs/*.pdf" % (target_instrument))]
+    # [os.path.basename(x.replace(".chopro", "")) for x in glob.glob("songs/*.chopro") if not x.endswith("%s.chopro" % (sys.argv[1]))]
+    files = [os.path.basename(x) for x in glob("build/%s/songs/*.pdf" % (target_instrument)) if not x.endswith("-%s.pdf" % (exclude_instrument[0]))]
     files.sort()
     for file in files:
         songs.append({"title": file, "pages": count_pdf_pages(("build/%s/songs/" % (target_instrument)) + file)})

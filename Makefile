@@ -57,7 +57,7 @@ build/guitar/toc.pdf: build/guitar/toc.ps
 	ps2pdf build/guitar/toc.ps build/guitar/toc.pdf
 
 out/songbook-guitar.pdf: build/guitar/toc.pdf build/empty.pdf songs/*.chopro chordpro-guitar.json cover/cover-guitar.pdf
-	./create_songbook.sh guitar ukulele
+	./create_songbook.py guitar ukulele
 
 build/ukulele/toc.txt:
 	mkdir -p build/ukulele/ ; (cd songs ; find . -type f -a -name "*.chopro" -a ! -name "*-guitar.chopro") | cut -c 3- | sed 's/\(-ukulele\)\{0,1\}\.chopro$$//' | sort > build/ukulele/toc.txt
@@ -69,7 +69,7 @@ build/ukulele/toc.pdf: build/ukulele/toc.ps
 	ps2pdf build/ukulele/toc.ps build/ukulele/toc.pdf
 
 out/songbook-ukulele.pdf: build/ukulele/toc.pdf build/empty.pdf songs/*.chopro chordpro-ukulele.json cover/cover-ukulele.pdf
-	./create_songbook.sh ukulele guitar
+	./create_songbook.py ukulele guitar
 
 release: clean out/songbook-guitar.pdf out/songbook-ukulele.pdf out/songbook-guitar-printshop.pdf out/songbook-ukulele-printshop.pdf
 	./release.py
