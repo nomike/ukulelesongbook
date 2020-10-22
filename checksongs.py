@@ -18,8 +18,8 @@ if __name__ == "__main__":
             song = os.path.basename(s)
             artist = rchop(rchop(a, '-ukulele'), '-guitar')
             
-            if not re.search("{t(?:itle){0,1}: {0,1}%s}" % song, content):
+            if not re.search("{t(?:itle){0,1}: {0,1}%s}" % song.replace("(", "\\(").replace(")", "\\)"), content.replace('/', '_')):
                 print("Wrong title in song '%s'" % (filename))
-            if not re.search("{artist: {0,1}%s}" % artist, content):
+            if not re.search("{artist: {0,1}%s}" % artist.replace("(", "\\(").replace(")", "\\)"), content.replace('/', '_')):
                 print("Wrong artist in song '%s'" % (filename))
             
