@@ -12,9 +12,9 @@ def rchop(s, suffix):
 
 if __name__ == "__main__":
 
+    issue = False
     for (s, a) in [f[:-7].split(" - ") for f in glob.glob('songs/*.chopro')]:
         filename = '%s - %s.chopro' % (s, a)
-        issue = False
         with open(filename, 'r') as file:
             content = file.read()
             song = os.path.basename(s)
