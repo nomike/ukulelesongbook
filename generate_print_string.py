@@ -16,7 +16,7 @@ rxcountpages = re.compile(b"/Type\s*/Page([^s]|$)", re.MULTILINE|re.DOTALL)
 def count_pdf_pages(filename):
     with open(filename, "rb") as file:
         data = file.read()
-    return len(rxcountpages.findall(data))
+    return max(len(rxcountpages.findall(data)), 1)
 
 def generate_print_string(songs, instrument):
     if not instrument in instruments:
