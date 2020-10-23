@@ -12,11 +12,8 @@ out/songbook-ukulele-printshop.pdf: songs/*.chopro chordpro-ukulele.json cover/c
 out/songbook-guitar-printshop.pdf: songs/*.chopro chordpro-guitar.json cover/cover-guitar.pdf build/guitar.songlist
 	CHORDPRO_PDF="PDF::API2" ./create_printshop_songbook.py --instrument guitar
 
-clean-vscode: clean
-	rm -f cover/cover-guitar.aux cover/cover-guitar.fdb_latexmk cover/cover-guitar.fls cover/cover-guitar.log cover/cover-guitar.synctex.gz cover/cover-ukulele.aux cover/cover-ukulele.fdb_latexmk cover/cover-ukulele.fls cover/cover-ukulele.log cover/cover-ukulele.synctex.gz cover/hardcover-ukulele.fdb_latexmk cover/hardcover-ukulele.fls cover/hardcover-ukulele.synctex.gz
-
 clean: clean-build clean-out
-	rm -f cover/cover-guitar.pdf cover/cover-guitar.aux cover/cover-guitar.log cover/cover-guitar.tex cover/cover-ukulele.pdf cover/cover-ukulele.aux cover/cover-ukulele.log cover/cover-ukulele.tex
+	rm -f cover/cover-guitar.aux cover/cover-guitar.fdb_latexmk cover/cover-guitar.fls cover/cover-guitar.log cover/cover-guitar.synctex.gz cover/cover-ukulele.aux cover/cover-ukulele.fdb_latexmk cover/cover-ukulele.fls cover/cover-ukulele.log cover/cover-ukulele.synctex.gz cover/hardcover-ukulele.fdb_latexmk cover/hardcover-ukulele.fls cover/hardcover-ukulele.synctex.gz cover/cover-guitar.pdf cover/cover-guitar.aux cover/cover-guitar.log cover/cover-guitar.tex cover/cover-ukulele.pdf cover/cover-ukulele.aux cover/cover-ukulele.log cover/cover-ukulele.tex
 
 clean-build:
 	rm -rf build/

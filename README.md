@@ -122,8 +122,3 @@ Single songbooks
 Single songbooks are printable versions of the songbook where songs can be added easily.
 An individual PDF is generated for each song and the reulting files are joined together with the cover and a freshly generated TOC.
 If new songs are added, just print the new songs and sort put them into the existing book.
-
-clean-vscode
-------------
-If you use visual studio code for editing the latex sources used for the cover pages, the LATEX plugin will create some aditional temporary files which can be cleaned up with the "clean-vcsode" target of the Makefile:
-`make clean-vscode`
