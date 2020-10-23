@@ -9,6 +9,8 @@ import subprocess
 import os
 from docopt import docopt
 import logging
+import locale
+locale.setlocale(locale.LC_ALL, '')
 
 instruments = ['ukulele', 'guitar']
 
@@ -24,7 +26,7 @@ if __name__ == "__main__":
         lines = [os.path.join("songs", i.rstrip('\n')) for i in file.readlines() if i[0] != "#"]
 
     filelist = glob.glob('songs/*.chopro')
-    filelist.sort()
+    filelist.sort(key=locale.strxfrm)
     for file in filelist:
         for p in excluded_instruments:
             if not p.match(os.path.basename(file)):

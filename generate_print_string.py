@@ -9,6 +9,8 @@ import os
 from docopt import docopt
 import logging
 from glob import glob
+import locale
+locale.setlocale(locale.LC_ALL, '')
 
 instruments = ['ukulele', 'guitar']
 rxcountpages = re.compile(b"/Type\s*/Page([^s]|$)", re.MULTILINE|re.DOTALL)
@@ -29,7 +31,7 @@ def generate_print_string(songs, instrument):
         cover_pages = 1
     toc_pages = count_pdf_pages(os.path.join("build", instrument, "paged", "toc.pdf"))
     files = [os.path.basename(x) for x in glob("build/%s/paged/songs/*.pdf" % (instrument))]
-    files.sort()
+    files.sort(key=locale.strxfrm)
     all_songs = []
     for file in files:
         all_songs.append({"title": file, "pages": count_pdf_pages(("build/%s/paged/songs/" % (instrument)) + file)})

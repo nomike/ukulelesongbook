@@ -8,6 +8,8 @@ import sys
 import glob
 import re
 import shutil
+import locale
+locale.setlocale(locale.LC_ALL, '')
 
 rxcountpages = re.compile(b"/Type\s*/Page([^s]|$)", re.MULTILINE|re.DOTALL)
 def count_pdf_pages(filename):
@@ -27,7 +29,8 @@ if __name__ == "__main__":
         os.makedirs("out/")
     
     songs = [os.path.basename(x.replace(".chopro", "")) for x in glob.glob("songs/*.chopro") if not x.endswith("-%s.chopro" % (exclude_instrument))]
-    songs.sort()
+    songs.sort(key=locale.strxfrm)
+
     for song in songs:
         if (not os.path.isfile("build/%s/songs/%s.pdf" % (instrument, song))) or max(os.path.getmtime("songs/%s.chopro" % (song)), os.path.getmtime("chordpro-%s.json" % (instrument))) > os.path.getmtime("build/%s/songs/%s.pdf" % (instrument, song)):
             result = subprocess.run(["chordpro", "--config", "chordpro-%s.json" % (instrument), "--config", "no-pagenumbers.json", "--output", "build/%s/songs/%s.pdf" % (instrument, song), "songs/%s.chopro" % (song)], capture_output=True)
