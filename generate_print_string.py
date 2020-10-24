@@ -27,8 +27,6 @@ def generate_print_string(songs, instrument):
         return ""
     print_string = ""
     cover_pages = count_pdf_pages(os.path.join("build", instrument, "paged", "cover.pdf"))
-    if cover_pages == 0:
-        cover_pages = 1
     toc_pages = count_pdf_pages(os.path.join("build", instrument, "paged", "toc.pdf"))
     files = [os.path.basename(x) for x in glob("build/%s/paged/songs/*.pdf" % (instrument))]
     files.sort(key=locale.strxfrm)
