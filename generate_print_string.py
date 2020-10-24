@@ -37,7 +37,7 @@ def generate_print_string(songs, instrument):
         all_songs.append({"title": file, "pages": count_pdf_pages(("build/%s/paged/songs/" % (instrument)) + file)})
     current_page = cover_pages + toc_pages
     start = 1
-    end = current_page - 1
+    end = current_page
     for song in all_songs:
         if song["title"].replace(".pdf", "") in songs:
             new_start = current_page
