@@ -74,6 +74,9 @@ checksongs:
 release: clean checksongs out/songbook-guitar.pdf out/songbook-ukulele.pdf out/songbook-guitar-printshop.pdf out/songbook-ukulele-printshop.pdf
 	./release.py
 
+release-offline: clean checksongs out/songbook-guitar.pdf out/songbook-ukulele.pdf out/songbook-guitar-printshop.pdf out/songbook-ukulele-printshop.pdf
+	./release.py --no-upload
+
 build/ukulele.songlist: songs/*.chopro
 	./create_songlist.py --instrument=ukulele > build/ukulele.songlist
 
