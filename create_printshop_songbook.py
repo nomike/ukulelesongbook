@@ -33,6 +33,6 @@ if __name__ == "__main__":
                 if not file in lines:
                     logging.info("%s is not in songlist." % (file))
                     lines.append(file)
-    command = ['/usr/local/bin/chordpro', '--config', 'chordpro-%s.json' % (target_instrument), '--output', 'out/songbook-%s-printshop.pdf' % (target_instrument), '--cover', 'cover/cover-%s.pdf' % (target_instrument)]
+    command = ['chordpro', '--config', 'chordpro-%s.json' % (target_instrument), '--output', 'out/songbook-%s-printshop.pdf' % (target_instrument), '--cover', 'cover/cover-%s.pdf' % (target_instrument)]
     command.extend(lines)
     subprocess.run(command)
