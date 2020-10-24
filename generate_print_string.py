@@ -38,8 +38,8 @@ def generate_print_string(songs, instrument):
     end = current_page
     for song in all_songs:
         if song["title"].replace(".pdf", "") in songs:
-            new_start = current_page
-            new_end = current_page + song["pages"] + 1
+            new_start = current_page - 1 # -1 to print the last page of the previous song
+            new_end = current_page + song["pages"]
             if new_start > end + 1:
                 print_string = print_string + "%d-%d," % (start, end)
                 start = new_start
