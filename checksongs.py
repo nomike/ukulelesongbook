@@ -20,10 +20,10 @@ if __name__ == "__main__":
             song = os.path.basename(s)
             artist = rchop(rchop(a, '-ukulele'), '-guitar')
             
-            if not re.search("{t(?:itle)?: ?%s}" % song.replace("(", "\\(").replace(")", "\\)"), content.replace('/', '_')):
+            if not re.search("{t(?:itle)?: ?%s}" % re.escape(song), content.replace('/', '_')):
                 issue = True
                 print("Wrong title in song '%s'" % (filename))
-            if not re.search("{artist: ?%s}" % artist.replace("(", "\\(").replace(")", "\\)"), content.replace('/', '_')):
+            if not re.search("{artist: ?%s}" % re.escape(artist), content.replace('/', '_')):
                 issue = True
                 print("Wrong artist in song '%s'" % (filename))
     if issue:
