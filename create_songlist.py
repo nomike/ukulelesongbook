@@ -23,7 +23,7 @@ class restart(Exception):
 def count_pdf_pages(filename):
     with open(filename, "rb") as file:
         data = file.read()
-    return len(rxcountpages.findall(data))
+    return max(len(rxcountpages.findall(data)), 1)
 
 if __name__=="__main__":
     logging.basicConfig(level=logging.INFO)
