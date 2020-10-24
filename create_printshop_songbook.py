@@ -26,6 +26,8 @@ if __name__ == "__main__":
         lines = [os.path.join("songs", i.rstrip('\n')) for i in file.readlines() if i[0] != "#"]
 
     filelist = glob.glob('songs/*.chopro')
+    if len(filelist) == 0:
+        raise Exception("There are no songs in the songs directory.")
     filelist.sort(key=locale.strxfrm)
     for file in filelist:
         for p in excluded_instruments:
