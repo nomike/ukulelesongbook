@@ -43,6 +43,8 @@ $ make ukulele
 $ make guitar
 ```
 
+***Note:** It is intended to not run the python and shell scripts directly. You should use the Makefile targets for all actions. The Makefile contains some sanity checks and takes care that all necessary dependencies are met.*
+
 The `songs` folder
 ------------------
 All songs are to be placed in the `songs` folder in .chordpro format. `songs` is a symlink pointing to `../songs/`. as the songs have been split up to a separate repository due to copyright reasons.
