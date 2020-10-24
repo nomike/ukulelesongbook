@@ -14,7 +14,6 @@ You need to install a couple of dependencies:
 #### Ubuntu/Debian
 ```
 sudo apt install texlive-full python3-docopt enscript libpdf-api2-perl imagemagick libstring-interpolate-perl
-sudo cpan install App::Packager
 sudo cpan install chordpro
 ```
 <!-- TODO: Add instructions for other operating systems** -->
