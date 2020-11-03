@@ -140,15 +140,26 @@
 	//   "format" : "\"%f\", line %n, %m\n\t%l",
     // },
 
-    // // Table of contents.
-    "toc" : {
-	//   // Title for ToC.
-	//   "title" : "Table of Contents",
-	//   // Sorting order.
-	//   // Currently only sorting by page number and alpha is implemented.
-	  "order" : "alpha",
-	  "line" : "%{title}  -  %{artist}",
-  },
+    "contents" : [
+        { "fields"   : [ "songindex" ],
+          "label"    : "Table of Contents",
+          "line"     : "%{title}",
+          "fold"     : false,
+          "omit"     : true,
+        },
+        { "fields"   : [ "sorttitle", "artist" ],
+          "label"    : "Table of Contents",
+          "line"     : "%{title}%{artist| - %{}}",
+          "fold"     : false,
+          "omit"     : false,
+        },
+        { "fields"   : [ "artist", "sorttitle" ],
+          "label"    : "Contents by Artist",
+          "line"     : "%{artist|%{} - }%{title}",
+          "fold"     : false,
+          "omit"     : true,
+        },
+    ],
 
     // // Layout definitions for PDF output.
 
