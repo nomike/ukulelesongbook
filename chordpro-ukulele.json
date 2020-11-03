@@ -35,6 +35,7 @@
     //   "transcode" : null,
 	// // Always decapoize.
 	// "decapo" : false,
+	   "chordnames": "relaxed",
      },
 
     // // Metadata.
