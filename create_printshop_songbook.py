@@ -37,4 +37,5 @@ if __name__ == "__main__":
                     lines.append(file)
     command = ['chordpro', '--config', 'chordpro-%s.json' % (target_instrument), '--output', 'out/songbook-%s-printshop.pdf' % (target_instrument), '--cover', 'cover/cover-%s.pdf' % (target_instrument)]
     command.extend(lines)
+    logging.info("Calling chordpro: %s" % (' '.join([ '"' + i + '"' for i in command])))
     subprocess.run(command)
