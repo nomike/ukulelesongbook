@@ -71,10 +71,14 @@ out/songbook-ukulele.pdf: build/ukulele/toc.pdf build/empty.pdf songs/*.chopro c
 checksongs:
 	./checksongs.py
 
-release: clean checksongs out/songbook-guitar.pdf out/songbook-ukulele.pdf out/songbook-guitar-printshop.pdf out/songbook-ukulele-printshop.pdf
+release: clean quickrelease
+
+quickrelease: checksongs out/songbook-guitar.pdf out/songbook-ukulele.pdf out/songbook-guitar-printshop.pdf out/songbook-ukulele-printshop.pdf
 	./release.py
 
-release-offline: clean checksongs out/songbook-guitar.pdf out/songbook-ukulele.pdf out/songbook-guitar-printshop.pdf out/songbook-ukulele-printshop.pdf
+release-offline: clean quickrelease-offline
+
+quickrelease-offline: checksongs out/songbook-guitar.pdf out/songbook-ukulele.pdf out/songbook-guitar-printshop.pdf out/songbook-ukulele-printshop.pdf
 	./release.py --no-upload
 
 build/ukulele.songlist: songs/*.chopro
