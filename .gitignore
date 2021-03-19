@@ -40,3 +40,5 @@ cover/hardcover-ukulele.fdb_latexmk
 cover/hardcover-ukulele.fls
 cover/hardcover-ukulele.synctex.gz
 config/headers_auth.json
+newcover/src/guitarVariables.sty
+newcover/src/ukuleleVariables.sty
