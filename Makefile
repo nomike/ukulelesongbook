@@ -29,10 +29,10 @@ newcover/src/ukuleleVariables.sty: newcover/src/ukuleleVariables.sty.tpl config/
 newcover/src/guitarVariables.sty: newcover/src/guitarVariables.sty.tpl config/bookname
 	. ./configuration ; envsubst <newcover/src/guitarVariables.sty.tpl >newcover/src/guitarVariables.sty
 
-newcover/ukulele.pdf: newcover/src/ukuleleVariables.sty
+newcover/ukulele.pdf: newcover/src/ukuleleVariables.sty newcover/ukulele.tex
 	(cd newcover ; pdflatex --shell-escape ukulele.tex)
 
-newcover/guitar.pdf: newcover/src/guitarVariables.sty
+newcover/guitar.pdf: newcover/src/guitarVariables.sty newcover/guitar.tex
 	(cd newcover ; pdflatex --shell-escape guitar.tex)
 
 convert: convert-ultimate convert-tabs
