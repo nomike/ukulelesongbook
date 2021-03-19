@@ -1,0 +1,49 @@
+\documentclass[11pt,oneside]{book}%
+\usepackage[utf8]{inputenc} % set input encoding
+\def\rootprefix{../../}
+\usepackage{\rootprefix lib/designAcademycos}
+\designacademycos{
+	sage=true, 
+	animation=true, 
+	root=\rootprefix, 
+	wolframanimation=true, 
+	enginedownload=wget, 
+	sagenamesty=sagetex3.4,
+	pythontex=true,
+	template=empty
+}
+\usepackage[spanish,activeacute]{babel}%idioma document
+\usepackage[T1]{fontenc}
+%\spanishdecimal{.}
+\setlength{\JustifyingParindent}{0mm}
+\usepackage[light,math]{kurier}%http://www.tug.dk/FontCatalogue/
+\usepackage{src/ownCommands}
+\usepackage{src/initialVariables}%
+\usepackage{\pathrootplugins highlighting}%codigo highlighting
+\usepackage{\pathrootplugins marginsPrint}%plugins
+\usepackage{\pathrootplugins exercisesQuestionsAnswers}%plugins
+\usepackage{\pathrootplugins folderTree}%plugins
+\usepackage[nameFile=abc]{\pathrootplugins compilationInfo}%plugins
+\tcbuselibrary{documentation}
+\usepackage{lipsum}
+\usepackage{booktabs}%por pythontex pandas
+\begin{document}
+%----------Header programing--------------
+	\maketitle
+	\import{programming/python/}{dataScience.tex}
+	\import{programming/sage/}{matrix.tex}
+	\import{programming/mathematica/}{animations.tex}
+%-----------------------------------------
+	\frontmatter
+		\tableofcontents
+		\import{src/}{beginning.tex} 
+	\mainmatter
+	\import{chapters/}{plantillaBase.tex}
+%	\import{chapters/}{template.tex}
+	\import{chapters/}{dependencias.tex}
+	\import{chapters/}{estandares.tex}
+	\import{chapters/}{animaciones.tex}
+	\import{chapters/}{entornoDeDesarrollo.tex}
+%	\import{chapters/}{milkyWay.tex}
+	\printCompilationInfo
+\end{document}

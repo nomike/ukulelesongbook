@@ -1,0 +1,14 @@
+\begin{pycode}
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy import stats
+from sklearn.linear_model import LinearRegression
+
+path = 'csv/automobileEDA.csv'
+data_frame = pd.read_csv(path)
+regression_linear_graph = sns.regplot(x="horsepower", y="price", data=data_frame).get_figure()
+regression_linear_graph.savefig("images/pythontex/regressionLinear.png")
+corr_data = data_frame[['price', 'engine-size', 'horsepower', 'highway-mpg']].corr()
+\end{pycode}

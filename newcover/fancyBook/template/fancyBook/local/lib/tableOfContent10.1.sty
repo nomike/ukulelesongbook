@@ -1,0 +1,65 @@
+%-------------------------------------------
+% INICIO tabla de contenidos
+%-------------------------------------------
+\tcbset{
+    numeralCapStyle/.style={
+        hbox,
+        colback=backTOCcap,
+        boxrule=0mm,
+        sharpish corners,
+        frame hidden,
+        borderline={0mm}{0mm}, 
+        nobeforeafter,
+        baseline=3mm,
+        frame hidden,
+    }
+}
+\contentsmargin{0cm}
+\titlecontents{part}[0pc]{
+    \addvspace{10pt}%
+}
+{\huge}
+{}
+{
+	\hspace*{6pt}\hfill\hspace*{6pt}\bfseries\thecontentspage 
+}[\color{backTOCcap}\titlerule\addvspace{10pt}]
+
+%--------------capitulo--------
+\titlecontents{chapter}[0pc]{
+    \addvspace{10pt}%
+    \begin{tcolorbox}[numeralCapStyle]
+        \color{numeralTOCcap}\bfseries\huge  \thecontentslabel
+    \end{tcolorbox}
+}
+{\huge}
+{}
+{
+%    \titlerule*[1.5mm]{.}       
+	\hspace*{6pt}\hfill\hspace*{6pt}\bfseries\thecontentspage 
+}[\color{backTOCcap}\titlerule\addvspace{10pt}]
+
+%---------------section-------
+\titlecontents{section}[1pc]{
+    \addvspace{5pt}%
+    \Large{\color{black}\thecontentslabel\hspace*{6pt}}
+}
+{\color{black}}
+{}
+{
+    %\titlerule*[1.5mm]{.}
+    \color{black}\hspace*{6pt}\titlerule*[\distancepointsinTOC]{.}\hspace*{6pt}\large\bfseries \thecontentspage
+}%
+%------------subsection-------
+\titlecontents{subsection}[2pc]{
+    \addvspace{5pt}%
+    {\color{black}\thecontentslabel\hspace*{6pt}}
+}
+{\color{black}}
+{}
+{
+    %\titlerule*[1.5mm]{.}
+    \hspace*{6pt}\titlerule*[\distancepointsinTOC]{.}\hspace*{6pt}\large\bfseries \thecontentspage
+}%
+%-------------------------------------------
+% FIN tabla de contenidos
+%-------------------------------------------

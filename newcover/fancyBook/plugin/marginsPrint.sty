@@ -1,0 +1,52 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{marginsPrint - designAcademycos}[2020/04/08 Design Academycos LosAcademycos.com]
+\def\printVersionMarginsPrint{
+	{1.0}
+}  
+\usepackage[
+pages=some,
+color=blue!90
+]{background}
+\backgroundsetup{
+	angle=0,
+	scale=1,
+	opacity=1,
+	contents={%
+		\begin{tikzpicture}[remember picture, overlay,thick]
+			%% lower left
+			\draw ([yshift=3cm]current page.south west) -- +(3,0);
+			\draw ([xshift=2.5cm]current page.south west) -- +(0,4);
+			%% lower right
+			\draw ([yshift=3cm]current page.south east) -- +(-5,0);
+			\draw ([xshift=-2.8cm]current page.south east) -- +(0,4);
+			%% upper left
+			\draw ([yshift=-1cm]current page.north west) -- +(3,0);
+			\draw ([xshift=2.5cm]current page.north west) -- +(0,-3);
+			%% upper right
+			\draw ([yshift=-1cm]current page.north east) -- +(-5,0);
+			\draw ([xshift=-2.8cm]current page.north east) -- +(0,-4);
+			%% lower middle
+		\end{tikzpicture}
+	}%
+}%
+\newcommand{\pagePrint}{
+	\newpage\thispagestyle{empty}\text{ }\newpage 
+	\noindent
+	\thispagestyle{empty}
+	\BgThispage
+	\vspace*{\fill}
+	\begin{tcolorbox}[
+		transparent,
+		overlay={
+			\begin{tcbclipinterior}
+				\draw[red,line width=1cm] (interior.north west)--(interior.south east);
+				\draw[red,line width=1cm] (interior.south west)--(interior.north east);
+			\end{tcbclipinterior}
+		}
+		]
+		\vspace{7cm}
+	\end{tcolorbox}
+	{\Huge 
+	$\swarrow$ Margen inferior izquierda.}
+	\newpage\thispagestyle{empty}\text{ }\newpage 
+}

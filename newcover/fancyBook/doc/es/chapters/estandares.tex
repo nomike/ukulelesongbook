@@ -1,0 +1,81 @@
+\chapter{Estándares}
+{\justifying
+		\section{Estandarizaciones}
+		Las estandarizaciones van desde el nombrado de archivos hasta el nombre de las variables y comandos que podemos llegar a usar, así que presentamos algunas recomendaciones en este apartado para mejorar el costo de producción de nuestro código y contenido en el documento \LaTeX.
+		\subsection{Estadarizaciones comunes}
+			Las estadarizaciones que a continuación presentaremos son tipicas en algunos lenguajes de programación, la idea es adoptarlas en nuestros documentos \LaTeX.
+			\subsubsection{UpperCamelCase}
+				La escritura utilizando UpperCamelCase es iniciar en mayúscula cada palabra que compone el nombre de la variable, sin olvidar que esta no puede tener espacios ni caracteres especiales. 
+			\subsubsection{lowerCamelCase}
+				La escritura utilizando lowerCamelCase es iniciar en minúscula cada palabra que compone el nombre de la variable, sin olvidar que esta no puede tener espacios ni caracteres especiales.
+			\subsubsection{snake\_case}
+				La escritura utilizando snake\_case es usar todo en minúscula y los espacios son reemplazados por guiones bajos. 
+			\section{Comandos}
+			Recuerde que la estructura de un comando es:
+			\begin{center}
+				\begin{tcblisting}{boxlatex}
+					\newcommand{\<comando>}[<argumentos>]{<función>}
+				\end{tcblisting}
+			\end{center}
+			Para nombrar correctamente los comandos se usará la notación lowerCamelCase.
+			\section{Referencias}
+			Todas las referencias de la mayor parte de los entornos deben tener un prefijo, esto conlleva a una buena organización y previene el error de referencias iguales para entornos diferentes.
+			\begin{boxbasic}[Estándar]
+				Algunas referencias no dependen del template cargado algunas de ellas podrían llegar a ser capítulos, ecuaciones y items, por ello se recomienda seguir el siguiente estándar
+				\begin{itemize}
+					\item Capítulo. \verb|\label{cap:<nombre>}|.
+					\item Ecuación. \verb|\label{eqn:<nombre>}|.
+					\item Item. \verb|\label{itm:<nombre>}|.
+					\item Imagen. \verb|\label{fig:<nombre>}|.
+					\item Bibliografía. \verb|\label{bib:<nombre>}| o \verb|\label{book:<nombre>}|.
+					\item Tabla. \verb|\label{tab:<nombre>}|.
+				\end{itemize}
+				\begin{boxbasic}[Nota]
+					Para el \verb|<nombre>| utilizaremos la estandarización lowerCamelCase. 
+				\end{boxbasic}
+			\end{boxbasic}
+		\section{Convención de nombres}
+		Todos los archivos y carpetas deben ser nombradas con  lowerCamelCase y además seguir las siguientes recomendaciones
+		\begin{enumerate}
+			\item Los nombres de los archivos .tex utiliza el idioma en el que esta redactado las notas de clase.
+			\item Los nombres de los archivos .sage deben ser escritos en ingles.
+		\end{enumerate}
+	    \section{Sangrado (Indentación)}
+	    El contenido de los entornos debe iniciar con una tabulación, así como se muestra en el siguiente código
+	    \begin{tcblisting}{boxlatex}
+	    	\begin{<entorno>}
+	    		Contenido del entorno.
+	    	\end{<entorno>}
+	    \end{tcblisting}
+	    De forma similar en las ecuaciones se realizan las respectivas tabulaciones en el símbolo \& tal como se observa en el siguiente código
+	    \begin{tcblisting}{boxlatex}	
+	    	\begin{align*}
+	    		(a+b)c&=(a+b)\cdot c\\
+	    	        &=ac+bc.
+	    	\end{align*}
+	    \end{tcblisting}
+	    \section{SAGE}
+	    Gracias a la librería \textbf{sagetex} de \LaTeX\space podemos programar cálculos internos, claro, hay limitaciones a la hora de mezclar SAGE con \LaTeX\space, como por ejemplo una mejor edición de graficas, notación, recorrer arreglos y por supuesto los pasos intermedios en un cálculo determinado, sin embargo, estas limitaciones se pueden mitigar por la creatividad del autor y su conocimiento en SAGE y \LaTeX\space, por tanto debemos tener un código ordenado. 
+	    \subsection{Carpetas}
+	    Todos los archivos con codigos SAGE puros (archivos con solo código SAGE), deben estar en la carpeta \textbf{programming/sage}, por esta razón en esta carpeta encontramos el archivo \textbf{initial\_variables.sage}.
+	    \begin{boxbasic}[Nota]
+	    	Los nombres de los archivos dependen del tipo de contenido que poseen, por ejemplo, si su contenido es una clase el nombre del archivo será el mismo que la clase.
+	    \end{boxbasic}
+	    \subsection{Archivo head.sage}
+	    En este archivo estarán las lineas necesarias para cargar las funciones, clases y el archivo \textbf{main.sagetex.tex}, por ejemplo el archivo tendría las siguientes lineas.
+	    \begin{tcblisting}{boxlatex}
+	    	load("programming/sage/initial_variables.sage")
+	    	load("main.sagetex.sage")
+	    \end{tcblisting}
+%	    \subsection{Convención}
+%	    Recordemos que cuando escribimos en el contenido de nuestro documento \LaTeX\space utilizaremos la convención Camel Case por lo que para programar en SAGE utilizaremos la convención del lenguaje \textbf{Python}, es de esperar que fuera así, ya que SAGE esta programado en Python. Para continuar veamos la convención \textbf{snake\_case}, esta convención es fácil de entender, los nombres no tienen caracteres especiales y todo esta en minúscula por ejemplo \textbf{relativity\_theory}. Ahora veamos las convenciones básicas.
+%	    \subsubsection{Variables}
+%	    Para los nombres de las variables se utilizará la convención snake\_case.
+%	    \subsubsection{Funciones}
+%	    Para los nombres de las funciones se utilizará la convención snake\_case.
+%	    \subsubsection{Clases}
+%	    Para los nombres de las clases se utilizará la convención UpperCamelCase.
+	    \begin{boxbasic}[Nota]
+	    	Si se usa pythontex debe seguirse las mismas pautas dadas para SAGE.
+	    \end{boxbasic}
+}

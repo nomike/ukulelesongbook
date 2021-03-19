@@ -1,0 +1,19 @@
+%-------------------------------------------
+% INICIO configuracion programacion 
+% (requiere antes que se defina textwidth package geometry)
+%-------------------------------------------
+%------------------variables---------------
+\newdimen\widthchapternumber %\numeralChapterAncho 
+\widthchapternumber = 3.76cm % tamaño fijo \numeralChapterAncho 
+\newdimen\lagtext %\desfaceText 
+\lagtext = 3cm % tamaño fijo \desfaceText 
+\newlength{\widthtitlechapter}%\tituloChapterAncho
+\newlength{\maximumtextwidth}%\anchoMaxTexto
+\setlength{\widthtitlechapter}{\textwidth-\widthchapternumber}%\tituloChapterAncho \numeralChapterAncho 
+\setlength{\maximumtextwidth}{\textwidth+\lagtext}% \anchoMaxTexto +\desfaceText 
+\newdimen\distancepointsinTOC  %\distanciaPuntosTOC
+\distancepointsinTOC  = 2mm % tamaño fijo \distanciaPuntosTOC
+%-------------------end variables-----------
+%-------------------------------------------
+% FIN configuracion programacion 
+%-------------------------------------------

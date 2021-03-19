@@ -1,0 +1,44 @@
+\definecolor{base88}{HTML}{0076e4}
+\colorlet{lineExer}{base88!100!white}
+%-----------------estilo----
+\tcbset{
+	exersiceStyle/.style={
+		empty,
+		title=My title,
+		attach boxed title to top left=,
+		fonttitle=\normalsize\bfseries,
+		boxed title style={
+			empty,size=minimal,
+			toprule=2pt,
+			top=4pt,
+			overlay={}
+		},
+		coltitle=\colorText,
+		parbox=false,
+		boxsep=0pt,
+		left=0pt,
+		right=3mm,
+		top=4pt,
+		breakable,
+		pad at break*=0mm,
+		vfill before first,
+		overlay unbroken={
+			\draw[\colorLine,line width=0.02cm]
+			([xshift=-0.5pt]frame.south east)--(frame.south west); 
+		},
+		overlay first={},
+		overlay middle={},
+		overlay last={
+			\draw[\colorLine,line width=0.02cm]
+			([xshift=-0.5pt]frame.south east)--(frame.south west); 
+		},
+	}
+}
+%--------INICIO declaracion------------------
+\newtcbtheorem[number within=section]{boxexer}{Ejercicios}
+{exersiceStyle}{exer}
+\newenvironment{myexer}[2]{
+	\begin{boxexer}{#1}{#2}
+	}{	\end{boxexer}
+}
+%-----------FIN declaracion------------------

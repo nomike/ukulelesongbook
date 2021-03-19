@@ -1,0 +1,239 @@
+%-------------------------------------------
+% INICIO demostracion
+%-------------------------------------------
+\tcolorboxenvironment{proof}{%'proof'from'amsthm'
+	blanker,
+	breakable,
+	left=5mm,
+	before skip=10pt,
+	after skip=10pt,
+	borderline west={1mm}{0pt}{titleProof}
+}
+\renewcommand\qedsymbol{\textcolor{titleProof}{\openbox}}
+%-------------------------------------------
+% FIN demostracion
+%-------------------------------------------
+%-------------------------------------------
+% INICIO solución
+%-------------------------------------------
+\tcolorboxenvironment{solution}{%from lib/base/commands.sty
+	blanker,
+	breakable,
+	left=5mm,
+	before skip=10pt,
+	after skip=10pt,
+	borderline west={1mm}{0pt}{titleSolution}
+}
+%-------------------------------------------
+% FIN solución
+%-------------------------------------------
+\tcbset{
+	generalStyle/.style={
+		enhanced,
+		boxrule=0.2mm,
+		attach boxed title to top left={
+			xshift=1cm,yshift*=1mm-\tcboxedtitleheight
+		},
+		boxed title style={
+			frame code={
+				\path[fill=tcbcolback!30!black]
+				([yshift=-1mm,xshift=-1mm]frame.north west)
+				arc[start angle=0,end angle=180,radius=1mm]
+				([yshift=-1mm,xshift=1mm]frame.north east)
+				arc[start angle=180,end angle=0,radius=1mm];
+				\path[left color=tcbcolback!60!black,right color=tcbcolback!60!black,middle color=tcbcolback!80!black]
+				([xshift=-2mm]frame.north west) -- ([xshift=2mm]frame.north east)[rounded corners=1mm]--
+				([xshift=1mm,yshift=-1mm]frame.north east)-- (frame.south east) -- (frame.south west)--
+				([xshift=-1mm,yshift=-1mm]frame.north west)[sharp corners]-- cycle;
+			},
+			interior engine=empty,
+		},
+		fonttitle=\normalsize\bfseries,
+		fontupper=\normalsize,
+		arc=0.5mm,boxrule=1mm,
+		frame hidden,
+		breakable,
+	}
+}
+%-------------------------------------------
+% INICIO estilos cajas tcolorbox
+%-------------------------------------------
+%-------teoremas----------------------------
+\tcbset{
+	mythStyle/.style={
+		generalStyle,
+		colbacktitle=backBoxTitleTheoU,
+		interior style={
+			top color= backBoxContentTheoU,
+			bottom color= backBoxContentTheoD,
+		},
+		coltitle=colorTitleTheo,
+		borderline={0mm}{0mm}{borderTheo},
+%		show bounding box
+	}
+}
+%------------------definicion---------------
+\tcbset{
+	mydefStyle/.style={
+		generalStyle,
+		colbacktitle=backBoxTitleDefU,
+		interior style={
+			top color= backBoxContentDefU,
+			bottom color= backBoxContentDefD,
+		},
+		coltitle=colorTitleDef,
+		borderline={0mm}{0mm}{borderDef},
+		%		show bounding box
+	}
+}
+%---------corolario------------------------
+\tcbset{
+	mycorStyle/.style={
+		generalStyle,
+		colbacktitle=backBoxTitleCorU,
+		interior style={
+			top color= backBoxContentCorU,
+			bottom color= backBoxContentCorD,
+		},
+		coltitle=colorTitleCor,
+		borderline={0mm}{0mm}{borderCor},
+		%		show bounding box
+	}
+}
+%------lema---------------------------------
+\tcbset{
+	mylemStyle/.style={
+		generalStyle,
+		colbacktitle=backBoxTitleLemU,
+		interior style={
+			top color= backBoxContentLemU,
+			bottom color= backBoxContentLemD,
+		},
+		coltitle=colorTitleLem,
+		borderline={0mm}{0mm}{borderLem},
+		%		show bounding box
+	}
+}
+%------Proposition---------------------------------
+\tcbset{
+	myproposiStyle/.style={
+		generalStyle,
+		colbacktitle=backBoxTitleProposiU,
+		interior style={
+			top color= backBoxContentProposiU,
+			bottom color= backBoxContentProposiD,
+		},
+		coltitle=colorTitleProposi,
+		borderline={0mm}{0mm}{borderProposi},
+		%		show bounding box
+	}
+}
+%-------------observation-------------
+\tcbset{
+	myobservationStyle/.style={
+		generalStyle,
+		colbacktitle=backBoxTitleNotaU,
+		interior style={
+			top color= backBoxContentNotaU,
+			bottom color= backBoxContentNotaD,
+		},
+		fonttitle=\normalsize\bfseries,
+		coltitle=colorTitleNota,
+		borderline={0mm}{0mm}{borderNota},
+	}
+}
+%-----------------property-------------------
+\tcbset{
+	mypropStyle/.style={
+		generalStyle,
+		colbacktitle=backBoxTitlePropU,
+		interior style={
+			top color= backBoxContentPropU,
+			bottom color= backBoxContentPropD,
+		},
+		fonttitle=\normalsize\bfseries,
+		coltitle=colorTitleProp,
+		borderline={0mm}{0mm}{borderProp}
+	}
+}
+%-----------------ejemplo----
+\tcbset{
+	myexamStyle/.style={
+		empty,
+		title=My title,
+		attach boxed title to top left=,
+		fonttitle=\normalsize\bfseries,
+		boxed title style={
+			empty,size=minimal,
+			toprule=2pt,
+			top=4pt,
+			overlay={}
+		},
+		coltitle=textExam,
+		parbox=false,
+		boxsep=0pt,
+		left=0pt,
+		right=3mm,
+		top=4pt,
+		breakable,
+		pad at break*=0mm,
+		vfill before first,
+		overlay unbroken={
+			\draw[lineExam,line width=0.02cm]
+			([xshift=-0.5pt]frame.south east)--(frame.south west);
+		},
+		overlay first={},
+		overlay middle={},
+		overlay last={
+			\draw[lineExam,line width=0.02cm]
+			([xshift=-0.5pt]frame.south east)--(frame.south west);
+		},
+	}
+}
+%-------------freebox-------------
+\tcbset{
+	myfreeboxStyle/.style={
+		generalStyle,
+		colbacktitle=backBoxTitleCajaU,
+		interior style={
+			top color= backBoxContentCajaU,
+			bottom color= backBoxContentCajaD,
+		},
+		fonttitle=\normalsize\bfseries,
+		coltitle=colorTitleCaja,
+		borderline={0mm}{0mm}{borderCaja},
+	}
+}
+%---------------tablas----------
+\tcbset{
+	mytableStyle/.style={
+		enhanced,
+		arc=0.5mm,boxrule=1mm,
+		frame hidden,
+		interior style={
+			top color= backBoxContentTablaU,
+			bottom color= backBoxContentTablaD,
+		},
+		fonttitle=\normalsize\bfseries,
+		borderline={0mm}{0mm}{borderTabla},
+		coltitle=colorTitleTabla,
+		attach boxed title to top left={
+			xshift=2mm,
+			yshift=-0.50mm
+		},
+		boxed title style={
+			skin=enhancedfirst jigsaw,
+			size=small,arc=0mm,bottom=0mm,
+			boxrule=0mm,
+			borderline={0mm}{0mm}{colorBorderTitleTabla},
+			interior style={
+				fill=none,
+				top color=backBoxTitleTablaU,
+				bottom color=backBoxTitleTablaD,
+			}
+		}
+	}
+}
+%-------------------------------------------
+% FIN estilos cajas tcolorbox
+%-------------------------------------------

@@ -42,10 +42,10 @@ if __name__ == "__main__":
                 subprocess.run(["pdfunite", "build/%s/songs/%s.pdf" % (instrument, song), "build/empty.pdf", "build/%s/paged/songs/%s.pdf" % (instrument, song)])
             else:
                 shutil.copyfile("build/%s/songs/%s.pdf" % (instrument, song), "build/%s/paged/songs/%s.pdf" % (instrument, song))
-    if count_pdf_pages("cover/cover-%s.pdf" % instrument) % 2 == 0:
-        subprocess.run(["pdfunite", "cover/cover-%s.pdf" % (instrument), "build/empty.pdf", "build/%s/paged/cover.pdf" % (instrument)])
+    if count_pdf_pages("newcover/%s.pdf" % instrument) % 2 == 0:
+        subprocess.run(["pdfunite", "newcover/%s.pdf" % (instrument), "build/empty.pdf", "build/%s/paged/cover.pdf" % (instrument)])
     else:
-        shutil.copyfile("cover/cover-%s.pdf" % (instrument), "build/%s/paged/cover.pdf" % (instrument))
+        shutil.copyfile("newcover/%s.pdf" % (instrument), "build/%s/paged/cover.pdf" % (instrument))
 
     if count_pdf_pages("build/%s/toc.pdf" % instrument) % 2 == 1:
         subprocess.run(["pdfunite", "build/%s/toc.pdf" % (instrument), "build/empty.pdf", "build/%s/paged/toc.pdf" % (instrument)])

@@ -1,0 +1,36 @@
+%-------------------------------------------
+% INICIO seccion y header 
+%-------------------------------------------
+\newcounter{logicHeader}
+\def\textHeader{}
+\newcommand{\textHeaderDef}[1]{#1.\textHeader}
+    \pagestyle{fancy}
+    \renewcommand{\headrule}{
+        \color{lineaHeader}%
+        \hrule width\headwidth height\headrulewidth depth\headrulewidth
+    }
+    \fancyhf{} %quita enumaracion de abajo
+    \fancyhead[LE,RO]{
+        \normalsize\colorbox{backNumeroHeader}{\color{colorNumeroHeader}\sffamily\strut\quad\thepage\quad}
+    }
+    \fancyhead[LO]{
+    	\ifnum\value{logicHeader}>0 
+    		{\textcolor{textHeader}{\textHeaderDef{\thechapter}}}
+    	\else 
+    		{\bfseries\textcolor{textHeader} \rightmark}% 
+    	\fi
+    }
+    \fancyhead[RE]{
+    	\ifnum\value{logicHeader}>0 
+    		{\textcolor{textHeader}{\textHeaderDef{\thechapter}}}
+    	\else 
+    		{\textcolor{textHeader} \leftmark}% 
+    	\fi
+    }
+%\setcounter{secnumdepth}{0} %elimina numeral de seccion
+\sectionfont{\color{textSec}}
+\subsectionfont{\color{textSubSec}}
+\subsubsectionfont{\color{textSubSubSec}}%este comando es de sectsty
+%-------------------------------------------
+% FIN seccion y header 
+%-------------------------------------------

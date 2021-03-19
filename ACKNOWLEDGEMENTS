@@ -1,0 +1,8 @@
+This program uses the following 3rd party programs
+==================================================
+
+fancyBook
+---------
+The fancyBook is a package for LaTeX
+Source: https://github.com/camilor2611/fancyBook
+License: MIT (see newcover/fancybook/LICENSE)

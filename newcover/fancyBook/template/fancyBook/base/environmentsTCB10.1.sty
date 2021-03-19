@@ -1,0 +1,25 @@
+%-------------------------------------------
+% INICIO declaracion de cajas
+%-------------------------------------------
+\newtcbtheorem[number within=chapter]{theorem}{\refnametheorem}
+{mythStyle}{th}
+\newtcbtheorem[number within=chapter]{definition}{\refnamedefinition}
+{mydefStyle}{def}
+\newtcbtheorem[number within=chapter]{corollary}{\refnamecorollary}
+{mycorStyle}{cor}
+\newtcbtheorem[number within=chapter]{lemma}{\refnamelemma}
+{mylemStyle}{lem}
+\newtcbtheorem[number within=chapter]{example}{\refnameexample}
+{myexamStyle}{exam}
+%--------------------------------------------
+\newtcbtheorem[number within=chapter]{proposition}{\refnameproposition}
+{myproposiStyle}{proposi}
+\newtcbtheorem[number within=chapter]{property}{\refnameproperties}
+{mypropStyle}{prop}
+%--------------------------------------------
+\newtcolorbox{freebox}[1][]{myfreeboxStyle, title={#1}}
+\newtcolorbox{mytable}[2][]{mytableStyle, title={#2}, #1}%variable 1 mas opciones con tipo de tabla , 2 titulo
+\newtcolorbox{observation}{myobservationStyle, title=\refnameobservation}
+%-------------------------------------------
+% FIN declaracion de cajas
+%-------------------------------------------

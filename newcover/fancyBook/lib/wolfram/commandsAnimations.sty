@@ -1,0 +1,20 @@
+\def\folderanimation{images/png/animation/}
+\newcommand{\boxanimation}[2]{
+	\animategraphics[controls,loop,height=#1]{10}{\folderanimation #2/frame-}{0}{59}
+}
+%\newcommand{\animationswolfram}[3]{%
+%	\IfFileExists{images/png/animation/#2.gif}{%
+%		\boxanimation{#3}{#2}
+%	}{%
+%%		\iflinux
+%%			\ShellEscape{mkdir -p\space#2}
+%%		\fi
+%		\wolframanimation{#1}{images/png/animation/#2}
+%		\boxanimation{#3}{#2}
+%	}
+%}
+\newcommand{\animationswolframclean}{
+	\iflinux
+		\ShellEscape{rm images/png/animation/*.gif}
+	\fi
+}

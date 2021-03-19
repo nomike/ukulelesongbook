@@ -1,0 +1,78 @@
+\DeclareRobustCommand{\versiontemplatemagazinestyleud}{1.0}
+\RequirePackage{\pathtemplate/loadOptions}
+\ProcessPgfOptions{/DATEMPLATE}
+%-------------------------------------------
+%-------INICIO configuraciones -------------
+%-------------------------------------------
+\geometry{letterpaper, textwidth=390pt}
+\ifnotindentall
+	\setlength{\JustifyingParindent}{0mm}
+\fi
+\newcommand{\colorprovide}[2]{\providecolor{#1}{named}{#2}}
+%----------bibliografia----------------
+\ifbibunits
+	\RequirePackage[sectionbib]{bibunits}
+	\defaultbibliographystyle{\bibliographystyletemplate}
+	\bibliographyunit[\chapter]
+	\defaultbibliography{\bibliographysrc}
+\fi
+%-------------------------------------------
+%-------FIN configuraciones ----------------
+%-------------------------------------------
+\RequirePackage{epigraph}
+\RequirePackage{sectsty}
+\RequirePackage[explicit,calcwidth]{titlesec}
+\RequirePackage{fancyhdr}
+\RequirePackage{titletoc}
+\RequirePackage{fontawesome}
+\RequirePackage{eso-pic} %portada
+\RequirePackage{\pathroot lib/designAcademycosProgramming}
+\RequirePackage{\pathtemplate/base/language}
+\RequirePackage{\pathtemplate/base/stylesTCB10.1}
+\RequirePackage{\pathtemplate/base/commands}
+\ifthenelse{\equal{\compilefrom}{temp}}{
+	\def\namefoldertheme{themeDownload}%!important
+	\def\suffix@min{.min}%!important
+	\hostfiles{\pathtemplate/temp/themes/\namefoldertheme/}{10.1/fancyBook/themes/\themetemplate}{install}{sty}
+	\RequirePackage{\pathtemplate/\compilefrom/themes/\namefoldertheme/install}
+	\ifwindows
+		\RequirePackage{xstring}
+		\StrSubstitute{\pathtemplate}{/}{\\}[\temppaththeme]
+		\AtEndDocument{\ShellEscape{del \temppaththeme\\temp\\lib\\*.sty}}
+		\AtEndDocument{\ShellEscape{del \temppaththeme\\temp\\themes\\\namefoldertheme\\*.sty}}
+		\AtEndDocument{\ShellEscape{del \temppaththeme\\temp\\themes\\\namefoldertheme\\*.tex}}
+		\AtEndDocument{\ShellEscape{del \temppaththeme\\temp\\themes\\\namefoldertheme\\*.png}}
+%		\AtEndDocument{\ShellEscape{copy \temppaththeme\\README.txt \temppaththeme/temp}}
+	\fi
+	\iflinux
+		\AtEndDocument{\ShellEscape{rm \pathtemplate/temp/lib/*.sty}}
+		\AtEndDocument{\ShellEscape{rm \pathtemplate/temp/themes/\namefoldertheme/*.sty}}
+		\AtEndDocument{\ShellEscape{rm \pathtemplate/temp/themes/\namefoldertheme/*.tex}}
+		\AtEndDocument{\ShellEscape{rm \pathtemplate/temp/themes/\namefoldertheme/*.png}}
+%		\AtEndDocument{\ShellEscape{cp \pathtemplate/README.txt \pathtemplate/temp}}
+	\fi
+}{
+	\ifthenelse{\equal{\compilefrom}{local}}{
+		\def\namefoldertheme{\themetemplate}%!important
+		\def\suffix@min{}
+	}{
+		\PackageWarning{designAcademycos}{There isn't folder compilefrom}
+	}
+}
+%---------------------------------------------------
+\RequirePackage{\pathtemplate/\compilefrom/themes/\namefoldertheme/load}
+\RequirePackage{\pathtemplate/base/environmentsTCB10.1}
+%---------------------------------------------------
+\hypersetup{
+	colorlinks,
+	allcolors = referenceLink,
+}
+\let\Hy@linktoc\Hy@linktoc@none
+%---------------------------------------------------
+\RequirePackage{lettrine}
+\renewcommand{\LettrineTextFont}{\normalfont}
+%---------------------------------------------------
+\ifindexmake
+	\RequirePackage{imakeidx}
+	\makeindex
+\fi

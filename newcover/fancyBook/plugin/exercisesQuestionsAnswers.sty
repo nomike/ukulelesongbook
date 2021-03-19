@@ -1,0 +1,43 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{exercisesQuestionsAnswers - designAcademycos}[2020/04/08 Design Academycos LosAcademycos.com]
+\def\printVersionExercisesQuestionsAnswers{
+	{1.0}
+}
+\RequirePackage{answers}
+\RequirePackage{\pathrootplugins exercisesQuestionsAnswers/tcb/style}
+\pgfkeys{
+	/OPTIONSEXERCISES/.cd,
+	folderTemp/.initial=answers,
+	folderTemp/.get=\keyFolderTemp,
+	folderTemp/.store in=\keyFolderTemp,
+	colorText/.initial=black,
+	colorText/.get=\colorText,
+	colorText/.store in=\colorText,
+	colorLine/.initial=black,
+	colorLine/.get=\colorLine,
+	colorLine/.store in=\colorLine
+}
+\ProcessPgfOptions{/OPTIONSEXERCISES}
+%-------------------------------------------
+% INICIO preguntas (ejercicios)
+%-------------------------------------------
+\Newassociation{addSolution}{AnsResp}{FileResp}
+%\renewcommand{\AnsResplabel}[1]{\hspace{1em}#1.}
+%---------------variables iniciales--------------------
+\newcommand\pathQuestionsAnswers{\keyFolderTemp/}
+\newcommand\prefixQuestionsAnswers{Answers}%prefijo de los archivos crados por la libreria
+%------------------------------------------------------
+\newcommand{\getAnswers}{
+	\newcounter{inumber}
+	\forloop{inumber}{1}{\value{inumber} < \thechapter}{
+		\IfFileExists{\pathQuestionsAnswers \prefixQuestionsAnswers\theinumber.tex}{
+			\import{\pathQuestionsAnswers}{\prefixQuestionsAnswers\theinumber.tex}
+		}
+		{}
+	}
+}
+\newcommand\resetAnswers{\ShellEscape{rm \pathQuestionsAnswers *}}
+
+%-------------------------------------------
+% FIN preguntas (ejercicios)
+%-------------------------------------------

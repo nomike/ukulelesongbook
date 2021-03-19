@@ -1,0 +1,31 @@
+\documentclass[11pt,oneside]{book}%  
+\usepackage[english, activeacute]{babel}%important you can change language
+\usepackage[utf8]{inputenc}%set input encoding
+\usepackage{fancyBook/lib/designAcademycos}
+\designacademycos{
+	root=fancyBook/, 
+	template=fancyBook,
+	download=false
+}
+\usepackage[T1]{fontenc}
+\usepackage[light,math]{kurier}%http://www.tug.dk/FontCatalogue/
+\usepackage{src/initialVariables}
+%\usepackage{\pathrootplugins marginsPrint}%plugins
+%\usepackage{\pathrootplugins compilationInfo}%plugins
+\datemplate{
+	indexMake=true,
+}
+\usepackage{lipsum}
+\begin{document}
+%	\BgThispage %plugin  marginsPrint
+	\import{\pathtemplate/\compilefrom/themes/\namefoldertheme/}{cover.tex}%you should change the file src/initialVariables
+	\frontmatter
+		\import{\pathtemplate/\compilefrom/themes/\namefoldertheme/}{beginning.tex}
+		\tableofcontents
+	\mainmatter
+	\import{chapters/}{newChapter.tex}
+%	\bibliography{references/bibliography}
+%	\bibliographystyle{unsrt}
+%	\printCompilationInfo %plugin compilationInfo
+%	\printindex %option datatemplate indexMake=true
+\end{document}

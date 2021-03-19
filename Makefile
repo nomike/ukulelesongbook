@@ -1,19 +1,21 @@
 SHELL := /bin/bash -O nullglob
-all: regular printshop hardcover
-.PHONY: all printshop regular cover-ukulele cover-guitar clean clean-vscode clean-build clean-out convert convert-tabs convert-ultimate ukulele hardcover-ukulele hardcover-guitar hardcover
+all: regular printshop
+.PHONY: all printshop regular cover-ukulele cover-guitar clean clean-vscode clean-build clean-out convert convert-tabs convert-ultimate ukulele
 printshop: out/songbook-ukulele-printshop.pdf out/songbook-guitar-printshop.pdf
 regular: out/songbook-guitar.pdf out/songbook-ukulele.pdf
-cover-ukulele: cover/cover-ukulele.pdf
-cover-guitar: cover/cover-guitar.pdf
+cover-ukulele: newcover/ukulele.pdf
+cover-guitar: newcover/guitar.pdf
 
-out/songbook-ukulele-printshop.pdf: songs/*.chopro chordpro-ukulele.json cover/cover-ukulele.pdf build/ukulele.songlist
+out/songbook-ukulele-printshop.pdf: songs/*.chopro chordpro-ukulele.json newcover/ukulele.pdf build/ukulele.songlist
 	./create_printshop_songbook.py --instrument ukulele
 
-out/songbook-guitar-printshop.pdf: songs/*.chopro chordpro-guitar.json cover/cover-guitar.pdf build/guitar.songlist
+out/songbook-guitar-printshop.pdf: songs/*.chopro chordpro-guitar.json newcover/guitar.pdf build/guitar.songlist
 	./create_printshop_songbook.py --instrument guitar
 
-clean: clean-build clean-out
-	rm -f cover/cover-guitar.aux cover/cover-guitar.fdb_latexmk cover/cover-guitar.fls cover/cover-guitar.log cover/cover-guitar.synctex.gz cover/cover-ukulele.aux cover/cover-ukulele.fdb_latexmk cover/cover-ukulele.fls cover/cover-ukulele.log cover/cover-ukulele.synctex.gz cover/hardcover-ukulele.fdb_latexmk cover/hardcover-ukulele.fls cover/hardcover-ukulele.synctex.gz cover/cover-guitar.pdf cover/cover-guitar.aux cover/cover-guitar.log cover/cover-guitar.tex cover/cover-ukulele.pdf cover/cover-ukulele.aux cover/cover-ukulele.log cover/cover-ukulele.tex
+clean: clean-newcover clean-build clean-out
+
+clean-newcover:
+	rm -f newcover/*.aux newcover/*.fdb_latexmk newcover/*.fls newcover/*.idx newcover/*.log newcover/*.out newcover/*.pdf newcover/*.ilg
 
 clean-build:
 	rm -rf build/
@@ -21,17 +23,17 @@ clean-build:
 clean-out:
 	rm -rf out/
 
-cover/cover-ukulele.tex: cover/cover-ukulele.tex.tpl config/COMMIT-HASH config/COMMIT-HASH-songs config/TAG config/TAG-songs configuration
-	. ./configuration ; envsubst <cover/cover-ukulele.tex.tpl >cover/cover-ukulele.tex
+newcover/src/ukuleleVariables.sty: newcover/src/ukuleleVariables.sty.tpl
+	. ./configuration ; envsubst <newcover/src/ukuleleVariables.sty.tpl >newcover/src/ukuleleVariables.sty
 
-cover/cover-guitar.tex: cover/cover-guitar.tex.tpl config/COMMIT-HASH config/COMMIT-HASH-songs config/TAG config/TAG-songs configuration
-	. ./configuration ; envsubst <cover/cover-guitar.tex.tpl >cover/cover-guitar.tex
+newcover/src/guitarVariables.sty: newcover/src/guitarVariables.sty.tpl
+	. ./configuration ; envsubst <newcover/src/guitarVariables.sty.tpl >newcover/src/guitarVariables.sty
 
-cover/cover-ukulele.pdf: cover/cover-ukulele.tex
-	(cd cover; pdflatex cover-ukulele.tex)
+newcover/ukulele.pdf: newcover/src/ukuleleVariables.sty
+	(cd newcover ; pdflatex --shell-escape ukulele.tex)
 
-cover/cover-guitar.pdf: cover/cover-guitar.tex
-	(cd cover; pdflatex cover-guitar.tex)
+newcover/guitar.pdf: newcover/src/guitarVariables.sty
+	(cd newcover ; pdflatex --shell-escape guitar.tex)
 
 convert: convert-ultimate convert-tabs
 
@@ -53,7 +55,7 @@ build/guitar/toc.ps: build/guitar/toc.txt
 build/guitar/toc.pdf: build/guitar/toc.ps
 	ps2pdf build/guitar/toc.ps build/guitar/toc.pdf
 
-out/songbook-guitar.pdf: build/guitar/toc.pdf build/empty.pdf songs/*.chopro chordpro-guitar.json cover/cover-guitar.pdf
+out/songbook-guitar.pdf: build/guitar/toc.pdf build/empty.pdf songs/*.chopro chordpro-guitar.json newcover/guitar.pdf
 	./create_songbook.py guitar ukulele
 
 build/ukulele/toc.txt:
@@ -65,7 +67,7 @@ build/ukulele/toc.ps: build/ukulele/toc.txt
 build/ukulele/toc.pdf: build/ukulele/toc.ps
 	ps2pdf build/ukulele/toc.ps build/ukulele/toc.pdf
 
-out/songbook-ukulele.pdf: build/ukulele/toc.pdf build/empty.pdf songs/*.chopro chordpro-ukulele.json cover/cover-ukulele.pdf
+out/songbook-ukulele.pdf: build/ukulele/toc.pdf build/empty.pdf songs/*.chopro chordpro-ukulele.json newcover/ukulele.pdf
 	./create_songbook.py ukulele guitar
 
 checksongs:
@@ -86,25 +88,6 @@ build/ukulele.songlist: songs/*.chopro
 
 build/guitar.songlist: songs/*.chopro
 	./create_songlist.py --instrument=guitar > build/guitar.songlist
-
-
-cover/hardcover-ukulele.tex: cover/cover-ukulele.tex.tpl config/COMMIT-HASH config/COMMIT-HASH-songs config/TAG config/TAG-songs configuration
-	export nusb_version="" ; envsubst <cover/cover-ukulele.tex.tpl >cover/hardcover-ukulele.tex
-
-cover/hardcover-guitar.tex: cover/cover-guitar.tex.tpl config/COMMIT-HASH config/COMMIT-HASH-songs config/TAG config/TAG-songs configuration
-	export nusb_version="" ; envsubst <cover/cover-guitar.tex.tpl >cover/hardcover-guitar.tex
-
-cover/hardcover-ukulele.pdf: cover/hardcover-ukulele.tex
-	(cd cover; pdflatex hardcover-ukulele.tex)
-
-cover/hardcover-guitar.pdf: cover/hardcover-guitar.tex
-	(cd cover; pdflatex hardcover-guitar.tex)
-
-hardcover-ukulele: cover/hardcover-ukulele.pdf
-
-hardcover-guitar: cover/hardcover-guitar.pdf
-
-hardcover: hardcover-ukulele hardcover-guitar
 
 config/COMMIT-HASH: FORCE
 	./update_commit_hashes.sh

@@ -1,0 +1,138 @@
+%-------------------------------------------
+% INICIO chapter
+%-------------------------------------------
+%\RequirePackage[printwatermark]{xwatermark}
+%\newsavebox\mybox
+%\savebox\mybox{\tikz[color=colorPer1,opacity=0.7]\node{Vista Preliminar};}
+%\newwatermark*[
+%	allpages,
+%	angle=45,
+%	scale=3,
+%	xpos=0,
+%	ypos=20
+%]{\usebox\mybox}
+%-------Verifica que existe imagen----------
+%\RequirePackage[printwatermark]{xwatermark}
+%\newwatermark*[allpages,color=gray,angle=45,scale=3,xpos=0,ypos=20]{Vista Preliminar}
+\IfFileExists{./\pathtemplate/\compilefrom/themes/\namefoldertheme/banner.png}{
+	\tcbset{
+		chapterBannerImagenStyle/.style={
+			interior style image=./\pathtemplate/\compilefrom/themes/\namefoldertheme/banner.png
+		}
+	}
+}{
+	\tcbset{
+		chapterBannerImagenStyle/.style={}
+	}
+}
+%-------------------------------------------
+\newlength\ChapWd
+\settowidth\ChapWd{\huge\chaptertitlename}
+\tcbset{
+    chapterBannerStyle/.style={
+        enhanced, 
+%        valign=center, 
+        borderline south={3pt}{0pt}{fondolineCap}, 
+        spread upwards, 
+        height=7cm, 
+        interior style={
+        	top color=fondoCapU,
+        	bottom color=fondoCapD
+        }, 
+    	colframe=fondoCapU,
+    	sharp corners=all,
+    	top=0pt,
+    	bottom=0pt
+    }
+}
+\tcbset{
+    contentChapterStyle/.style={
+        empty, 
+        height=6.8cm, 
+        width=\maximumtextwidth,
+        center,
+        valign=center
+    }
+}
+\tcbset{
+	titleChapterStyle/.style={
+		enhanced,
+		valign=center, 
+		width=20cm, 
+		halign=left,
+		frame hidden,
+		interior style={
+			top color=fondoCapU,
+			bottom color=fondoCapD
+		},
+	}
+}
+\tcbset{
+	imagenChapterStyle/.style={
+		hbox, 
+		colframe=fondolineCap, 
+		boxrule=4pt, 
+		colback=white, 
+		%sharpish corners,
+		drop fuzzy shadow
+	}
+}
+\renewcommand\chapterimage[2]{%
+	\gdef\@chapterimage{
+		\tcbincludegraphics[imagenChapterStyle, graphics options={height=#2}]{#1}
+	}
+}
+\newcounter{TempChapter}%correccion titulos \chapter*
+\setcounter{TempChapter}{-1}%correccion titulos \chapter*
+\titleformat{\chapter}[display]{\normalfont\sffamily}{
+    \begin{tcolorbox}[chapterBannerStyle, chapterBannerImagenStyle]
+		\begin{tcolorbox}[contentChapterStyle]
+			\begin{tcolorbox}[titleChapterStyle]
+			{\ifthenelse{\equal{\thechapter}{\theTempChapter}}%
+				{	\pagestyle{empty}
+					\begin{tcolorbox}[width=\maximumtextwidth-\lagtext,halign=left,empty]
+						{\fontsize{30}{10}\bfseries\color{tituloCap}
+						\ifnumeralchapter
+							\thechapter.\space
+						\fi
+						#1
+						}
+					\end{tcolorbox}
+				}
+				{}%correccion titulos \chapter*
+			}
+			\end{tcolorbox}
+			{\ifthenelse{\boolean{authorExist}}%
+				{
+				\vspace{-1.0cm}
+					\begin{tcolorbox}[marginsInteriorNull, halign=right, empty]
+						\begin{tcolorbox}[capture=hbox,colback=cuadroCap,
+							colframe=fondoCapD]
+							\color{numeralCap}\@chapterauthor 
+						\end{tcolorbox}
+				\end{tcolorbox}
+				}
+				{}
+			}		
+    	\end{tcolorbox}
+	\vspace{-1.5cm}
+	\begin{tcolorbox}[center, width=\maximumtextwidth-\lagtext, empty]
+			\@chapterimage
+	\end{tcolorbox}
+\end{tcolorbox}
+\setcounter{TempChapter}{\thechapter}%correccion titulos \chapter*
+}{0cm}{
+	{\ifthenelse{\equal{\thechapter}{\theTempChapter}}%
+        {}{
+        	\begin{center}
+        		\fontsize{28}{20}\selectfont\color{titleCapDefault}#1
+        	\end{center}
+      	}%correccion titulos \chapter*
+    }
+}[
+	\stepcounter{TempChapter}%correccion titulos \chapter*
+]
+\titlespacing*{\chapter}{0pt}{0pt}{0cm}
+%-------------------------------------------
+% FIN chapter
+%-------------------------------------------

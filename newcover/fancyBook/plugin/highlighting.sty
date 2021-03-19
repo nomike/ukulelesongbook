@@ -1,0 +1,14 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{highlighting - designAcademycos}[2020/04/09 Design Academycos LosAcademycos.com]
+\def\printVersionHighlighting{
+	{1.0}
+}
+\tcbuselibrary{minted}
+\RequirePackage{\pathrootplugins highlighting/tcb/style}
+\pgfkeys{
+	/OPTIONSHIGHLIGHTING/.cd,
+	background/.initial=gray!20!white,
+	background/.get=\backgroundBoxHighlighting,
+	background/.store in=\backgroundBoxHighlighting
+}
+\ProcessPgfOptions{/OPTIONSHIGHLIGHTING}

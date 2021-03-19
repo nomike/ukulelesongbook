@@ -1,0 +1,24 @@
+\def\printversionSageCommands{
+	{1.0}
+}  
+%----------INICIO variables iniciales-------------
+\newcounter{varI}
+\newcounter{varII}
+\newcounter{numberEquations}
+\newcounter{finish}
+%----------FIN variables iniciales-------------
+\newcommand{\vecSage}[2]{
+	\setcounter{varI}{0}
+	\setcounter{varII}{0}
+	\setcounter{finish}{#1 -1}
+	\forLoop{0}{\thefinish}{varI}{
+		\stepcounter{varII}%avanza varII
+		#2
+	}
+	\setcounter{finish}{0}
+}
+\newcommand{\vecListSage}[4]{%#4 total de iteraciones
+	\ifnumcomp{#4-1}{=}{\thevarII}{#2}{
+		\ifnumequal{\thenumberEquations}{\thevarII}{#3}{#1}
+	}
+}   

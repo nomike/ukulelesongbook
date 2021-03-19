@@ -1,0 +1,57 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{compilationInfo - designAcademycos}[2021/01/04 Design Academycos LosAcademycos.com]
+\def\printVersionCompilationInfo{
+	{1.0}
+}
+\RequirePackage{bashful}
+\pgfkeys{
+	/OPTIONSCOMPILATIONINFO/.cd,
+	style/.initial=defaultCompilationStyle,
+	style/.get=\keyStyleCompileInfo,
+	style/.store in=\keyStyleCompileInfo,
+	nameFile/.initial=infoCompilation,
+	nameFile/.get=\keyNameFileCompileInfo,
+	nameFile/.store in=\keyNameFileCompileInfo,
+}
+\ProcessPgfOptions{/OPTIONSCOMPILATIONINFO}
+\tcbset{
+	defaultCompilationStyle/.style={}
+}
+%----------
+\bash[stdoutFile=\keyNameFileCompileInfo.log]
+newLineTex="\\\\"
+versionComannd=$(tex -v)
+IFS='' #setting space as delimiter  
+read -ra ADDR <<<"$versionComannd"
+echo "Version TeXlive: ${ADDR[0]}${newLineTex}"
+versionComannd=$(bibtex -v)
+IFS='' #setting space as delimiter  
+read -ra ADDR <<<"$versionComannd"
+echo "Version BibTex: ${ADDR[0]}${newLineTex}"
+versionComannd=$(pdflatex -v)
+IFS='' #setting space as delimiter  
+read -ra ADDR <<<"$versionComannd" 
+echo "Version Pdflatex: ${ADDR[0]}${newLineTex}"
+versionComannd=$(python --version)
+IFS=''  
+read -ra ADDR <<<"$versionComannd" 
+echo "Python version: ${ADDR[0]}${newLineTex}"
+versionComannd=$(pythontex --version)
+IFS=''  
+read -ra ADDR <<<"$versionComannd" 
+echo "PythonTeX version: ${ADDR[0]}${newLineTex}"
+versionComannd=$(grep '^VERSION=' /etc/os-release)
+IFS='=' #setting space as delimiter  
+read -ra ADDR <<<"$versionComannd" 
+echo "S.O: ${ADDR[1]}${newLineTex}"
+\END
+\newcommand\printCompilationInfo[1][]{
+	\begin{tcolorbox}[\keyStyleCompileInfo]
+		Date: \today \\
+		\import{./}{\keyNameFileCompileInfo.log}
+		\ifsage
+			Sage version: \sage{version()}
+		\fi
+	\end{tcolorbox}
+}
+

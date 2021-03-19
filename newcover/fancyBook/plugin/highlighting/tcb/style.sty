@@ -1,0 +1,88 @@
+%-----------------programacion highlighting----
+\tcbset{
+	programmingStyle/.style={
+		colback=\backgroundBoxHighlighting,
+		title hidden,
+		frame hidden,
+		listing only,
+		breakable,
+		enhanced jigsaw,
+		%colframe=white,
+	}
+}
+%-----lenguaje tex-----
+\tcbset{
+	lenTex/.style={
+		listing options={
+			language=latex,
+			columns=fullflexible,
+			keywordstyle=\color{red}
+		}
+		listing engine=minted,
+		left=5mm,enhanced,
+	}
+}
+\tcbset{
+	lenSQL/.style={
+		listing options={
+			language=SQL,
+			columns=fullflexible,
+			keywordstyle=\color{red}
+		}
+		listing engine=minted,
+		left=5mm,enhanced,
+	}
+}
+\tcbset{
+	lenPython/.style={
+		listing engine=minted,
+		minted language=python,
+		minted options={%
+			linenos,
+			breaklines,
+			autogobble,
+			fontsize=\small,
+			numbersep=2mm,
+			baselinestretch=1
+		},
+		left=5mm,
+		enhanced,
+	}
+}
+%-----caja highlighting-------
+\tcbset{
+	boxlatex/.style={
+		programmingStyle,
+		lenTex
+	}
+}
+\tcbset{
+	boxpython/.style={
+		programmingStyle,
+		lenPython
+	}
+}
+\tcbset{
+	boxsql/.style={
+		programmingStyle,
+		lenSQL
+	}
+}
+\tcbset{
+	terminal/.style={
+		listing and comment,
+		skin=bicolor,
+		colback=black,
+		colupper=white,
+		colbacklower= white,
+		collower=black,
+		comment = {#1},
+		listing options={
+		 	language=bash,
+			aboveskip=0pt,
+			belowskip=0pt,
+			nolol,
+			basicstyle=\ttfamily\bfseries,extendedchars=true
+		}
+	},
+}

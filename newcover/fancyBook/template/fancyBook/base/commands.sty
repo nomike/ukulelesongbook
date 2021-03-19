@@ -1,0 +1,56 @@
+%------INICIO variables iniciales----
+\theoremstyle{remark}
+\newtheorem*{solution}{\refnamesolution}
+\newcommand{\checkdofor}[3]{
+	\ifcsname #1\endcsname%
+		#2
+	\else
+		#3
+	\fi%
+}
+%------------------------------------
+\newboolean{authorExist}
+\let\@chapterauthor\relax
+\newcommand\chapterauthor[1]{%
+	\gdef\@chapterauthor{
+		#1
+	}
+	\setboolean{authorExist}{true}
+}
+\let\@chapterimage\relax
+\newcommand\chapterimage[2]{%
+}
+%reset
+\newcommand\nochapterimage{
+	\let\@chapterimage\relax
+}
+\newcommand\nochapterauthor{
+	\setboolean{authorExist}{false}
+	\let\@chapterauthor\relax
+}
+\newcommand\cleanalldata{
+	\nochapterimage
+	\nochapterauthor
+}
+\newenvironment{infoauthorarticlebox}{
+	\begin{tcolorbox}[dataSheetStyle]
+	}{  
+	\end{tcolorbox}
+}
+\newcommand{\infoauthorarticle}[3]{
+	\begin{infoauthorarticlebox}
+		\faPencil\hspace{5pt} #1\\
+		\faAt\hspace{9pt}\href{mailto:#2}{#2}\\
+		\faUniversity\hspace{2pt} #3
+		\tcblower
+		\tcbincludegraphics[transparent, marginsInteriorNull, graphics options={width=2cm}]{\pathtemplate/images/png/user.png}
+	\end{infoauthorarticlebox}
+}
+\newenvironment{abstract}{
+	\begin{tcolorbox}[enhanced, transparent, breakable]
+		\begin{center}
+			{\bfseries{\refnameabstract}}
+		\end{center}
+	}{  \end{tcolorbox}
+}
+%------FIN variables iniciales----

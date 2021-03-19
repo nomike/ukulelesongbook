@@ -1,0 +1,261 @@
+{\justifying
+%\chapterimage{chapters/Galois.jpg}{4cm}
+\chapter{Documentación (plantilla base)}\label{cap:designEditorial}
+%	\epigraph{\comillas{Algunos misterios siempre escaparán a la mente humana. Para convencernos de ello, sólo hay que echar un vistazo a las tablas de los números primos, y ver que no reina ni orden, ni reglas}}{--- \textup{Évariste Galois}}
+	La base de la plantilla son los paquetes necesarios para crear diversos tipos de documentos, desde libros, revistas, artículos básicos etc, basándose en la siguiente estructura general
+	\begin{figure}[H]
+		\centering
+		\includesvg[inkscapelatex=false,scale= 0.8]{svg/estructuraGeneral.svg}
+		\caption{Estructura general de plantilla base}
+		\label{fig:estructuraPlantillaBaseGeneral}
+	\end{figure}
+	\section{Opciones}\label{sec:opciones}
+	El paquete \printproject\space tiene las siguientes opciones
+	\begin{enumerate}
+		\item \textbf{silencewarning}. Esta opción silencia las advertencias de la plantilla base, su valor por defecto es \textbf{true}.
+		\item \textbf{root}. Es la ruta de plantilla base la cual se guarda en la variable \verb|\pathroot| y su valor por defecto es \textbf{../}
+		\item \textbf{roottemplates}. Es la ruta de la carpeta donde encontraremos todos los templates su valor por defecto es \verb|\pathroot template/|.
+		\item \textbf{template}. Nombre de template a cargar, por defecto es \textbf{empty}, es decir, no carga ningún template  esta opción se guarda en la variable \verb|\pathtemplate|.
+		\item \textbf{lite}. La versión lite carga una versión básica del template si es que existe, su valor por defecto es \textbf{false}.
+		\item \textbf{rootplugins}. Esta opción nos permite cambiar al ruta de los plugins, por defecto su valor es \verb|\pathroot plugin/|.
+		\item \textbf{download}. Esta opción nos habilitará las descargas de archivos con el paquete download, si se deshabilita las opciones \textbf{enginedownload} y \textbf{host} no funcionarán. Su valor por defecto es \textbf{true}. Normalmente se debe deshabilitar cuando se trabaja con servicios en linea como Overleaf.
+		\item \textbf{enginedownload}. La plantilla base tiene el paquete download, esta opción es el motor (engine) de este paquete, por defecto es \textbf{curl}.
+		\item \textbf{host}. Esta es la url principal para descargar archivos desde un servidor determinado con el comando \verb|\hostFiles|, por defecto es
+		\begin{center}
+			http://project.losacademycos.com/appl/latex/security/
+		\end{center}
+		Por ejemplo 
+		\begin{docCommand}{hostFiles}{\marg{ruta de descarga}\marg{carpeta de host}\marg{nombre}\marg{extensión}}
+			Así que este comando descargará el archivo desde \meta{carpeta de host}/\meta{name}.\meta{extensión} desde la url principal guardándolo en \meta{ruta de descarga}.
+		\end{docCommand}
+		\item \textbf{animation}. Es una opción de tipo booleana que nos permite crear dos versiones en un mismo archivo, usando el paquete animation.
+		\item \textbf{pythontex}. Esta es una opción booleana la cual carga el paquete pythontex, por defecto es \textbf{false}.
+		\item \textbf{sage}. Esta es una opción booleana la cual carga el paquete sagetex, por defecto es \textbf{false}. Si el valor es \textbf{true} tenemos otras opciones complementarias
+		\begin{enumerate}
+			\item \textbf{sageroot}.
+			Esta es la ruta de la librería sagetex, por defecto es 
+			\begin{center}
+				\verb|\pathroot lib/sage/|.
+			\end{center}
+			\item \textbf{sagenamesty}. Debido que es mejor tener un control de las versiones del paquete sagetex, en algunas ocasiones de manera manual se renombra el archivo .sty, por defecto es \textbf{sagetex}.
+			\item \textbf{sagecommands}. Es un archivo con algunos comandos relacionados con la librería sagetex, valor por defecto es \textbf{false}.
+		\end{enumerate}
+		\item \textbf{wolfram}. Esta opción nos carga el paquete latexalpha2 con la opción por defecto \textbf{cache}, su uso esta relacionado con wolframscript el cual se encuentra en el sistema computacional Wolfram Mathematica además es un paquete disponible solo para sistemas Unix-like. Por defecto su opción es \textbf{false}.
+		\item \textbf{wolframanimation}. Esta opción carga las características de las opciones de animation, wolfram y unos comandos que los relacionan. Por defecto su valor es \textbf{false}.
+	\end{enumerate}
+	\section{Paquetes cargados}
+		Los paquetes que siempre cargará sin importar las opciones dadas para el paquete son
+		\begin{tcblisting}{boxlatex}
+			\RequirePackage{import, amsmath, amsfonts, amssymb, amsthm}%matematicas
+			\RequirePackage{yfonts, lmodern}%German fonts, computer modern font
+			\RequirePackage{ragged2e}%alinear texto
+			\RequirePackage{forloop}
+			\RequirePackage{calc} %calculos internos
+			\RequirePackage{shellesc} %shell
+			\RequirePackage{ifplatform} %SO
+			\RequirePackage{tikz}
+			\usetikzlibrary{shadows.blur, shapes.symbols, babel, tikzmark}
+			\RequirePackage{tikz-cd}
+			\RequirePackage{wrapfig} %imagen entre texto
+			\RequirePackage{float} %posicionamineto de imagenes
+			\RequirePackage{graphics, graphicx, svg} %graficas
+			\RequirePackage{tcolorbox}
+			\tcbuselibrary{skins, theorems, breakable, raster, listings}%tcolorbox
+			\RequirePackage{array, tabularx, colortbl}% tablas
+			\RequirePackage{geometry}
+			\RequirePackage{hyperref}
+			\RequirePackage{pgfopts}
+			%-----otros-----------------------------
+			\RequirePackage{\pathroot lib/designAcademycosCommands}
+			\RequirePackage{\pathroot lib/tcb/stylesTCB}
+		\end{tcblisting}
+        La ruta de las imágenes esta dada por 
+		\begin{tcblisting}{boxlatex}
+			\graphicspath{{./images/}}
+			%se puede agregar mas rutas desde otra parte del código
+		\end{tcblisting}
+		Observe que la ruta \verb|./images/| es una carpeta que se encuentra junto con el archivo \textbf{main.tex} (archivo a compilar).\pap
+		\textbf{animate}.
+		\begin{tcblisting}{boxlatex}
+			\ifanimation
+			\RequirePackage{animate}%animaciones
+				\newcommand{\panimate}[2]{#2}
+			\else 
+				\newcommand{\panimate}[2]{#1}
+			\fi
+		\end{tcblisting}
+		Para entender el funcionamiento de esta opción ver capítulo \ref{cap:Animaciones}\pap	
+		\textbf{sage}.
+		\begin{tcblisting}{boxlatex}
+			\ifsage
+				\RequirePackage{\sagepathroot\sagenameversion}
+				\ifsagecommands
+					\RequirePackage{\sagepathroot sageCommands}
+				\fi
+			\fi
+		\end{tcblisting}
+		\textbf{pythontex}
+		\begin{tcblisting}{boxlatex}
+			\ifpythontex
+				\RequirePackage{pythontex}
+			\fi
+		\end{tcblisting}
+	\section{Paquete import}
+	El paquete import es unos de los más importantes de la plantilla base, ya que nos permite importar archivos tex de manera anidada, algo que no dispone el comando \verb|\include{}|, En la primera importación se usa el comando 
+	\begin{tcblisting}{boxlatex}
+		\import{chapter/}{example.tex}.
+	\end{tcblisting}
+	Si en el archivo \textbf{example.tex} necesitamos importar otro archivo .tex usaremos el comando 
+	\begin{tcblisting}{boxlatex}
+		\subimport{../images/tikz/}{imagenTikz.tex}.
+	\end{tcblisting}
+	\begin{boxbasic}[Nota]
+		Las rutas dadas son a modo de ejemplo, para ello tenga cuidado en las rutas relativas, consulte la documentación en \href{https://www.ctan.org/pkg/import}{ctan}. 
+	\end{boxbasic}
+	\section{Imágenes}
+	La forma habitual de insertar una imagen en \LaTeX\space es usando el paquete
+	\begin{tcblisting}{boxlatex}
+		\usepackage{graphicx}
+	\end{tcblisting}
+	Por supuesto podemos usarlo sin inconvenientes, también disponemos del paquete svg nos permitirá insertar imágenes en formato vectorial, tenga en cuenta que este paquete requiere la instalación de Inkscape, consulte la documentación en \href{https://www.ctan.org/pkg/svg}{ctan}.
+	\section{Cálculos internos}
+	Para realizar cálculos internos debemos tener programas como SAGE, mathematica o python, gracias a unos paquetes podemos integrar parte de las funcionalidades de dichos programas.
+	\subsection{SAGE}
+	SAGE es un sistema computacional el cual que nos permite realizar cálculos avanzados e insertarlos en \LaTeX, como SAGE es un programa externo, primero se debe realizar la compilación en \LaTeX\space de manera normal, posteriormente en SAGE se debe cargar el archivo generado en formato .sage y por último realizar nuevamente una compilación. A continuación se expone los entornos que trabaja SAGE en su librería \verb|\usepackage{sagetex}|.
+	\subsubsection{Mostrar código SAGE}
+	\begin{tcblisting}{boxlatex}
+		%muestra codigo sage
+		\begin{sageblock}
+			f(x) = exp(x) * sin(2*x)
+		\end{sageblock}
+	\end{tcblisting}
+	\subsubsection{Programación SAGE}
+	\begin{tcblisting}{boxlatex}
+		%el siguente bloque es interpretado por sage
+		\begin{sagesilent}
+			A_1 = matrix([[2,4,6],[3,6,8],[-3,8,1]])
+			B_1 = matrix([[-3,7,9],[8,-3,-7],[-2,0,9]]);
+		\end{sagesilent}
+	\end{tcblisting}
+	\subsubsection{Obtener variables SAGE}
+	\begin{tcblisting}{boxlatex}
+		%muestra la suma de las variables A_1 y B_1
+		$$\sage{A_1}+\sage{B_1}=\sage{A_1+B_1}$$
+	\end{tcblisting}
+	\subsubsection{Gráficar con SAGE}
+	\begin{tcblisting}{boxlatex}
+		%grafica la funcion identidad
+		\sageplot{plot(x, -1, 1)}
+	\end{tcblisting}
+	\begin{boxbasic}[Nota]
+		Se recomienda leer la documentación original de sagetex en \href{https://www.ctan.org/pkg/sagetex}{ctan}.
+	\end{boxbasic}
+	\subsection{Paquete pythontex}
+	Se recomienda leer cuidadosamente la documentación original en \href{https://www.ctan.org/pkg/pythontex}{ctan}. Recuerde que debe tener instalado python 2.7 o una versión mayor. Para ejecutar pythontex debemos compilar primero {\LaTeX} y luego ejecutamos 
+	\begin{tcblisting}{boxlatex}	
+		pythontex main.tex 
+	\end{tcblisting}
+	posteriormente volvemos a compilar el \LaTeX.
+	\subsection{Paquete latexalpha2}
+	Se recomienda leer cuidadosamente la documentación original en \href{https://www.ctan.org/pkg/latexalpha2}{ctan}. Recuerde que debe tener instalado Wolfram mathematica que tiene en su instalación wolframScript.
+	\section{Estructura de carpetas} 
+	Un gran documento debe tener cualidades desde orden en su código y por supuesto organización en sus carpetas, pensando en ello el paquete \printproject\space recomienda la siguiente estructura
+	\begin{figure}[H]
+		\dirtree{%
+			.1 {\color{treeDefault}\faFolder} \printprojectgit.
+			.2 {\color{treeDefault}\faFolder} lib.
+			.3 {\color{treeDefault}\faFolder} sage.
+			.4 {\color{treeDefault}\faFileCodeO} sageCommands.sty.
+			.4 {\color{treeDefault}\faFileCodeO} sagetex3.2.sty.
+			.3 {\color{treeDefault}\faFolder} tcb.
+			.4 {\color{treeDefault}\faFileCodeO} stylesTCB.sty.
+			.3 {\color{treeDefaultImportant}\faFileCodeO} designAcademycos.sty.
+			.3 {\color{treeDefault}\faFileCodeO} designAcademycosCommands.sty.
+			.3 {\color{treeDefault}\faFileCodeO} designAcademycosProgramming.sty.
+			.2 {\color{treeDefault}\faFolder} plugin.
+			.2 {\color{treeDefault}\faFolder} template.
+		}	
+		\caption{Estructura plantilla base}
+		\label{fig:estructuraCarpetasBase}
+	\end{figure}
+	\section{Reestructuración de carpetas}
+	La estructura de carpetas esta enfocada en el trabajo colaborativo por git y github donde \printprojectgit\space es un submodulo. Por ejemplo, supongamos que debes realizar tu trabajo de grado, donde debes realizar el escrito de tu tesis, un poster, una presentación, un articulo resumido para publicar (claro las revistas manejan su propia plantilla) y además estas realizando unas notas de clases en relación a tu tesis.\pap
+	Por lo que puedes tener varias opciones, la primera es tener un repositorio privado en github para cada uno de tus proyectos ó tener un repositorio privado para todos tus proyectos, en efecto tendríamos la siguiente estructura.
+	\begin{figure}[H]
+		\dirtree{%
+			.1 {\color{treeDefault}\faFolder} CopiaDeRepositorio.
+			.2 {\color{treeDefault}\faFolder} Articulo.
+			.2 {\color{treeDefault}\faFolder} \printprojectgit\space (submodulo git).
+			.2 {\color{treeDefault}\faFolder} NotasDeClase.
+			.2 {\color{treeDefault}\faFolder} Poster.
+			.2 {\color{treeDefault}\faFolder} Presentación.
+			.2 {\color{treeDefault}\faFolder} Tesis.
+		}	
+		\caption{Ejemplo 1}
+		\label{fig:EstructuraEjemplo1}
+	\end{figure}
+	Al realizar todos tus trabajos podemos observar que la filosofía \printproject\space es tener una base común y un template diferente, claramente todos tus trabajos están relacionados de alguna forma por lo que cada proyecto carga un template diferente en el archivo <folder>/main.tex.\pap
+	Puede pasar que la estructura presentada no se ajuste a las necesidades del autor, por tanto es posible reordenar las carpetas lib, plugin y templete, por ejemplo, algún template en fase beta, aunque puede ser estable no implica que se encuentre en el submodulo \printproject\space, así que siguiendo la suposición del ejemplo anterior deberíamos tener la siguiente estructura
+	\begin{figure}[H]
+		\dirtree{%
+			.1 {\color{treeDefault}\faFolder} CopiaDeRepositorio.
+			.2 {\color{treeDefault}\faFolder} Articulo.
+			.2 {\color{treeDefault}\faFolder} \printprojectgit\space (submodulo git).
+			.2 {\color{treeDefault}\faFolder} NotasDeClase.
+			.2 {\color{treeDefault}\faFolder} Poster.
+			.3 {\color{treeDefault}\faFileCodeO} main.tex.
+			.2 {\color{treeDefault}\faFolder} Presentación.
+			.2 {\color{treeDefault}\faFolder} template.
+			.3 {\color{treeDefault}\faFolder} templateFaseBeta.
+			.2 {\color{treeDefault}\faFolder} Tesis.
+		}	
+		\caption{Ejemplo 2}
+		\label{fig:EstructuraEjemplo2}
+	\end{figure}
+	Si suponemos que archivo Poster/main.tex usará templateFaseBeta deberá usar la opción \textbf{roottemplates=../template/} y \textbf{template=templateFaseBeta}. Aunque realicemos estos cambios no debemos quitar la carpeta \textbf{\printprojectgit/template/} ya que es un submodulo git.
+	\begin{boxbasic}[Nota]
+		De forma similar se puede cambiar la ruta de los plugins con la opción rootplugins
+	\end{boxbasic}
+	\section{Developers}
+	Esta sección se enfoca en la creación de templates y plugins para el paquete \printproject\space (plantilla base). Gran parte de los templates están basados en los paquetes de la plantilla base y finalmente veremos el enfoque de los plugins.
+	\begin{boxbasic}[Nota]
+		Por seguridad el template no puede contener ningún script escrito para pythontex o SAGE. Siempre que sea el caso se recomienda advertir al usuario del uso del paquete svg, ya que este tiene una dependencia de InkScape. 
+	\end{boxbasic}
+	\subsection{Templates}
+	Los templates tienen un objetivo básico el cual es el diseño de un proyecto en particular, por ejemplo, un libro, así que template debe tener todos los entornos colores e imágenes que harán que nuestro libro luzca diferente. A continuación veremos la estructura básica de las carpetas
+	\begin{figure}[H]
+		\dirtree{%
+			.1 {\color{treeDefault}\faFolder} template.
+			.2 {\color{treeDefault}\faFolder} (nombre del template).
+			.3 {\color{treeDefault}\faFolder} documentation.
+			.4 {\color{treeDefaultImportant}\faFileZipO} quickStart.zip.
+			.4 {\color{treeDefaultImportant}\faFilePdfO} doc.pdf.
+			.4 {\color{treeDefault}\faFolder} example.
+			.5 {\color{treeDefaultImportant}\faFilePdfO} example.pdf.
+			.5 {\color{treeDefaultImportant}\faFilePdfO} example.tex.
+			.3 {\color{treeDefault}\faFolder} images.
+			.3 {\color{treeDefault}\faFolder} lib.
+			.3 {\color{treeDefaultImportant}\faFileCodeO} load.sty.
+			.3 {\color{treeDefault}\faFileCodeO} loadLite.sty.
+			.3 {\color{treeDefault}\faFileCodeO} loadOptions.sty.
+		}	
+		\caption{Estructura básica de un template}
+		\label{fig:EstructuraTemplate}
+	\end{figure} 
+	Las funciones de cada archivo y carpeta son las siguientes
+	\begin{enumerate}
+		\item \textbf{quickStart.zip (obligatorio)}. Este archivo contiene el código báscio para que el usuario pueda compilar dicho template.
+		\item \textbf{doc.pdf (obligatorio)}. Este documento contiene toda la documentación del template, dicha documentación debe ser escrita solo usando el paquete \printproject\space (plantilla base) con plugins, es decir, sin usar ningún template y usando los plugins necesarios para su escritura (no es necesario adjuntar código).
+		\item \textbf{example (obligatorio)}. En esta carpeta se debe encontrar todo el código de un ejemplo totalmente funcional más su respectivo pdf, lo más importante es mostrar las características del template como entornos, comandos y configuraciones adicionales. 
+		\item \textbf{images (opcional)}. Esta carpeta guardará todas las imágenes necesarias para el funcionamiento del template. Una vez el template este funcionando se agregará automáticamente la ruta de esta carpeta al comando \verb|\graphicspath|.
+		\item \textbf{lib}. Esta carpeta contiene todos los archivo .sty relacionados al template, por ejemplo, allí podría existir archivos tales como colors.sty, environment.sty etc (puede ser opcional).
+		\item \textbf{load.sty (obligatorio)}. Este es el archivo más importante, es aquel que carga el template en la plantilla base.
+		\item \textbf{loadLite.sty}. Este archivo cargará una versión básica del template si es que existe, por tanto este archivo es opcional.
+		\item \textbf{loadOptions.sty}. Este archivo contiene las opciones del template, es un archivo opcional.
+	\end{enumerate}
+	\subsection{Plugins}
+	Los plugins son una parte fundamental a la hora de complementar nuestros trabajos, por ejemplo, en un libro queremos proponer ejercicios al lector y que al final tengan respuestas o sugerencias, claramente no puede pertenecer directamente al paquete \printproject\space o algún template. \pap La filosofía de los plugins son complementos que cumplen una función particular, y solo dependen de la plantilla base.
+%	\section{Versión Lite}
+%		La versión lite depende del template cargado, si es cargada esta versión y no existe en el template ´la plantilla base genera un error y no compila.
+}
+%\nochapterimage

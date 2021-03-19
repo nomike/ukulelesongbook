@@ -1,0 +1,224 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{designAcademycos}[2020/05/06 Design Editorial LosAcademycos.com]%de babel y encoding se define antes de llamar paquete
+\RequirePackage{import, amsmath, amsfonts, amssymb, amsthm}%import matematicas
+\RequirePackage{yfonts, lmodern}%German fonts, computer modern font
+\RequirePackage{ragged2e}%alinear texto
+\RequirePackage{forloop}%No eliminar sirva para comandos sage
+\RequirePackage{calc} %calculos internos
+\RequirePackage{shellesc} %shell
+\RequirePackage{ifplatform} %SO
+%-------------------------------------------
+% INICIO Imagenes, tikz
+%-------------------------------------------
+\RequirePackage{tikz}
+\usetikzlibrary{shadows.blur, shapes.symbols, babel, tikzmark}
+\RequirePackage{tikz-cd}
+\RequirePackage{wrapfig} %imagen entre texto
+\RequirePackage{float} %posicionamineto de imagenes
+\RequirePackage{graphics, graphicx, svg} %graficas, La ruta se definirá más adelante
+\RequirePackage{tcolorbox}
+\tcbuselibrary{skins, theorems, breakable, raster, listings}%libreria de tcolorbox
+\RequirePackage{array, tabularx, colortbl}% tablas
+%-------------------------------------------
+% FIN Imagenes SVG, tikz
+%-------------------------------------------
+%-------------------------------------------
+% INICIO configuracion pagina
+%-------------------------------------------
+\RequirePackage{geometry}
+%-------------------------------------------
+% FIN configuracion pagina
+%-------------------------------------------
+%-------------------------------------------
+% INICIO enlaces referencia
+%-------------------------------------------
+\RequirePackage{hyperref}
+%-------------------------------------------
+% FIN enlaces referencias
+%-------------------------------------------
+%-------------------------------------------
+% INICIO rutas graficas
+%-------------------------------------------
+%-------------Ruta imagenes-----------------
+\graphicspath{{./images/}}
+\newcommand\appendtographicspath[1]{%
+	\g@addto@macro\Ginput@path{#1}%
+}
+%-------------------------------------------
+% FIN rutas graficas
+%-------------------------------------------
+%-------------------------------------------
+% INICIO opciones
+%-------------------------------------------
+\RequirePackage{pgfopts}
+\newif{\ifsilence}
+\newif{\ifsage}
+\newif{\ifsagecommands}
+\newif{\ifpythontex}
+\newif{\ifanimation}
+\newif{\iflite}
+\newif{\ifwolfram}
+\newif{\ifwolframanimation}
+\newif{\ifdownloadsty}
+\silencetrue
+\downloadstytrue
+\pgfkeys{
+	/DESIGNACADEMYCOSOPTIONS/.cd,
+	silencewarning/.is if=silence,
+	root/.initial= ../,
+	root/.get=\pathroot,
+	root/.store in=\pathroot,
+	roottemplates/.initial= \pathroot template/,
+	roottemplates/.get=\pathroottemplates,
+	roottemplates/.store in=\pathroottemplates,
+	template/.initial=empty,
+	template/.get=\nametemplate,
+	template/.store in=\nametemplate,
+	lite/.is if=lite,
+	rootplugins/.initial= \pathroot plugin/,
+	rootplugins/.get=\pathrootplugins,
+	rootplugins/.store in=\pathrootplugins,
+	download/.is if=downloadsty,
+	enginedownload/.initial= curl,
+	enginedownload/.get=\engine@lib@download,
+	enginedownload/.store in=\engine@lib@download,
+	host/.initial=http://project.losacademycos.com/appl/latex/security/,
+	host/.get=\hostprimary,
+	host/.store in=\hostprimary,
+	animation/.is if=animation,
+	pythontex/.is if=pythontex,
+	sage/.is if=sage,
+	sageroot/.initial=\pathroot lib/sage/,
+	sageroot/.get=\sagepathroot,
+	sageroot/.store in=\sagepathroot,
+	sagenamesty/.initial=sagetex,
+	sagenamesty/.get=\sagenameversion,
+	sagenamesty/.store in=\sagenameversion,
+	sagecommands/.is if=sagecommands,
+	wolfram/.is if=wolfram,
+	wolframanimation/.is if=wolframanimation,
+}
+\ProcessPgfPackageOptions{/DESIGNACADEMYCOSOPTIONS}
+\newcommand{\printtemplate}{\nametemplate}
+\newcommand{\pathtemplate}{\pathroottemplates\nametemplate}
+\newcommand\designacademycos[1]{\pgfqkeys{/DESIGNACADEMYCOSOPTIONS}{#1}}
+\newcommand\datemplate[1]{
+	\IfFileExists{\pathtemplate/loadOptions.sty}{%
+		\RequirePackage{\pathtemplate/loadOptions}
+		\pgfqkeys{/DATEMPLATE}{#1}
+	}{
+		\PackageError{designAcademycos - template}{There is not options for template \nametemplate}
+	}	
+}
+%-------------------------------------------
+% INICIO silenciar advertencias
+%-------------------------------------------
+\ifsilence
+	\RequirePackage{silence}%Disable all warnings issued by latex starting with "You have..."
+	\WarningFilter{latex}{You have requested package}
+	\pdfsuppresswarningpagegroup=1 %silencia PDF inclusion: multiple pdfs with page group included in a single page>]
+\fi	
+%-------------------------------------------
+% FIN silenciar advertencias
+%-------------------------------------------
+\AtEndPreamble{%gracias a etoolbox 
+	%-------------------------------------------
+	% INICIO update
+	%-------------------------------------------
+	\ifdownloadsty
+		\RequirePackage[engine=\engine@lib@download]{\pathroot lib/download}
+		\newcommand{\hostfiles}[4]{%1 ruta instalacion, 2 nombre, 3 carpeta de host, 4 extension 
+			\download[#1#3.#4]{\hostprimary #2/#3.#4}%
+		}
+	\fi
+	%-------------------------------------------
+	% FIN update
+	%-------------------------------------------
+	%-------------------------------------------
+	% INICIO Comandos, programacion y estilos TCB
+	%-------------------------------------------
+	\RequirePackage{\pathroot lib/designAcademycosCommands}
+	\RequirePackage{\pathroot lib/tcb/stylesTCB}
+	%-------------------------------------------
+	% FIN Comandos, programacion y estilos TCB
+	%-------------------------------------------
+	\ifthenelse{\equal{\nametemplate}{empty}}
+		{%
+			\PackageWarning{designAcademycos}{No template has been loaded}
+		}%
+		{
+		\appendtographicspath{{./\pathtemplate/images/}}
+		\iflite	
+			\IfFileExists{\pathtemplate/loadLite.sty}{%
+				\RequirePackage{\pathtemplate/loadLite}
+			}{%
+				\PackageError{designAcademycos}{The template {\printtemplate} do not have lite version}
+			}	
+		\else
+			%-------------------------------------------
+			% INICIO cargar template
+			%-------------------------------------------
+			\IfFileExists{\pathtemplate/load.sty}{%
+				\RequirePackage{\pathtemplate/load}
+			}{%
+				\PackageError{designAcademycos}{There is not template \printtemplate\space in roottemplate}
+			}
+			%-------------------------------------------
+			% FIN cargar template
+			%-------------------------------------------
+		\fi
+		}%	
+	\ifwolframanimation
+		\wolframtrue
+		\animationtrue
+		\RequirePackage{\pathroot lib/wolfram/commandsAnimations}	
+	\fi
+	\ifwolfram
+		\RequirePackage[cache]{\pathroot lib/wolfram/latexalpha2v1.0}
+		\PackageWarning{designAcademycos}{The option wolfram, wolframanimation work only on systems unix-like}
+	\fi
+	\ifanimation
+		\RequirePackage{animate}%animaciones
+		\newcommand{\panimate}[2]{#2}
+	\else 
+		\newcommand{\panimate}[2]{#1}
+	\fi
+	\ifsage
+		\ifthenelse{\equal{\sagenameversion}{local}}{
+			\RequirePackage{sagetex}
+		}{
+			\RequirePackage{\sagepathroot\sagenameversion}
+		}
+		\ifsagecommands
+			\RequirePackage{\sagepathroot sageCommands}
+		\fi
+	\fi
+	\ifpythontex
+		\RequirePackage{pythontex}
+		\newcommand{\includepythontex}[2]{
+			\IfFileExists{images/pythontex/#2}{
+				\includegraphics[#1]{pythontex/#2}
+			}{
+				\begin{center}
+					\textbf{IMAGEN PYTHON TEX Compilar de nuevo}
+				\end{center}
+			}
+		}
+	\fi
+}
+%-------------------------------------------
+% FIN opciones
+%-------------------------------------------
+%-------------------------------------------
+% INICIO Variables principales
+%-------------------------------------------
+\DeclareRobustCommand{\printauthor}{{\@author}}
+\DeclareRobustCommand{\printtitle}{{\@title}}
+\DeclareRobustCommand{\printpackagenameda}{{designAcademycos}}
+\DeclareRobustCommand{\printversion}{{10.1}}
+\DeclareRobustCommand{\printkeyname}{{Milky Way}}
+\DeclareRobustCommand{\printproject}{{\printpackagenameda\space\printversion}}
+\DeclareRobustCommand{\printprojectgit}{{\printpackagenameda\printversion}}
+%-------------------------------------------
+% FIN Variables principales
+%-------------------------------------------
