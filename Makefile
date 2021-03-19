@@ -23,10 +23,10 @@ clean-build:
 clean-out:
 	rm -rf out/
 
-newcover/src/ukuleleVariables.sty: newcover/src/ukuleleVariables.sty.tpl
+newcover/src/ukuleleVariables.sty: newcover/src/ukuleleVariables.sty.tpl config/bookname
 	. ./configuration ; envsubst <newcover/src/ukuleleVariables.sty.tpl >newcover/src/ukuleleVariables.sty
 
-newcover/src/guitarVariables.sty: newcover/src/guitarVariables.sty.tpl
+newcover/src/guitarVariables.sty: newcover/src/guitarVariables.sty.tpl config/bookname
 	. ./configuration ; envsubst <newcover/src/guitarVariables.sty.tpl >newcover/src/guitarVariables.sty
 
 newcover/ukulele.pdf: newcover/src/ukuleleVariables.sty

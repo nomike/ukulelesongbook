@@ -1,7 +1,7 @@
 \author{ukulele edition}
 \title{nomike's ukulele songbook}
 \def\printedicion{
-	Oxygen
+	${nusb_bookname}
 }%optional
 \def\namelogo{png/ukulele.png}
 \def\printlogo{\includegraphics[scale=.1]{\namelogo}}
