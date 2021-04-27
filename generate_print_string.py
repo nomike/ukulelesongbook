@@ -34,7 +34,7 @@ def generate_print_string(songs, instrument):
     for file in files:
         all_songs.append({"title": file, "pages": count_pdf_pages(("build/%s/paged/songs/" % (instrument)) + file)})
     current_page = cover_pages + toc_pages + 1 # +1 to print the first page of the first song which is on the back of the last TOC page
-    start = 1
+    start = 3
     end = current_page
     for song in all_songs:
         if song["title"].replace(".pdf", "") in songs:
