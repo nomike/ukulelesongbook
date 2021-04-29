@@ -2,6 +2,7 @@
 
 import sys
 import re
+import os
 
 if __name__ == "__main__":
     verse_count = 1
@@ -10,10 +11,26 @@ if __name__ == "__main__":
     re_numbered = re.compile('^(.*) [0-9]*$')
     with open(sys.argv[1], 'r') as file:
         lines = [i.rstrip('\n') for i in file.readlines()]
+    (song, artist) = os.path.basename(sys.argv[1])[:-4].split(" - ")
+    print("{t: %s}" % (song))
+    print("{artist: %s}" % (artist))
+    unskip_empty_line = True
+    was_empty_line = False
     for i in range(0, len(lines)):
         line = lines[i]
+        if was_empty_line and unskip_empty_line:
+            unskip_empty_line = False
+            print("")
+        
+        if len(line) == 0:
+            was_empty_line = True
+            continue
+        else:
+            was_empty_line = False
+        
         match = re_section_header.match(line)
         if match:
+            unskip_empty_line = False
             if last_section:
                 print('{end_of_%s}\n' % (last_section.replace('-', '')))
             match_numbered = re_numbered.match(match.group(1))
