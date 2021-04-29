@@ -84,10 +84,10 @@ quickrelease-offline: checksongs out/songbook-guitar.pdf out/songbook-ukulele.pd
 	./release.py --no-upload
 
 build/ukulele.songlist: songs/*.chopro
-	./create_songlist.py --instrument=ukulele > build/ukulele.songlist
+	mkdir -p build ; ./create_songlist.py --instrument=ukulele > build/ukulele.songlist
 
 build/guitar.songlist: songs/*.chopro
-	./create_songlist.py --instrument=guitar > build/guitar.songlist
+	mkdir -p build ; ./create_songlist.py --instrument=guitar > build/guitar.songlist
 
 config/COMMIT-HASH: FORCE
 	./update_commit_hashes.sh
