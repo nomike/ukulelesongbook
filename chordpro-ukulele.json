@@ -118,6 +118,7 @@
 		{ "name" : "Em",       "base" : 1, "frets" : [ 0,4,3,2 ], "fingers" : [ 0,3,2,1 ] },
 		{ "name" : "Em6",       "base" : 1, "frets" : [ 0,1,0,2 ], "fingers" : [ 0,1,0,2 ] },
 		{ "name" : "Em9",       "base" : 1, "frets" : [ 0,4,2,2 ], "fingers" : [ 0,1,3,3 ] },
+		{ "name" : "Em/G",      "base" : 1, "frets" : [ 0,4,0,2 ], "fingers" : [ 0,3,0,1 ] },
 		{ "name" : "F#m11",   "base" : 1, "frets" : [ 1,4,2,0 ], "fingers" : [ 1,4,2,0 ] },
 		{ "name" : "F#m7b5",   "base" : 2, "frets" : [ 1,3,1,2 ], "fingers" : [ 1,3,1,2 ] },
 		{ "name" : "F7sus4",   "base" : 1, "frets" : [ 3,3,1,3 ], "fingers" : [ 2,3,1,4 ] },
