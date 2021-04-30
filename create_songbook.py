@@ -9,13 +9,13 @@ import glob
 import re
 import shutil
 import locale
+from PyPDF2 import PdfFileReader
 locale.setlocale(locale.LC_ALL, '')
 
 rxcountpages = re.compile(b"/Type\s*/Page([^s]|$)", re.MULTILINE|re.DOTALL)
 def count_pdf_pages(filename):
     with open(filename, "rb") as file:
-        data = file.read()
-    return max(len(rxcountpages.findall(data)), 1)
+        return PdfFileReader(file).numPages
 
 if __name__ == "__main__":
     instrument = sys.argv[1]

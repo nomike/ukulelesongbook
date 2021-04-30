@@ -10,6 +10,7 @@ from docopt import docopt
 import logging
 from glob import glob
 import locale
+from PyPDF2 import PdfFileReader
 locale.setlocale(locale.LC_ALL, '')
 
 instruments = ['ukulele', 'guitar']
@@ -22,8 +23,7 @@ class restart(Exception):
 
 def count_pdf_pages(filename):
     with open(filename, "rb") as file:
-        data = file.read()
-    return max(len(rxcountpages.findall(data)), 1)
+        return PdfFileReader(file).numPages
 
 if __name__=="__main__":
     logging.basicConfig(level=logging.INFO)
