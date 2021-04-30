@@ -1,4 +1,13 @@
 #!/usr/bin/env python3
+"""
+Ultimate Converter - Converts tabs from a popular tab website to an intermediate format parseable by `chordpro a2crd`.
+
+Usage:
+    convert_ultimate.py <path_to_song>
+
+The result is printed to stdout.
+"""
+
 
 import sys
 import re
@@ -21,13 +30,13 @@ if __name__ == "__main__":
         if was_empty_line and unskip_empty_line:
             unskip_empty_line = False
             print("")
-        
+
         if len(line) == 0:
             was_empty_line = True
             continue
         else:
             was_empty_line = False
-        
+
         match = re_section_header.match(line)
         if match:
             unskip_empty_line = False
