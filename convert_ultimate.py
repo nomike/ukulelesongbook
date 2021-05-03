@@ -27,7 +27,8 @@ if __name__ == "__main__":
     was_empty_line = False
     for i in range(0, len(lines)):
         line = lines[i]
-        if was_empty_line and unskip_empty_line:
+        match = re_section_header.match(line)
+        if was_empty_line and unskip_empty_line and not match:
             unskip_empty_line = False
             print("")
 
@@ -36,18 +37,18 @@ if __name__ == "__main__":
             continue
         else:
             was_empty_line = False
+            unskip_empty_line = True
 
-        match = re_section_header.match(line)
         if match:
             unskip_empty_line = False
             if last_section:
-                print('{end_of_%s}\n' % (last_section.replace('-', '')))
+                print('{end_of_%s}\n' % (last_section.replace('-', '').replace(' ', '_')))
             match_numbered = re_numbered.match(match.group(1))
             if match_numbered:
                 last_section = match_numbered.group(1).lower()
             else:
                 last_section = match.group(1).lower()
-            print('{start_of_%s: %s}' % (last_section.replace('-', ''), "%s %d" % (last_section.capitalize(), verse_count) if last_section == 'verse' else last_section.capitalize()))
+            print('{start_of_%s: %s}' % (last_section.replace('-', '').replace(' ', '_'), "%s %d" % (last_section.capitalize(), verse_count) if last_section == 'verse' else last_section.capitalize()))
             if last_section == "verse":
                 verse_count = verse_count + 1
         else:
