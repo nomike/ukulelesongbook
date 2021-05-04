@@ -15,7 +15,7 @@ out/songbook-guitar-printshop.pdf: songs/*.chopro chordpro-guitar.json newcover/
 clean: clean-newcover clean-build clean-out
 
 clean-newcover:
-	rm -f newcover/*.aux newcover/*.fdb_latexmk newcover/*.fls newcover/*.idx newcover/*.log newcover/*.out newcover/*.pdf newcover/*.ilg
+	rm -f newcover/src/ukuleleVariables.sty newcover/src/guitarVariables.sty newcover/*.aux newcover/*.fdb_latexmk newcover/*.fls newcover/*.idx newcover/*.log newcover/*.out newcover/*.pdf newcover/*.ilg
 
 clean-build:
 	rm -rf build/
@@ -23,10 +23,10 @@ clean-build:
 clean-out:
 	rm -rf out/
 
-newcover/src/ukuleleVariables.sty: newcover/src/ukuleleVariables.sty.tpl config/bookname
+newcover/src/ukuleleVariables.sty: config/TAG config/TAG-songs newcover/src/ukuleleVariables.sty.tpl config/bookname 
 	. ./configuration ; envsubst <newcover/src/ukuleleVariables.sty.tpl >newcover/src/ukuleleVariables.sty
 
-newcover/src/guitarVariables.sty: newcover/src/guitarVariables.sty.tpl config/bookname
+newcover/src/guitarVariables.sty: config/TAG config/TAG-songs newcover/src/guitarVariables.sty.tpl config/bookname
 	. ./configuration ; envsubst <newcover/src/guitarVariables.sty.tpl >newcover/src/guitarVariables.sty
 
 newcover/ukulele.pdf: newcover/src/ukuleleVariables.sty newcover/ukulele.tex
