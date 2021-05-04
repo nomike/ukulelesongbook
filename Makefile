@@ -23,7 +23,7 @@ clean-build:
 clean-out:
 	rm -rf out/
 
-newcover/src/ukuleleVariables.sty: config/TAG config/TAG-songs newcover/src/ukuleleVariables.sty.tpl config/bookname 
+newcover/src/ukuleleVariables.sty: config/TAG config/TAG-songs newcover/src/ukuleleVariables.sty.tpl config/bookname
 	. ./configuration ; envsubst <newcover/src/ukuleleVariables.sty.tpl >newcover/src/ukuleleVariables.sty
 
 newcover/src/guitarVariables.sty: config/TAG config/TAG-songs newcover/src/guitarVariables.sty.tpl config/bookname
@@ -50,7 +50,7 @@ build/guitar/toc.txt:
 	mkdir -p build/guitar/ ; (cd songs ; find . -type f -a -name "*.chopro" -a ! -name "*-ukulele.chopro") | cut -c 3- | sed 's/\(-guitar\)\{0,1\}\.chopro$$//' | sort > build/guitar/toc.txt
 
 build/guitar/toc.ps: build/guitar/toc.txt
-	cat build/guitar/toc.txt | iconv -c --from-code utf-8 --to-code ISO-8859-1 | enscript --margins=30::40: --encoding=88591 --font=Helvetica@12 --no-header --output=build/guitar/toc.ps 
+	cat build/guitar/toc.txt | iconv -c --from-code utf-8 --to-code ISO-8859-1 | enscript --margins=30::40: --encoding=88591 --font=Helvetica@12 --no-header --output=build/guitar/toc.ps
 
 build/guitar/toc.pdf: build/guitar/toc.ps
 	ps2pdf build/guitar/toc.ps build/guitar/toc.pdf
@@ -62,7 +62,7 @@ build/ukulele/toc.txt:
 	mkdir -p build/ukulele/ ; (cd songs ; find . -type f -a -name "*.chopro" -a ! -name "*-guitar.chopro") | cut -c 3- | sed 's/\(-ukulele\)\{0,1\}\.chopro$$//' | sort > build/ukulele/toc.txt
 
 build/ukulele/toc.ps: build/ukulele/toc.txt
-	cat build/ukulele/toc.txt | iconv -c --from-code utf-8 --to-code ISO-8859-1 | enscript --margins=30::40: --encoding=88591 --font=Helvetica@12 --no-header --output=build/ukulele/toc.ps 
+	cat build/ukulele/toc.txt | iconv -c --from-code utf-8 --to-code ISO-8859-1 | enscript --margins=30::40: --encoding=88591 --font=Helvetica@12 --no-header --output=build/ukulele/toc.ps
 
 build/ukulele/toc.pdf: build/ukulele/toc.ps
 	ps2pdf build/ukulele/toc.ps build/ukulele/toc.pdf
@@ -93,6 +93,12 @@ config/COMMIT-HASH: FORCE
 	./update_commit_hashes.sh
 
 config/COMMIT-HASH-songs: FORCE
+	./update_commit_hashes.sh songs
+
+config/TAG: FORCE
+	./update_commit_hashes.sh
+
+config/TAG-songs: FORCE
 	./update_commit_hashes.sh songs
 
 FORCE:
