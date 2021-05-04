@@ -92,6 +92,7 @@
     // // "fingers" is optional.
 	"chords" : ["append",
 		{ "name" : "A7sus4",   "base" : 1, "frets" : [ 0,2,0,0 ], "fingers" : [ 0,1,0,0 ] },
+		{ "name" : "Am6",      "base" : 1, "frets" : [ 2,0,2,0 ], "fingers" : [ 1,0,2,0 ] },
 		{ "name" : "Am/B",     "base" : 1, "frets" : [ 2,0,0,2 ], "fingers" : [ 2,0,0,3 ] },
 		{ "name" : "Am/E",     "copy" : "Am" },
 		{ "name" : "Am/F",     "base" : 1, "frets" : [ 2,4,1,3 ], "fingers" : [ 2,4,1,3 ] },
@@ -115,7 +116,7 @@
 		{ "name" : "D7sus4",   "base" : 1, "frets" : [ 2,2,3,3 ], "fingers" : [ 1,2,3,4 ] },
 		{ "name" : "E",        "base" : 1, "frets" : [ 1,4,0,2 ], "fingers" : [ 1,4,0,2 ] },
 		{ "name" : "E/G#",     "copy" : "E" },
-		{ "name" : "Ems7sus4", "base" : 3, "frets" : [ 2,2,3,3 ], "fingers" : [ 1,2,3,4 ] },
+		{ "name" : "Em7sus4", "base" : 3, "frets" : [ 2,2,3,3 ], "fingers" : [ 1,2,3,4 ] },
 		{ "name" : "E7/G#",    "copy" : "E7" },
 		{ "name" : "Em",       "base" : 1, "frets" : [ 0,4,3,2 ], "fingers" : [ 0,3,2,1 ] },
 		{ "name" : "Em6",       "base" : 1, "frets" : [ 0,1,0,2 ], "fingers" : [ 0,1,0,2 ] },
