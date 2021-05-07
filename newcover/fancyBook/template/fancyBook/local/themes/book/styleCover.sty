@@ -12,9 +12,8 @@
 		top=0.5cm,
 		sharp corners=all, 
 		frame hidden,
-		opacityback=.85,
-		width = \paperwidth, 
-		drop shadow southwest
+		opacityback=0,
+		width = \paperwidth
 	}
 }
 \tcbset{
@@ -33,14 +32,6 @@
 			{\Large\printauthor} \\
 			\rule{\paperwidth}{1pt}
 		}
-		\begin{flushright}
-			{
-				\color{white} 
-				\checkdofor{printedicion}{
-					\huge\textbf{\printedicion}\hspace{7cm}
-				}{}
-			}
-		\end{flushright}
 	\end{tcolorbox} 
 	\begin{tcolorbox}[bannerLogoCoverSyle, transparent, width = 8cm, flush right]
 		\checkdofor{printlogo}{
