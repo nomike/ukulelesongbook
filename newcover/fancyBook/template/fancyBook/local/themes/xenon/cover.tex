@@ -1,0 +1,18 @@
+\renewcommand{\thepage}{Cover}
+\begin{coverpage}
+	\noindent
+	\IfFileExists{\pathtemplate/\compilefrom/themes/\namefoldertheme/cover.png}{
+		\AddToShipoutPicture*{
+			\put(0,0){
+				\includegraphics[scale=1]{\pathtemplate/\compilefrom/themes/\namefoldertheme/cover.png}
+			}
+		}
+	}{}
+	\checkdofor{printcontentcover}{
+		\printcontentcover
+	}{
+		\begin{tcolorbox}
+			There isn't def printcontentcover in src/initialVariable.sty
+		\end{tcolorbox}
+	}
+\end{coverpage}

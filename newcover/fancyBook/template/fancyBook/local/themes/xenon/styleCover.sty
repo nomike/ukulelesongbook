@@ -1,0 +1,69 @@
+\tcbset{
+	bannerCoverSyle/.style={
+		halign=left,
+		enhanced,
+		valign=center, 
+		interior style={
+			top color=colorPer1,
+			bottom color=colorPer2
+		}, 
+		bottom=0.5cm, 
+		left=0.5cm, 
+		top=0.5cm,
+		sharp corners=all, 
+		frame hidden,
+		opacityback=0,
+		width = \paperwidth
+	}
+}
+\tcbset{
+	bannerLogoCoverSyle/.style={
+		enhanced,
+		halign=left,
+		valign=center, 
+		frame hidden,		
+	}
+}
+\newcommand{\printcontentcover}{
+	\begin{tcolorbox}[bannerCoverSyle]
+		{%
+			\color{white}
+			{\Huge\textbf{\printtitle}} \\
+			{\Large\printauthor} \\
+			\rule{\paperwidth}{1pt}
+		}
+	\end{tcolorbox} 
+	\begin{tcolorbox}[bannerLogoCoverSyle, transparent, width = 8cm, flush right]
+		\checkdofor{printlogo}{
+			\printlogo
+		}{}
+	\end{tcolorbox}
+}
+\newcommand\printcontentcoverpage{
+	\begin{tcolorbox}[transparent, width = \textwidth]
+		\begin{center}
+			{\Huge\textbf{\printtitle}} \\
+			{\Large\printauthor} \\
+		\end{center}
+		\begin{center}
+			{\printscriptversion} \\
+			{\printsongsversion}
+		\end{center}
+		\begin{center}
+			{
+				\colorprovide{contraportada}{gray}
+				\color{contraportada}\rule{\linewidth}{2pt}
+				\hspace{2cm}\rule{\linewidth-2cm}{2pt}
+			}
+		\end{center}
+	\end{tcolorbox}
+	\begin{flushright}
+		\Large\printedicion
+	\end{flushright}
+	\begin{figure*}[!b]
+		\centering
+		\checkdofor{printlogo}{
+			\printlogo
+		}{}
+	\end{figure*}
+}
