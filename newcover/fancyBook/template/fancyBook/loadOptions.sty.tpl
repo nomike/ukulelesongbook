@@ -22,7 +22,7 @@
 	numeralChapter/.is if=numeralchapter,
 	coverpage/.is if=coverpagecontent,
 	indexMake/.is if=indexmake,
-	theme/.initial= ${newcover_template_name},
+	theme/.initial= ${newcover_theme_name},
 	theme/.get=\themetemplate,
 	theme/.store in=\themetemplate,
 }

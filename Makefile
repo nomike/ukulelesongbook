@@ -23,7 +23,7 @@ clean-build:
 clean-out:
 	rm -rf out/
 
-newcover/fancyBook/template/fancyBook/loadOptions.sty: config/newcover_template_name
+newcover/fancyBook/template/fancyBook/loadOptions.sty: config/newcover_theme_name
 	. ./configuration ; envsubst <newcover/fancyBook/template/fancyBook/loadOptions.sty.tpl >newcover/fancyBook/template/fancyBook/loadOptions.sty
 
 

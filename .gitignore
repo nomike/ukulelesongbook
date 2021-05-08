@@ -8,7 +8,7 @@ config/bookname
 config/COMMIT-HASH*
 config/headers_auth.json
 config/last_printed_*_commit
-config/newcover_template_name
+config/newcover_theme_name
 config/releases
 config/releases.json
 config/TAG*
