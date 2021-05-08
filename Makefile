@@ -23,16 +23,20 @@ clean-build:
 clean-out:
 	rm -rf out/
 
-newcover/src/ukuleleVariables.sty: config/TAG config/TAG-songs newcover/src/ukuleleVariables.sty.tpl config/bookname
+newcover/fancyBook/template/fancyBook/loadOptions.sty: config/newcover_template_name
+	. ./configuration ; envsubst <newcover/fancyBook/template/fancyBook/loadOptions.sty.tpl >newcover/fancyBook/template/fancyBook/loadOptions.sty
+
+
+newcover/src/ukuleleVariables.sty: config/TAG config/TAG-songs newcover/src/ukuleleVariables.sty.tpl config/bookname 
 	. ./configuration ; envsubst <newcover/src/ukuleleVariables.sty.tpl >newcover/src/ukuleleVariables.sty
 
 newcover/src/guitarVariables.sty: config/TAG config/TAG-songs newcover/src/guitarVariables.sty.tpl config/bookname
 	. ./configuration ; envsubst <newcover/src/guitarVariables.sty.tpl >newcover/src/guitarVariables.sty
 
-newcover/ukulele.pdf: newcover/src/ukuleleVariables.sty newcover/ukulele.tex
+newcover/ukulele.pdf: newcover/src/ukuleleVariables.sty newcover/ukulele.tex newcover/fancyBook/template/fancyBook/loadOptions.sty
 	(cd newcover ; pdflatex --shell-escape ukulele.tex)
 
-newcover/guitar.pdf: newcover/src/guitarVariables.sty newcover/guitar.tex
+newcover/guitar.pdf: newcover/src/guitarVariables.sty newcover/guitar.tex newcover/fancyBook/template/fancyBook/loadOptions.sty
 	(cd newcover ; pdflatex --shell-escape guitar.tex)
 
 convert: convert-ultimate convert-tabs
