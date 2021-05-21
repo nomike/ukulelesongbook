@@ -1,10 +1,10 @@
 {
     "folders": [
         {
-            "path": "songs"
+            "path": "."
         },
         {
-            "path": "."
+            "path": "songs"
         }
     ],
     "settings": {}
