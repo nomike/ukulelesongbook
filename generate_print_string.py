@@ -25,6 +25,7 @@ def generate_print_string(songs, instrument):
         raise Exception("Unsupported instrument")
     if len(songs) == 0:
         return ""
+    total_pages = count_pdf_pages(os.path.join('out', f'songbook-{instrument}.pdf'))
     print_string = ""
     cover_pages = count_pdf_pages(os.path.join("build", instrument, "paged", "cover.pdf"))
     toc_pages = count_pdf_pages(os.path.join("build", instrument, "paged", "toc.pdf"))
@@ -45,7 +46,7 @@ def generate_print_string(songs, instrument):
                 start = new_start
             end = new_end
         current_page = current_page + song["pages"]
-    print_string = print_string + "%d-%d" % (start, end)
+    print_string = print_string + "%d-%d" % (start, min(total_pages, end))
     return print_string
 
 if __name__=="__main__":
