@@ -59,3 +59,6 @@ oldcover/hardcover-ukulele.tex
 out/
 songs/
 newcover/ukulele.synctex.gz
+newcover/ukulele.fls
+newcover/ukulele.fdb_latexmk
+newcover/ukulele.ilg
