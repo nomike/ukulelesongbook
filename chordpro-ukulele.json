@@ -97,6 +97,7 @@
         { "name": "Am/E", "copy": "Am" },
         { "name": "Am/F", "base": 1, "frets": [2, 4, 1, 3], "fingers": [2, 4, 1, 3] },
         { "name": "Am/G", "copy": "Am7" },
+        { "name": "Bmadd11", "base": 1, "frets": [4, 6, 0, 5], "fingers": [1, 3, 0, 2] },
         { "name": "C/A", "base": 1, "frets": [0, 0, 0, 0], "fingers": [0, 0, 0, 0] },
         { "name": "C/B", "base": 1, "frets": [0, 0, 0, 2], "fingers": [0, 0, 0, 1] },
         { "name": "C/G", "copy": "C" },
