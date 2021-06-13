@@ -18,7 +18,8 @@ if __name__ == "__main__":
     last_section = None
     re_section_header = re.compile('^\[([^\]]*)\]$')
     re_numbered = re.compile('^(.*) [0-9]*$')
-    re_repeat = re.compile('^(.*)(x[0-9]{1,2})$')
+    re_repeat = re.compile('^(.*) x([0-9]{1,2})$')
+    re_repeat2 = re.compile('^(.*) ([0-9]{1,2})x$')
     with open(sys.argv[1], 'r') as file:
         lines = [i.rstrip('\n') for i in file.readlines()]
     (song, artist) = os.path.basename(sys.argv[1])[:-4].split(" - ")
@@ -59,10 +60,15 @@ if __name__ == "__main__":
             match = re_repeat.match(line)
             if match:
                 print(match[1].rstrip())
-                print(f'{{c: {match[2]}}}')
+                print(f'{{c: x{match[2]}}}')
             else:
-                if not (len(line) == 0 and i < (len(lines) - 1) and lines[i+1].startswith("[")):
-                    print(line)
+                match = re_repeat2.match(line)
+                if match:
+                    print(match[1].rstrip())
+                    print(f'{{c: x{match[2]}}}')
+                else:
+                    if not (len(line) == 0 and i < (len(lines) - 1) and lines[i+1].startswith("[")):
+                        print(line)
     if last_section:
         print('{end_of_%s}' % (last_section))
 
