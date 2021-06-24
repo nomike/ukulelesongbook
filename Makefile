@@ -77,9 +77,15 @@ out/songbook-ukulele.pdf: build/ukulele/toc.pdf build/empty.pdf songs/*.chopro c
 checksongs:
 	./checksongs.py
 
+check-song-commits:
+	test 0 -eq $$(cd songs; ( git status --porcelain=v1 | wc -l ) )
+
+check-script-commits:
+	test 0 -eq $$(git status --porcelain=v1 | wc -l)
+
 release: clean quickrelease
 
-quickrelease: config/COMMIT-HASH config/COMMIT-HASH-songs checksongs out/songbook-guitar.pdf out/songbook-ukulele.pdf out/songbook-guitar-printshop.pdf out/songbook-ukulele-printshop.pdf
+quickrelease: check-song-commits check-script-commits config/COMMIT-HASH config/COMMIT-HASH-songs checksongs out/songbook-guitar.pdf out/songbook-ukulele.pdf out/songbook-guitar-printshop.pdf out/songbook-ukulele-printshop.pdf
 	./release.py
 
 release-offline: clean quickrelease-offline
