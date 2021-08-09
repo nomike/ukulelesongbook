@@ -34,7 +34,7 @@ if __name__ == "__main__":
     for song in songs:
         if (not os.path.isfile("build/%s/songs/%s.pdf" % (instrument, song))) or max(os.path.getmtime("songs/%s.chopro" % (song)), os.path.getmtime("chordpro-%s.json" % (instrument))) > os.path.getmtime("build/%s/songs/%s.pdf" % (instrument, song)):
             print('Generating song "%s" for %s' % (song, instrument))
-            result = subprocess.run(["chordpro", "--config", "chordpro-%s.json" % (instrument), "--config", "no-pagenumbers.json", "--output", "build/%s/songs/%s.pdf" % (instrument, song), "songs/%s.chopro" % (song)], capture_output=True)
+            result = subprocess.run(["chordpro", "--config", "chordpro-%s.json" % (instrument), "--config", "regular.json", "--output", "build/%s/songs/%s.pdf" % (instrument, song), "songs/%s.chopro" % (song)], capture_output=True)
             print(result.stderr.decode("utf-8"), file=sys.stderr)
             if result.returncode != 0:
                 raise Exception("Error at song generation")
