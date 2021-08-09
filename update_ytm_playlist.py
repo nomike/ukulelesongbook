@@ -4,6 +4,8 @@ from ytmusicapi import YTMusic
 from glob import glob
 import os
 import json
+import logging
+import sys
 
 def get_song(title):
     songs = ytmusic.search(query=title, filter="songs", limit=1)
@@ -25,13 +27,16 @@ if __name__ == "__main__":
             if os.path.exists(f'songs/{songtitle}.json'):
                 with open(f'songs/{songtitle}.json', 'r') as song_info_file:
                     song_info = json.load(song_info_file)
+                    if 'YouTubeVideoId' in song_info:
+                        logging.error('Song json with old format detected. Run "migrate_songmetadata" to upgrade to the new format')
+                        sys.exit(1)
             else:
                 song_info = {}
                 song = get_song(songtitle)
-                song_info['YouTubeVideoId'] = song['videoId']
+                song_info['meta']['YouTubeVideoId'] = song['videoId']
                 with open(f'songs/{songtitle}.json', 'w') as song_info_file:
                     json.dump(song_info, song_info_file)
             
-            ytmusic.add_playlist_items(playlist['playlistId'], [song_info['YouTubeVideoId']])
+            ytmusic.add_playlist_items(playlist['playlistId'], [song_info['meta']['YouTubeVideoId']])
         except Exception:
             pass

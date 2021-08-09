@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+
+import json
+import sys
+
+if __name__ == '__main__':
+    for filename in sys.argv[1:]:
+        with open(filename, 'r') as file:
+            olddata = json.load(file)
+        
+        if 'meta' in olddata:
+            continue
+
+        newdata = {}
+        newdata['meta'] = olddata
+        with open(filename, 'w') as file:
+            olddata = json.dump(newdata, file)
+
