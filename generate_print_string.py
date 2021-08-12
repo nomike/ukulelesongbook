@@ -7,51 +7,46 @@ Usage:
 import re
 import os
 from docopt import docopt
+import csv
 import logging
-from glob import glob
-import locale
-from PyPDF2 import PdfFileReader
-locale.setlocale(locale.LC_ALL, '')
 
 instruments = ['ukulele', 'guitar']
-rxcountpages = re.compile(b"/Type\s*/Page([^s]|$)", re.MULTILINE|re.DOTALL)
 
-def count_pdf_pages(filename):
-    with open(filename, "rb") as file:
-        return PdfFileReader(file).numPages
+class Break(Exception):
+    pass
 
 def generate_print_string(songs, instrument):
-    if not instrument in instruments:
-        raise Exception("Unsupported instrument")
+    print_string = ''
     if len(songs) == 0:
-        return ""
-    total_pages = count_pdf_pages(os.path.join('out', f'songbook-{instrument}.pdf'))
-    print_string = ""
-    cover_pages = count_pdf_pages(os.path.join("build", instrument, "paged", "cover.pdf"))
-    toc_pages = count_pdf_pages(os.path.join("build", instrument, "paged", "toc.pdf"))
-    files = [os.path.basename(x) for x in glob("build/%s/paged/songs/*.pdf" % (instrument))]
-    files.sort(key=locale.strxfrm)
-    all_songs = []
-    for file in files:
-        all_songs.append({"title": file, "pages": count_pdf_pages(("build/%s/paged/songs/" % (instrument)) + file)})
-    current_page = cover_pages + toc_pages + 1 # +1 to print the first page of the first song which is on the back of the last TOC page
-    start = 3
-    end = current_page
-    for song in all_songs:
-        if song["title"].replace(".pdf", "") in songs:
-            new_start = current_page - 1 # -1 to print the last page of the previous song
-            new_end = current_page + song["pages"]
-            if new_start > end + 1:
-                print_string = print_string + "%d-%d," % (start, end)
-                start = new_start
-            end = new_end
-        current_page = current_page + song["pages"]
-    print_string = print_string + "%d-%d" % (start, min(total_pages, end))
+        return print_string
+    pageinfo = {}
+    with open(f'out/songbook-{instrument}-regular.csv', 'r') as csvfile:
+        reader = csv.DictReader(csvfile, delimiter=';')
+        for row in reader:
+            key = f"{row['title']} - {row['artists']}".replace("’", "'")
+#            print(f"Rowinfo for {key}: {ord(row['title'][3])}")
+            pageinfo[key] = row['pages']
+    
+    print_string = print_string + pageinfo['__table_of_contents__ - ChordPro']
+    instrument_suffix = f'-{instrument}'
+    ignore_instruments = [i for i in instruments if not i == instrument]
+    for song in songs:
+        try:
+            for ignore_instrument in ignore_instruments:
+                if song.endswith(f'-{ignore_instrument}'):
+                    raise Break()
+#            print(f">{song}: {instrument_suffix}")
+            if song.endswith(instrument_suffix):
+                song = song[:-len(instrument_suffix)]
+            (start, end) = pageinfo[song].split('-')
+            print_string = print_string + f',{int(start)-1}-{int(end)+1}'
+        except Break: 
+            pass
     return print_string
 
 if __name__=="__main__":
     logging.basicConfig(level=logging.INFO)
-    arguments = docopt(__doc__, version='generate_print_string.py v. 0.1')
+    arguments = docopt(__doc__, version='generate_print_string.py v. 1.0')
     instrument = arguments["--instrument"]
     logging.debug("Selected instrument: %s" % instrument)
     songs = [x.replace(".chopro", "") for x in arguments["<song>"]]

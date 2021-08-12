@@ -15,6 +15,7 @@ def calculate_print_string(instrument, start, end = 'HEAD'):
     logging.info("Calculate %s print string for tag %s" % (instrument, start))
     songs = str(subprocess.run(["git", "--no-pager", "diff", "--name-only", start, end], cwd = os.path.join(os.getcwd(), 'songs'), capture_output=True).stdout, 'utf-8').strip().split("\n")
     songs = [bytes(bytes(x.replace(".chopro", ""), 'ascii').decode('unicode-escape'), 'latin_1').decode('utf-8').strip('"') for x in songs if x]
+    songs = [song for song in songs if not song.endswith('.json')]
     logging.debug("Songs to consider: %r" % (songs))
     print_string = generate_print_string(songs, instrument)
     logging.debug("Print string: %s" % (print_string))

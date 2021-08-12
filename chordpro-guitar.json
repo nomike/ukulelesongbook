@@ -52,7 +52,7 @@
     //   "strict" : true,
     //   "separator" : "; ",
     // },
-
+    "metadata": { "keys": ["append", "YouTubeVideoId"] },
     // // Instrument settings. These are usually set by a separate
     // // config file.
     // //
@@ -96,8 +96,8 @@
         { "name": "Am/E", "base": 1, "frets": [0, 0, 2, 1, 1, 0], "fingers": [0, 0, 3, 2, 1, 0] },
         { "name": "Am/F", "base": 1, "frets": [-1, -1, 3, 2, 1, 0], "fingers": [0, 0, 3, 2, 1, 0] },
         { "name": "Am/G", "base": 1, "frets": [3, 0, 2, 2, 1, 0], "fingers": [4, 0, 2, 3, 1, 0] },
-        { "name": "Bmadd11", "base": 0, "frets": [-1, 2, 4, 4, 3, 0], "fingers": [0, 1, 4, 3, 2, 0] },
-        { "name": "B7sus4", "base": 0, "frets": [-1, 2, 4, 2, 0, 0], "fingers": [0, 1, 4, 2, 0, 0] },
+        { "name": "Bmadd11", "base": 1, "frets": [-1, 2, 4, 4, 3, 0], "fingers": [0, 1, 4, 3, 2, 0] },
+        { "name": "B7sus4", "base": 1, "frets": [-1, 2, 4, 2, 0, 0], "fingers": [0, 1, 4, 2, 0, 0] },
         { "name": "C/A", "base": 1, "frets": [-1, 0, 2, 0, 1, 3], "fingers": [0, 0, 2, 0, 1, 3] },
         { "name": "C/B", "base": 1, "frets": [-1, 2, 2, 0, 1, 0], "fingers": [0, 2, 3, 0, 1, 0] },
         { "name": "C/G", "base": 1, "frets": [3, 3, 2, 0, 1, 0], "fingers": [3, 4, 2, 0, 1, 0] },
@@ -156,27 +156,13 @@
     // },
 
     "contents": [{
-            "fields": ["songindex"],
-            "label": "Table of Contents",
-            "line": "%{title}",
-            "fold": false,
-            "omit": true,
-        },
-        {
-            "fields": ["sorttitle", "artist"],
-            "label": "Table of Contents",
-            "line": "%{title}%{artist| - %{}}",
-            "fold": false,
-            "omit": false,
-        },
-        {
-            "fields": ["artist", "sorttitle"],
-            "label": "Contents by Artist",
-            "line": "%{artist|%{} - }%{title}",
-            "fold": false,
-            "omit": true,
-        },
-    ],
+        "fields": ["songindex"],
+        "label": "Table of Contents",
+        "line": "%{title} - %{artist}",
+        "pageno": "",
+        "fold": false,
+        "omit": false
+    }],
 
     // // Layout definitions for PDF output.
 
@@ -184,7 +170,7 @@
 
         // // Papersize, 'a4' or [ 595, 842 ] etc.
         "papersize": "a4",
-        "pagealign-songs": 1,
+        "pagealign-songs": 0,
 
         // // Space between columns, in pt.
         // "columnspace"  :  20,
@@ -322,9 +308,14 @@
                 "footer": ["%{title}", "", "%{page}"],
             },
             //     // The very first output page is slightly different:
+
+            "default": {
+                "footer": ["%{title}", "", "%{page}"],
+            },
             "first": {
                 "footer": ["%{title}", "", "%{page}"],
             },
+
         },
 
         // // Fonts.

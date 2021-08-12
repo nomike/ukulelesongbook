@@ -10,6 +10,10 @@
             "title": {
                 "footer": ["%{title} - %{artist}", "", ""]
             }
+        },
+        "pagealign-songs": 2,
+        "csv": {
+            "songsonly": 0
         }
     }
 }
