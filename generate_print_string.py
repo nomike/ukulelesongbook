@@ -23,7 +23,7 @@ def generate_print_string(songs, instrument):
     with open(f'out/songbook-{instrument}-regular.csv', 'r') as csvfile:
         reader = csv.DictReader(csvfile, delimiter=';')
         for row in reader:
-            key = f"{row['title']} - {row['artists']}".replace("’", "'")
+            key = f"{row['title']} - {row['artists']}".replace("’", "'").replace('/', '_')
             pageinfo[key] = row['pages']
     
     print_string = print_string + pageinfo['__table_of_contents__ - ChordPro']
@@ -36,8 +36,9 @@ def generate_print_string(songs, instrument):
                     raise Break()
             if song.endswith(instrument_suffix):
                 song = song[:-len(instrument_suffix)]
-            (start, end) = pageinfo[song].split('-')
-            print_string = print_string + f',{int(start)-1}-{int(end)+1}'
+            if song in pageinfo:
+                (start, end) = pageinfo[song].split('-')
+                print_string = print_string + f',{int(start)-1}-{int(end)+1}'
         except Break: 
             pass
     return print_string
