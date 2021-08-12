@@ -72,9 +72,9 @@ if __name__ == "__main__":
     
     if not arguments['--no-upload']:
         logging.info("Upload files to %s." % (upload_target))
-        upload_file('out/songbook-guitar.pdf', upload_target)
+        upload_file('out/songbook-guitar-regular.pdf', upload_target)
         upload_file('out/songbook-guitar-printshop.pdf', upload_target)
-        upload_file('out/songbook-ukulele.pdf', upload_target)
+        upload_file('out/songbook-ukulele-regular.pdf', upload_target)
         upload_file('out/songbook-ukulele-printshop.pdf', upload_target)
         upload_file('config/releases.json', upload_target)
     
