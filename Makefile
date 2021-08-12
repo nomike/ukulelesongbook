@@ -7,10 +7,10 @@ cover-ukulele: newcover/ukulele.pdf
 cover-guitar: newcover/guitar.pdf
 
 out/songbook-ukulele-printshop.pdf: songs/*.chopro chordpro-ukulele.json newcover/ukulele.pdf
-	./create_printshop_songbook.py --instrument ukulele --variant=printshop
+	./create_songbook.py --instrument ukulele --variant=printshop
 
 out/songbook-guitar-printshop.pdf: songs/*.chopro chordpro-guitar.json newcover/guitar.pdf
-	./create_printshop_songbook.py --instrument guitar --variant=printshop
+	./create_songbook.py --instrument guitar --variant=printshop
 
 clean: clean-newcover clean-build clean-out
 
@@ -47,10 +47,10 @@ convert-ultimate:
 	( shopt -s nullglob; for i in songs/*.ult ; do ./convert_ultimate.py "$${i}" > "$${i%.ult}.tab" ; rm -f "$${i}" ; done )
 
 out/songbook-guitar-regular.pdf: songs/*.chopro chordpro-guitar.json newcover/guitar.pdf
-	./create_printshop_songbook.py --instrument guitar --variant=regular
+	./create_songbook.py --instrument guitar --variant=regular
 
 out/songbook-ukulele-regular.pdf: songs/*.chopro chordpro-ukulele.json newcover/ukulele.pdf
-	./create_printshop_songbook.py --instrument ukulele --variant=regular
+	./create_songbook.py --instrument ukulele --variant=regular
 
 checksongs:
 	./checksongs.py

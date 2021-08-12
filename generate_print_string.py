@@ -24,7 +24,6 @@ def generate_print_string(songs, instrument):
         reader = csv.DictReader(csvfile, delimiter=';')
         for row in reader:
             key = f"{row['title']} - {row['artists']}".replace("’", "'")
-#            print(f"Rowinfo for {key}: {ord(row['title'][3])}")
             pageinfo[key] = row['pages']
     
     print_string = print_string + pageinfo['__table_of_contents__ - ChordPro']
@@ -35,7 +34,6 @@ def generate_print_string(songs, instrument):
             for ignore_instrument in ignore_instruments:
                 if song.endswith(f'-{ignore_instrument}'):
                     raise Break()
-#            print(f">{song}: {instrument_suffix}")
             if song.endswith(instrument_suffix):
                 song = song[:-len(instrument_suffix)]
             (start, end) = pageinfo[song].split('-')
