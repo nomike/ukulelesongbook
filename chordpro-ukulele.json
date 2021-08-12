@@ -52,7 +52,7 @@
     //   "strict" : true,
     //   "separator" : "; ",
     // },
-
+    "metadata": { "keys": ["append", "YouTubeVideoId"] },
     // // Instrument settings. These are usually set by a separate
     // // config file.
     // //
@@ -165,27 +165,13 @@
     // },
 
     "contents": [{
-            "fields": ["songindex"],
-            "label": "Table of Contents",
-            "line": "%{title}",
-            "fold": false,
-            "omit": true,
-        },
-        {
-            "fields": ["sorttitle", "artist"],
-            "label": "Table of Contents",
-            "line": "%{title}%{artist| - %{}}",
-            "fold": false,
-            "omit": false,
-        },
-        {
-            "fields": ["artist", "sorttitle"],
-            "label": "Contents by Artist",
-            "line": "%{artist|%{} - }%{title}",
-            "fold": false,
-            "omit": true,
-        },
-    ],
+        "fields": ["songindex"],
+        "label": "Table of Contents",
+        "line": "%{title} - %{artist}",
+        "pageno": "",
+        "fold": false,
+        "omit": false
+    }],
 
     // // Layout definitions for PDF output.
 
@@ -193,7 +179,7 @@
 
         // // Papersize, 'a4' or [ 595, 842 ] etc.
         "papersize": "a4",
-        "pagealign-songs": 1,
+        "pagealign-songs": 0,
 
         // // Space between columns, in pt.
         // "columnspace"  :  20,
@@ -315,24 +301,30 @@
             //     // For even/odd printing, the order is reversed.
 
             //     // By default, a page has:
-            "default": {
-                //         // No title/subtitle.
-                //     	"title"     : null,
-                //     	"subtitle"  : null,
-                // 	// Footer is title -- page number.
-                "footer": ["%{title} - %{artist}", "", "%{page}"],
-            },
+            //     "default" : {
+            //         // No title/subtitle.
+            //     	"title"     : null,
+            //     	"subtitle"  : null,
+            // 	// Footer is title -- page number.
+            //     	"footer"    : [ "%{title}", "", "%{page}" ],
+            //     },
             //     // The first page of a song has:
             "title": {
                 //         // Title and subtitle.
                 //     	"title"     : [ "", "%{title}", "" ],
                 "subtitle": ["%{artist|%{artist}}%{subtitle|%{subtitle}}%{key| / Key %{key}}%{capo| / Capo %{capo}}", "", ""],
                 // 	// Footer with page number.
+                "footer": ["%{title}", "", "%{page}"],
             },
             //     // The very first output page is slightly different:
-            "first": {
-                "footer": ["%{title} - %{artist}", "", "%{page}"],
+
+            "default": {
+                "footer": ["%{title}", "", "%{page}"],
             },
+            "first": {
+                "footer": ["%{title}", "", "%{page}"],
+            },
+
         },
 
         // // Fonts.
