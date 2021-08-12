@@ -28,9 +28,9 @@ def count_song_pages(song, instrument):
     return count_pdf_pages(f"build/{instrument}/songs/{song}.pdf")
 
 def generate_song_pdf(song, instrument):
-    if (not os.path.isfile(f"build/{instrument}/songs/{song}.pdf")) or max(os.path.getmtime(f"songs/{song}.chopro"), os.path.getmtime(f"chordpro-{instrument}.json")) > os.path.getmtime(f"build/{instrument}/songs/{song}.pdf"):
+    if (not os.path.isfile(f"build/{instrument}/songs/{song}.pdf")) or max(os.path.getmtime(f"songs/{song}.chopro"), os.path.getmtime(f"chordpro.json"), os.path.getmtime(f"{instrument}.json")) > os.path.getmtime(f"build/{instrument}/songs/{song}.pdf"):
         logging.info(f'Generating song "{song}" for {instrument}')
-        command = ["chordpro", "--config", f"chordpro-{instrument}.json", "--config", "printshop.json", "--output", f"build/{instrument}/songs/{song}.pdf", f"songs/{song}.chopro"]
+        command = ["chordpro", "--config", "chordpro.json", "--config", f"{instrument}.json", "--config", "printshop.json", "--output", f"build/{instrument}/songs/{song}.pdf", f"songs/{song}.chopro"]
         logging.debug(f"Executing chordpro:\n{command}")
         result = subprocess.run(command, capture_output=True)
         if result.returncode != 0:
@@ -102,7 +102,7 @@ if __name__ == "__main__":
         songs = create_printshop_songlist(target_instrument, [i for i in instruments if i != target_instrument])
 
     # run chordpro to create the songbook
-    command = ['chordpro', '--config', f'chordpro-{target_instrument}.json', '--config', f"{arguments['--variant']}.json", '--output', f"out/songbook-{target_instrument}-{arguments['--variant']}.pdf", '--cover', f'newcover/{target_instrument}.pdf', '--csv']
+    command = ['chordpro', '--config', 'chordpro.json', '--config', f'{target_instrument}.json', '--config', f"{arguments['--variant']}.json", '--output', f"out/songbook-{target_instrument}-{arguments['--variant']}.pdf", '--cover', f'newcover/{target_instrument}.pdf', '--csv']
     command.extend([os.path.join('songs', song) for song in songs])
     logging.info("Calling chordpro: %s" % (' '.join([ '"' + i + '"' for i in command])))
     subprocess.run(command)

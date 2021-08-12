@@ -1,1 +1,10 @@
-{}
+{
+    "contents": [{
+        "fields": ["songindex"],
+        "label": "Table of Contents",
+        "line": "%{title} - %{artist}",
+        "pageno": "%{page}",
+        "fold": false,
+        "omit": false
+    }]
+}
