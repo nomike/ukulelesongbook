@@ -28,7 +28,7 @@ def count_song_pages(song, instrument):
     return count_pdf_pages(f"build/{instrument}/songs/{song}.pdf")
 
 def generate_song_pdf(song, instrument):
-    if (not os.path.isfile(f"build/{instrument}/songs/{song}.pdf")) or max(os.path.getmtime(f"songs/{song}.chopro"), os.path.getmtime(f"chordpro.json"), os.path.getmtime(f"{instrument}.json")) > os.path.getmtime(f"build/{instrument}/songs/{song}.pdf"):
+    if (not os.path.isfile(f"build/{instrument}/songs/{song}.pdf")) or max(os.path.getmtime(f"songs/{song}.chopro"), os.path.getmtime(f"chordpro.json"), os.path.getmtime(f"{instrument}.json"), os.path.getmtime("printshop.json")) > os.path.getmtime(f"build/{instrument}/songs/{song}.pdf"):
         logging.info(f'Generating song "{song}" for {instrument}')
         command = ["chordpro", "--config", "chordpro.json", "--config", f"{instrument}.json", "--config", "printshop.json", "--output", f"build/{instrument}/songs/{song}.pdf", f"songs/{song}.chopro"]
         logging.debug(f"Executing chordpro:\n{command}")

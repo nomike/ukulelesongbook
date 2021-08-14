@@ -250,7 +250,7 @@
             //     // The first page of a song has:
             "title": {
                 //         // Title and subtitle.
-                //     	"title"     : [ "", "%{title}", "" ],
+                "title": ["%{title} - %{artist}", "", ""],
                 "subtitle": ["%{artist|%{artist}}%{subtitle|%{subtitle}}%{key| / Key %{key}}%{capo| / Capo %{capo}}", "", ""],
                 // 	// Footer with page number.
                 "footer": ["%{title}", "", "%{page}"],

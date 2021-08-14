@@ -6,5 +6,20 @@
         "pageno": "%{page}",
         "fold": false,
         "omit": false
-    }]
+    }],
+    "pdf": {
+        "formats": {
+            "default": {
+                "footer": ["%{title}%{artist| - %{artist}}", "", "%{page}"]
+            },
+            "first": {
+                "title": ["%{title}%{artist| - %{artist}}", "", ""],
+                "footer": ["%{title}%{artist| - %{artist}}", "", "%{page}"]
+            },
+            "title": {
+                "title": ["%{title}%{artist| - %{artist}}", "", ""],
+                "footer": ["%{title}%{artist| - %{artist}}", "", "%{page}"]
+            }
+        }
+    }
 }

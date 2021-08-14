@@ -2,13 +2,15 @@
     "pdf": {
         "formats": {
             "default": {
-                "footer": ["%{title} - %{artist}", "", ""]
+                "footer": ["%{title}%{artist| - %{artist}}", "", ""]
             },
             "first": {
-                "footer": ["%{title} - %{artist}", "", ""]
+                "title": ["%{title}%{artist| - %{artist}}", "", ""],
+                "footer": ["%{title}%{artist| - %{artist}}", "", ""]
             },
             "title": {
-                "footer": ["%{title} - %{artist}", "", ""]
+                "title": ["%{title}%{artist| - %{artist}}", "", ""],
+                "footer": ["%{title}%{artist| - %{artist}}", "", ""]
             }
         },
         "pagealign-songs": 2,
