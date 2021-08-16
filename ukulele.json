@@ -53,7 +53,7 @@
         { "name": "H7", "copy": "B7" },
         { "name": "NC", "base": 1, "frets": [-1, -1, -1, -1] },
         { "name": "N.C.", "copy": "NC" },
-        { "name": "\\", "copy": "NC" },
+        { "name": "\\", "copy": "NC" }
     ],
     "pdf": {
         "info": {
