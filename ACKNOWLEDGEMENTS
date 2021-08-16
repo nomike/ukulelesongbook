@@ -1,8 +1,57 @@
 This program uses the following 3rd party programs
 ==================================================
 
-fancyBook
----------
-The fancyBook is a package for LaTeX
-Source: https://github.com/camilor2611/fancyBook
-License: MIT (see newcover/fancybook/LICENSE)
+ChordPro
+--------
+Reference implementation of the ChordPro standard for musical lead sheets. 
+https://www.chordpro.org/
+
+docopt
+------
+Command-line interface description language
+http://docopt.org/
+
+GNU bash
+--------
+Bash is the GNU Project's shell—the Bourne Again SHell. This is an sh-compatible shell
+that incorporates useful features from the Korn shell (ksh) and the C shell (csh). It is
+intended to conform to the IEEE POSIX P1003.2/ISO 9945.2 Shell and Tools standard. It
+offers functional improvements over sh for both programming and interactive use. In
+addition, most sh scripts can be run by Bash without modification.
+https://www.gnu.org/software/bash/
+
+GNU Make
+--------
+GNU Make is a tool which controls the generation of executables and other non-source files
+of a program from the program's source files.
+https://www.gnu.org/software/make/
+
+LaTeX
+-----
+LaTeX is a high-quality typesetting system; it includes features designed for the production of
+technical and scientific documentation. LaTeX is the de facto standard for the communication
+and publication of scientific documents. LaTeX is available as free software.
+https://www.latex-project.org/
+
+perl5
+-----
+Perl is a highly capable, feature-rich programming language with over 30 years of development.
+Perl runs on over 100 platforms from portables to mainframes and is suitable for both rapid
+prototyping and large scale development projects.
+https://www.perl.org/about.html
+
+PyPDF2
+------
+A Pure-Python library built as a PDF toolkit.
+https://pypi.org/project/PyPDF2/
+
+python
+------
+Python is a programming language that lets you work quickly and integrate systems more effectively.
+https://www.python.org/
+
+ytmusicapi
+----------
+ytmusicapi is a Python 3 library to send requests to the YouTube Music API. It emulates YouTube
+Music web client requests using the user's cookie data for authentication.
+https://github.com/sigma67/ytmusicapi
