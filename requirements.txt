@@ -1,0 +1,5 @@
+docopt
+gitpython
+wheel
+ytmusicapi
+PyPDF2
