@@ -1,3 +1,4 @@
+.venv/
 __pycache__/
 .last_printed_commit
 .last_printed_guitar_commit
