@@ -31,12 +31,12 @@ if __name__ == "__main__":
                         logging.error('Song json with old format detected. Run "migrate_songmetadata" to upgrade to the new format')
                         sys.exit(1)
             else:
-                song_info = {}
+                song_info = {'meta': {}}
                 song = get_song(songtitle)
                 song_info['meta']['YouTubeVideoId'] = song['videoId']
                 with open(f'songs/{songtitle}.json', 'w') as song_info_file:
                     json.dump(song_info, song_info_file)
             
             ytmusic.add_playlist_items(playlist['playlistId'], [song_info['meta']['YouTubeVideoId']])
-        except Exception:
+        except Exception as e:
             pass
