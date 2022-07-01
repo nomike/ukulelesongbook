@@ -25,8 +25,8 @@ def generate_print_string(songs, instrument):
         for row in reader:
             key = f"{row['title']} - {row['artists']}".replace("’", "'").replace('/', '_')
             pageinfo[key] = row['pages']
-    
-    print_string = print_string + pageinfo['__table_of_contents__ - ChordPro']
+    toc = [int(i) for i in pageinfo['__table_of_contents__ - ChordPro'].split('-')]
+    print_string = print_string + '-'.join([str(toc[0]-1), str(toc[1]+1)])
     instrument_suffix = f'-{instrument}'
     ignore_instruments = [i for i in instruments if not i == instrument]
     for song in songs:
