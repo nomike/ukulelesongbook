@@ -6,7 +6,7 @@ Usage:
     versionbump.py <element> [<amount>]
 """
 
-from distutils.version import LooseVersion
+from looseversion import LooseVersion
 import git
 from docopt import docopt
 

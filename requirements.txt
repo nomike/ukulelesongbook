@@ -3,3 +3,4 @@ gitpython
 wheel
 ytmusicapi
 PyPDF2
+looseversion
