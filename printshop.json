@@ -17,7 +17,8 @@
                 "footer": ["%{title}%{artist| - %{artist}}", "", "%{page}"]
             },
             "title": {
-                "title": ["%{title}%{artist| - %{artist}}", "", ""],
+                "title": ["%{title}", "", ""],
+                "subtitle": ["%{artist|%{artist}}%{subtitle|%{subtitle}}%{key| / Key %{key}}%{capo| / Capo %{capo}}", "", ""],
                 "footer": ["%{title}%{artist| - %{artist}}", "", "%{page}"]
             }
         }
