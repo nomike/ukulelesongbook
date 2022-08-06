@@ -63,8 +63,9 @@ if __name__ == "__main__":
     for tag in tags:
         logging.info("Calculate print strings for release %s" % (tag))
         print_string_guitar = calculate_print_string('guitar', tag, current_songs_tag)
+        print_string_piano = calculate_print_string('piano', tag, current_songs_tag)
         print_string_ukulele = calculate_print_string('ukulele', tag, current_songs_tag)
-        releases['print_strings'][tag] = {'ukulele': print_string_ukulele, 'guitar': print_string_guitar}
+        releases['print_strings'][tag] = {'ukulele': print_string_ukulele, 'piano': print_string_piano, 'guitar': print_string_guitar}
 
     logging.info("Dump the release info into the releases file.")
     with open('config/releases.json', 'w') as file: 
@@ -74,6 +75,8 @@ if __name__ == "__main__":
         logging.info("Upload files to %s." % (upload_target))
         upload_file('out/songbook-guitar-regular.pdf', upload_target)
         upload_file('out/songbook-guitar-printshop.pdf', upload_target)
+        upload_file('out/songbook-piano-regular.pdf', upload_target)
+        upload_file('out/songbook-piano-printshop.pdf', upload_target)
         upload_file('out/songbook-ukulele-regular.pdf', upload_target)
         upload_file('out/songbook-ukulele-printshop.pdf', upload_target)
         upload_file('config/releases.json', upload_target)

@@ -18,7 +18,7 @@ if __name__ == "__main__":
         with open(filename, 'r') as file:
             content = file.read()
             song = os.path.basename(s)
-            artist = rchop(rchop(a, '-ukulele'), '-guitar')
+            artist = rchop(rchop(rchop(a, '-ukulele'), '-guitar'), '-piano')
             
             if not re.search("{t(?:itle)?: ?%s}" % re.escape(song), content.replace('/', '_')):
                 issue = True

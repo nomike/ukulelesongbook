@@ -10,7 +10,7 @@ from docopt import docopt
 import csv
 import logging
 
-instruments = ['ukulele', 'guitar']
+instruments = ['ukulele', 'guitar', 'pinao']
 
 class Break(Exception):
     pass
