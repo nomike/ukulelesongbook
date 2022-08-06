@@ -14,7 +14,7 @@ from PyPDF2 import PdfFileReader
 
 locale.setlocale(locale.LC_ALL, '')
 
-instruments = ['ukulele', 'guitar']
+instruments = ['ukulele', 'guitar', 'piano']
 
 class restart(Exception):
     pass
