@@ -1,0 +1,11 @@
+{
+    "include": ["keyboard", "modern3"],
+    "pdf": {
+        "info": {
+            "title": "nomike's ukulele songbook - guitar edition",
+            "author": "nomike at nomike dot com",
+            "subject": "A songbook for guitar and ukulele",
+            "keywords": "songbook guitar"
+        }
+    }
+}
