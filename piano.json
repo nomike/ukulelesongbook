@@ -2,10 +2,13 @@
     "include": ["keyboard", "modern3"],
     "pdf": {
         "info": {
-            "title": "nomike's ukulele songbook - guitar edition",
+            "title": "nomike's ukulele songbook - piano edition",
             "author": "nomike at nomike dot com",
-            "subject": "A songbook for guitar and ukulele",
-            "keywords": "songbook guitar"
+            "subject": "A songbook for piano, keyboard, guitar, and ukulele",
+            "keywords": "songbook piano"
+        },
+        "kbdiagrams" : {
+            "show"     :  "right"
         }
     }
 }
