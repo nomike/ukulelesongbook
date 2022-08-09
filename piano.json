@@ -1,5 +1,8 @@
 {
     "include": ["keyboard", "modern3"],
+    "settings": {
+        "decapo": "true"
+    },
     "pdf": {
         "info": {
             "title": "nomike's ukulele songbook - piano edition",
@@ -9,6 +12,11 @@
         },
         "kbdiagrams" : {
             "show"     :  "right"
+        },
+        "formats": {
+            "title": {
+                "subtitle": ["%{artist|%{artist}}%{subtitle|%{subtitle}}%{key| / Key %{key}}", "", ""]
+            }
         }
     }
 }

@@ -61,6 +61,11 @@
             "author": "nomike at nomike dot com",
             "subject": "A songbook for ukulele, keyboard, piano, and guitar",
             "keywords": "songbook ukulele"
+        },
+        "formats": {
+            "title": {
+                "subtitle": ["%{artist|%{artist}}%{subtitle|%{subtitle}}%{key| / Key %{key}}%{capo| / Capo %{capo}}", "", ""]
+            }
         }
     }
 }
