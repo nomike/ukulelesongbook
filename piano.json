@@ -11,7 +11,15 @@
             "keywords": "songbook piano"
         },
         "kbdiagrams" : {
-            "show"     :  "right"
+            "show"     :  "right",
+            "width"    :  5.5,       // of a single key
+            "height"   :  23,        // of the diagram
+            "keys"     :  14,        // or 7, 10, 14, 17, 21
+            "base"     :  "C",       // or "F"
+            "linewidth" : 0.1,       // fraction of a single key width
+            "pressed"  :  "#959595", // colour of a pressed key
+            "hspace"   :  3.95,      // ??
+            "vspace"   :  0.3        // fraction of height            
         },
         "formats": {
             "title": {
